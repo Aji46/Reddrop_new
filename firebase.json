@@ -1,0 +1,12 @@
+{
+  "database": {
+    "rules": "Donor"
+  },
+  "firestore": {
+    "rules": "Index",
+    "indexes": "firestore.indexes.json"
+  },
+  "emulators": {
+    "singleProjectMode": true
+  }
+}
