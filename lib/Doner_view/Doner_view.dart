@@ -4,6 +4,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:reddrop/functions/functions.dart';
+import 'package:reddrop/home_Page/box.dart';
+import 'package:reddrop/home_Page/contactdatabase.dart';
 import 'package:reddrop/widget/wigets.dart';
 
 class ViewDonor extends StatefulWidget {
@@ -107,6 +109,10 @@ class _ViewerState extends State<ViewDonor> {
                             ),
                        onPressed: () {
   PhoneUtils.makeCall(widget.arguments['phone'] as String? ?? '');
+  setState(() {
+    boxcontact.put('key_${widget.arguments['name'] as String? ?? ''}', Contactdb(name:widget.arguments['name'] as String? ?? '',group:widget.arguments['group'] as String? ?? '',phone:widget.arguments['phone'] as String? ?? ''));
+  });
+  
 },
 
 

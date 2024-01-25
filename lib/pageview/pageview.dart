@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:reddrop/home_Page/contact.dart';
+import 'package:reddrop/home_Page/home%20grid.dart';
 
-class PageView extends StatefulWidget {
-  const PageView({super.key});
+class MyPageView extends StatefulWidget {
+  const MyPageView({Key? key}) : super(key: key);
 
   @override
-  State<PageView> createState() => _nameState();
+  State<MyPageView> createState() => _MyPageViewState();
 }
 
-class _nameState extends State<PageView> {
+class _MyPageViewState extends State<MyPageView> {
+  final PageController _pageController = PageController();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
-        
+        controller: _pageController,
+        children: [
+          HomeGrid(),
+          ContactListPage(),
+        ],
       ),
     );
   }

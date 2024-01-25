@@ -1,5 +1,8 @@
 import 'package:hive/hive.dart';
 
+part 'contactdatabase.g.dart';
+
+
 
 
 @HiveType(typeId: 1)

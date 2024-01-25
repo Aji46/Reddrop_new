@@ -2,12 +2,19 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:reddrop/home_Page/contactdatabase.dart';
 import 'package:reddrop/splash/splash.dart';
+
+import 'home_Page/box.dart';
 
 const SAVE_KEY_NAME ="userLoggedin";
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(ContactdbAdapter());
+  boxcontact =await Hive.openBox<Contactdb>('contactbox');
   
   try {
     Platform.isAndroid
