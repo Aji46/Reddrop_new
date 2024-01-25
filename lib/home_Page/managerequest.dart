@@ -6,12 +6,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:reddrop/Register_page/Register_page.dart';
-import 'package:reddrop/home_Page/Home.dart';
 import 'package:reddrop/home_Page/create_request.dart';
-import 'package:reddrop/home_Page/home%20grid.dart';
-import 'package:reddrop/main.dart';
 import 'package:reddrop/widget/wigets.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class manageView_Request extends StatefulWidget {
   const manageView_Request({super.key});
@@ -50,13 +46,11 @@ class _Register_pageState extends State<manageView_Request> {
       );
 
       // If sign in is successful, navigate to the desired page
-      Navigator.of(context).pushReplacement(
+      Navigator.of(context).push(
         MaterialPageRoute(
           builder: (ctx) => const Createrequest(),
         ),
       );
-        final sharedPref1 =await SharedPreferences.getInstance();
-       await sharedPref1.setBool(SAVE_KEY_NAME, true);
 
     } catch (e) {
       // Handle sign-in errors
@@ -101,35 +95,6 @@ class _Register_pageState extends State<manageView_Request> {
     return Stack(
       children: [
         Scaffold(
-           bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-
-          // Perform navigation based on the selected index
-          if (index == 0) {
-         Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (ctx) => const Home_search(),
-      ),
-    );
-          } else if (index == 1) {
-             Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (ctx) => const HomeGrid(),
-      ),
-    );
-          } else if (index == 2) {
-             Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (ctx) => const register_page(),
-      ),
-    );
-          }
-        },
-      ),
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
             appBar: customAppBar.buildAppBar(context),
           body: Container(

@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:reddrop/Doner_view/Doner_view.dart';
-import 'package:reddrop/Register_page/registerlogin.dart';
-import 'package:reddrop/home_Page/home%20grid.dart';
 import 'package:reddrop/widget/wigets.dart';
 import 'package:share/share.dart';
 
@@ -67,35 +65,6 @@ class _HomeSearchState extends State<Home_search> {
     return Stack(
       children: [
         Scaffold(
-          bottomNavigationBar: CustomBottomNavigationBar(
-            currentIndex: _currentIndex,
-            onTap: (index) {
-              setState(() {
-                _currentIndex = index;
-              });
-
-              // Perform navigation based on the selected index
-              if (index == 0) {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (ctx) => const Home_search(),
-                  ),
-                );
-              } else if (index == 1) {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (ctx) => const HomeGrid(),
-                  ),
-                );
-              } else if (index == 2) {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (ctx) => const register_login(),
-                  ),
-                );
-              }
-            },
-          ),
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           appBar: customAppBar.buildAppBar(context),
           body: Column(

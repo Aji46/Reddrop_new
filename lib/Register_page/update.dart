@@ -3,11 +3,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:reddrop/Register_page/Register_page.dart';
 import 'package:reddrop/Register_page/registerlogin.dart';
-import 'package:reddrop/home_Page/Home.dart';
 import 'package:reddrop/home_Page/home%20grid.dart';
-import 'package:reddrop/widget/wigets.dart';
 
 class Update extends StatefulWidget {
   const Update({Key? key}) : super(key: key);
@@ -157,35 +154,7 @@ void deactivateFirebaseAccount() async {
     return Stack(
       children: [
         Scaffold(
-           bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
 
-          // Perform navigation based on the selected index
-          if (index == 0) {
-         Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (ctx) => const Home_search(),
-      ),
-    );
-          } else if (index == 1) {
-             Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (ctx) => const HomeGrid(),
-      ),
-    );
-          } else if (index == 2) {
-             Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (ctx) => const register_page(),
-      ),
-    );
-          }
-        },
-      ),
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           appBar: AppBar(
             elevation: 0,

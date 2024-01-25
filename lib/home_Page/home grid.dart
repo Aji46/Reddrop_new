@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:reddrop/Register_page/registerlogin.dart';
-import 'package:reddrop/home_Page/Home.dart';
 import 'package:reddrop/home_Page/bloodgroups.dart';
 import 'package:reddrop/home_Page/request.dart';
 import 'package:reddrop/widget/wigets.dart';
@@ -27,7 +26,6 @@ class _HomeGridState extends State<HomeGrid> {
   int _currentIndex = 1;
   int _currentPageIndex = 0;
 
-    late CustomBottomNavigationBar _bottomNavigationBar;
 
   @override
   void initState() {
@@ -225,7 +223,7 @@ class _HomeGridState extends State<HomeGrid> {
                           child: InkWell(
                             onTap: () {
                               Navigator.of(context)
-                                  .pushReplacement(MaterialPageRoute(
+                                  .push(MaterialPageRoute(
                                 builder: (ctx) => const Request(),
                               ));
                             },
@@ -264,7 +262,7 @@ class _HomeGridState extends State<HomeGrid> {
                           child: InkWell(
                             onTap: () {
                               Navigator.of(context)
-                                  .pushReplacement(MaterialPageRoute(
+                                  .push(MaterialPageRoute(
                                 builder: (ctx) => const register_login(),
                               ));
                             },
@@ -284,37 +282,6 @@ class _HomeGridState extends State<HomeGrid> {
               ),
             ],
           ),
-
-           
-  bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-
-          // Perform navigation based on the selected index
-          if (index == 0) {
-         Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (ctx) => const Home_search(),
-      ),
-    );
-          } else if (index == 1) {
-             Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (ctx) => const HomeGrid(),
-      ),
-    );
-          } else if (index == 2) {
-             Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (ctx) => const register_login(),
-      ),
-    );
-          }
-        },
-      ),
     )
       ]
     );

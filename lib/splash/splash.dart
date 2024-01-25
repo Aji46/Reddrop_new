@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:reddrop/home_Page/home%20grid.dart';
+import 'package:reddrop/home_Page/bottomnav.dart';
+
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -23,7 +24,7 @@ class _SplashState extends State<Splash> {
 
   Future<void> gotoLogin() async {
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (ctx) => const HomeGrid()),
+      MaterialPageRoute(builder: (ctx) => const BottomNavBar()),
     );
   }
 

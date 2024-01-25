@@ -4,8 +4,6 @@
 import 'package:flutter/material.dart';
 import 'package:reddrop/Register_page/Register_page.dart';
 import 'package:reddrop/Register_page/sinup.dart';
-import 'package:reddrop/home_Page/Home.dart';
-import 'package:reddrop/home_Page/home%20grid.dart';
 import 'package:reddrop/widget/wigets.dart';
 
 
@@ -36,35 +34,7 @@ class _Register_pageState extends State<register_login> {
       children: [
         //const Background_Image(),
         Scaffold(
-           bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
 
-          // Perform navigation based on the selected index
-          if (index == 0) {
-         Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (ctx) => const Home_search(),
-      ),
-    );
-          } else if (index == 1) {
-             Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (ctx) => const HomeGrid(),
-      ),
-    );
-          } else if (index == 2) {
-             Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (ctx) => const register_login(),
-      ),
-    );
-          }
-        },
-      ),
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
            appBar: customAppBar.buildAppBar(context),
           body: Container(
@@ -110,7 +80,7 @@ class _Register_pageState extends State<register_login> {
                     ),
                   ),
                   onPressed: () {
-                     Navigator.of(context).pushReplacement(
+                     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (ctx) => const Signup(),
       ),

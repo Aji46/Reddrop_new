@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:reddrop/Register_page/Register_page.dart';
-import 'package:reddrop/home_Page/Home.dart';
 import 'package:reddrop/home_Page/home%20grid.dart';
 import 'package:reddrop/widget/wigets.dart';
 
@@ -126,7 +124,7 @@ int _currentIndex = 2;
         print("Request data added to subcollection successfully!");
 
         // Navigate to the desired page
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) => const HomeGrid()));
+        Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => const HomeGrid()));
       } else {
         print("User is null");
       }
@@ -146,35 +144,6 @@ int _currentIndex = 2;
       children: [
     
         Scaffold(
-          bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-
-          // Perform navigation based on the selected index
-          if (index == 0) {
-          Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (ctx) => const Home_search(),
-      ),
-    );
-          } else if (index == 1) {
-          Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (ctx) => const HomeGrid(),
-      ),
-    );
-          } else if (index == 2) {
-          Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (ctx) => const register_page(),
-      ),
-    );
-          }
-        },
-      ),
           backgroundColor: Color.fromARGB(255, 255, 255, 255),
           appBar: customAppBar.buildAppBar(context),
           body: SafeArea(

@@ -1,4 +1,3 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 //App bar
 class CustomAppBar {
@@ -51,38 +50,6 @@ class CustomAppBar {
 //bottom navigation bar
 
 
-class CustomBottomNavigationBar extends StatelessWidget {
-  final int currentIndex;
-  final Function(int) onTap;
-
-  CustomBottomNavigationBar({required this.currentIndex, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return CurvedNavigationBar(
-      height: 50,
-      backgroundColor: Colors.white,
-      color: const Color.fromARGB(255, 104, 41, 41),
-      animationDuration: const Duration(milliseconds: 100),
-      onTap: onTap,
-      items: const [
-        Icon(
-          Icons.bloodtype,
-          color: Colors.white,
-        ),
-        Icon(
-          Icons.home,
-          color: Colors.white,
-        ),
-        Icon(
-          Icons.account_circle,
-          color: Colors.white,
-        ),
-      ],
-      index: currentIndex,
-    );
-  }
-}
 
 
 //dot indicator
