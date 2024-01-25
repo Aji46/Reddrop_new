@@ -71,7 +71,7 @@ class _BloodGroupState extends State<Blood_donor_Group> {
                 }
                 if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                   return const Center(
-                    child: Text("No data available"),
+                    child: Text("No Blood Group available"),
                   );
                 }
                 if (snapshot.hasData) {

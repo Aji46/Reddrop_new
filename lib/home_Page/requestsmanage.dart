@@ -35,6 +35,21 @@ class _HomeGridState extends State<Request_Manage> {
     }
   }
 
+    Future<void> _deleteRequest(String requestId) async {
+    try {
+      // Delete the request from Firestore
+      await _firestore
+          .collection('users')
+          .doc(_currentUser.uid)
+          .collection('Requests')
+          .doc(requestId)
+          .delete();
+    } catch (e) {
+      print('Error deleting request: $e');
+      // Handle error as needed
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     CustomAppBar customAppBar = CustomAppBar();
@@ -234,7 +249,7 @@ class _HomeGridState extends State<Request_Manage> {
                                         children: [
                                           IconButton(
                                             onPressed: () {
-                                              // Handle sharing
+                                             _deleteRequest(requestSnap['id']);
                                             },
                                             tooltip: 'Share',
                                             icon: const Icon(
