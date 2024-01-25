@@ -170,7 +170,8 @@ class _Register_pageState extends State<requestSignup> {
                         Expanded(
                           child: TextField(
                             controller: _passwordController,
-                            keyboardType: TextInputType.phone,
+                            keyboardType: TextInputType.visiblePassword,
+                            obscureText: true,
                             decoration: const InputDecoration(
                               border: InputBorder.none,
                               hintText: "Password",
