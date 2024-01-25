@@ -106,29 +106,43 @@ class _HomeGridState extends State<HomeGrid> {
                                       children: [
                                         Row(
                                           children: [
-                                            BloodCard(
-                                              bloodGroup:
-                                                  bloodGroups[firstItemIndex],
+                                              BloodCard(
+                                              bloodGroup: bloodGroups[
+                                                  firstItemIndex],
                                               onTap: () {
-                                                setState(() {
-                                                  selectedBloodGroup =
-                                                      bloodGroups[
-                                                          firstItemIndex];
-                                                });
+                                                String selectedBloodGroup =
+                                                    bloodGroups[
+                                                        firstItemIndex];
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        Blood_donor_Group(
+                                                            selectedBloodGroup:
+                                                                selectedBloodGroup),
+                                                  ),
+                                                );
                                               },
                                             ),
                                             const SizedBox(
                                                 width:
                                                     40.0), // Adjust the width based on your preference
-                                            BloodCard(
+                                              BloodCard(
                                               bloodGroup: bloodGroups[
                                                   firstItemIndex + 1],
                                               onTap: () {
-                                                setState(() {
-                                                  selectedBloodGroup =
-                                                      bloodGroups[
-                                                          firstItemIndex + 1];
-                                                });
+                                                String selectedBloodGroup =
+                                                    bloodGroups[
+                                                        firstItemIndex + 1];
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        Blood_donor_Group(
+                                                            selectedBloodGroup:
+                                                                selectedBloodGroup),
+                                                  ),
+                                                );
                                               },
                                             ),
                                           ],
@@ -157,15 +171,22 @@ class _HomeGridState extends State<HomeGrid> {
                                             const SizedBox(
                                                 width:
                                                     40), // Adjust the width based on your preference
-                                            BloodCard(
+                                               BloodCard(
                                               bloodGroup: bloodGroups[
                                                   firstItemIndex + 3],
                                               onTap: () {
-                                                setState(() {
-                                                  selectedBloodGroup =
-                                                      bloodGroups[
-                                                          firstItemIndex + 3];
-                                                });
+                                                String selectedBloodGroup =
+                                                    bloodGroups[
+                                                        firstItemIndex + 3];
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        Blood_donor_Group(
+                                                            selectedBloodGroup:
+                                                                selectedBloodGroup),
+                                                  ),
+                                                );
                                               },
                                             ),
                                           ],
