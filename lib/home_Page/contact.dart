@@ -32,7 +32,7 @@ class _ContactListPageState extends State<ContactListPage> {
                   flex: 2,
                   onPressed: (BuildContext contextt) {
   setState(() {
-    boxcontact.delete(index);
+    boxcontact.deleteAt(index);
   });
 },
 
