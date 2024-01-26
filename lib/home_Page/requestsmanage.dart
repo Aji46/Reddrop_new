@@ -22,8 +22,13 @@ class _HomeGridState extends State<Request_Manage> {
   @override
   void initState() {
     super.initState();
-    _getCurrentUser();
+  _initializeCurrentUser();
   }
+
+  Future<void> _initializeCurrentUser() async {
+  await _getCurrentUser();
+  // Continue with other initialization logic if needed
+}
 
   Future<void> _getCurrentUser() async {
     User? currentUser = _auth.currentUser;
@@ -35,20 +40,21 @@ class _HomeGridState extends State<Request_Manage> {
     }
   }
 
-    Future<void> _deleteRequest(String requestId) async {
-    try {
-      // Delete the request from Firestore
-      await _firestore
-          .collection('users')
-          .doc(_currentUser.uid)
-          .collection('Requests')
-          .doc(requestId)
-          .delete();
-    } catch (e) {
-      print('Error deleting request: $e');
-      // Handle error as needed
-    }
+Future<void> _deleteRequest() async {
+ try {
+    // Query documents where 'RequestId' field is equal to _currentUser.uid
+       DocumentReference documentReference =
+        FirebaseFirestore.instance.collection("Request").doc(_currentUser.uid);
+
+    // Delete the document
+    await documentReference.delete();
+    print('Document deleted successfully.');
+  } catch (e) {
+    print('Error deleting document: $e');
+    // Handle error as needed
   }
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -118,32 +124,43 @@ class _HomeGridState extends State<Request_Manage> {
               ),
               Expanded(
                 child: FutureBuilder<QuerySnapshot>(
-                  future: FirebaseFirestore.instance
-                      .collection('users')
-                      .doc(_currentUser.uid)
-                      .collection('Requests')
-                      .get(),
-                  builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
+  future: FirebaseFirestore.instance
+      .collection('Request')
+      .where(_currentUser.uid)
+      .get(),
+  builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+    if (snapshot.connectionState == ConnectionState.waiting) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
 
-                    if (snapshot.hasError) {
-                      return const Center(
-                        child: Text('Error loading requests'),
-                      );
-                    }
+    if (snapshot.hasError) {
+      print('Error: ${snapshot.error}');
+      return const Center(
+        child: Text('Error loading requests'),
+      );
+    }
 
-                    if (!snapshot.hasData ||
-                        snapshot.data!.docs.isEmpty) {
-                      return const Center(
-                        child: Text('No requests found'),
-                      );
-                    }
+    if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+        print('Requests count: ${_currentUser.uid}');
+      return const Center(
+        child: Text('No requests found'),
+      );
+    }
 
-                    List<DocumentSnapshot> requests = snapshot.data!.docs;
+    if (_currentUser == null || _currentUser.uid.isEmpty) {
+  return const Center(
+    child: Text('User not authenticated'),
+  );
+}
+
+
+  print('Requests count: ${snapshot.data!.docs.length}');
+
+
+  List<QueryDocumentSnapshot> requests = snapshot.data!.docs;
+
 
                     return Container(
                       margin: const EdgeInsets.all(8.0),
@@ -249,7 +266,7 @@ class _HomeGridState extends State<Request_Manage> {
                                         children: [
                                           IconButton(
                                             onPressed: () {
-                                             _deleteRequest(requestSnap['id']);
+                                             _deleteRequest();
                                             },
                                             tooltip: 'Share',
                                             icon: const Icon(

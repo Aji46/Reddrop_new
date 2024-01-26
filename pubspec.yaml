@@ -39,8 +39,8 @@ dependencies:
   url_launcher: ^6.0.10
   share: ^2.0.4
   firebase_core: ^2.24.2
-  cloud_firestore: ^4.14.1
-  firebase_auth: ^4.16.0
+  cloud_firestore: ^4.13.1
+  firebase_auth: ^4.14.0
   pinput: ^3.0.1
   curved_navigation_bar: ^1.0.3
   captcha_plugin_flutter: ^1.1.6

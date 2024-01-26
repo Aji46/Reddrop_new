@@ -16,33 +16,7 @@ class Request extends StatefulWidget {
 class _HomeGridState extends State<Request> {
 
 
-void fetchRequestsForAllUsers() async {
-  // Step 1: Get all user documents from 'users' collection
-  QuerySnapshot<Map<String, dynamic>> usersSnapshot =
-      await FirebaseFirestore.instance.collection('users').get();
 
-  // Step 2: Extract user IDs from the documents
-  List<String> userIds = usersSnapshot.docs.map((doc) => doc.id).toList();
-
-  // Step 3: Use each user ID to query the 'Requests' subcollection
-  for (String userId in userIds) {
-    QuerySnapshot<Map<String, dynamic>> requestsSnapshot = await FirebaseFirestore
-        .instance
-        .collection('users')
-        .doc(userId)
-        .collection('Requests')
-        .get();
-
-    // Process the requests for the current user
-    for (QueryDocumentSnapshot<Map<String, dynamic>> requestDoc
-        in requestsSnapshot.docs) {
-      // Access the request data using requestDoc.data()
-      Map<String, dynamic> requestData = requestDoc.data();
-      print('User ID: $userId, Request Data: $requestData');
-    }
-
-  }
-}
 
   void shareContact(String contactDetails) {
     Share.share(contactDetails, subject: 'Contact Information');
@@ -52,9 +26,20 @@ void fetchRequestsForAllUsers() async {
   @override
   void initState() {
     super.initState();
-    fetchRequestsForAllUsers();
+    getCollectionId();
 
 }
+
+
+void getCollectionId() async {
+  CollectionReference collectionReference =
+      FirebaseFirestore.instance.collection('Request');
+
+  String collectionId = collectionReference.id;
+
+  print('Collection ID: $collectionId');
+}
+
   @override
   Widget build(BuildContext context) {
     
@@ -154,15 +139,32 @@ void fetchRequestsForAllUsers() async {
                 height: 10,
               ),
               Expanded(
-                child: StreamBuilder<QuerySnapshot>(
-                  stream: FirebaseFirestore.instance
-    .collection('users')
-    .doc()  // You might need to replace 'userId' with the actual user ID
-    .collection('Requests')
-    .orderBy('timestamp', descending: true)
-    .snapshots(),
-                  builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (snapshot.hasData) {
+                child: FutureBuilder<QuerySnapshot>(
+                 future: FirebaseFirestore.instance
+                      .collection('Request')
+                      .get(),
+                   builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+
+                    if (snapshot.hasError) {
+                      return const Center(
+                        child: Text('Error loading requests'),
+                      );
+                    }
+
+                    if (!snapshot.hasData ||
+                        snapshot.data!.docs.isEmpty) {
+                      return const Center(
+                        child: Text('No requests found'),
+                      );
+                    }
+
+                    List<DocumentSnapshot> requests = snapshot.data!.docs;
+                   
                       return Container(
                         margin: const EdgeInsets.all(8.0),
                         decoration: BoxDecoration(
@@ -293,7 +295,7 @@ void fetchRequestsForAllUsers() async {
                           },
                         ),
                       );
-                    }
+                    
                     return const Center(
                       child: CircularProgressIndicator(),
                     );

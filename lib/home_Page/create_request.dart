@@ -99,17 +99,12 @@ int _currentIndex = 2;
       User? user = auth.currentUser;
 
       if (user != null) {
-        // Create a reference to the main collection
-        CollectionReference users = FirebaseFirestore.instance.collection('users');
+         String userId = user.uid; // Assuming the user ID is used as the document ID
 
-        // Create a reference to the user's document in the main collection
-        DocumentReference userDocument = users.doc(user.uid);
+        DocumentReference userDocument = FirebaseFirestore.instance.collection('Request').doc(userId);
 
-        // Create a reference to the subcollection 'requests' within the user's document
-        CollectionReference requests = userDocument.collection('Requests');
-
-        // Add data to the subcollection
-        await requests.add({
+        // Set data to the document
+        await userDocument.set({
           'name': _usernameController.text,
           'phone': _phoneController.text,
           'district': _districtController.text,
