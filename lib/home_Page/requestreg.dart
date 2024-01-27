@@ -242,7 +242,7 @@ class _Register_pageState extends State<register_req> {
                             // Navigator.of(context).push(MaterialPageRoute(
                             //     builder: (ctx) => const HomeGrid()));
 
-                                 Navigator.of(context).push(MaterialPageRoute(
+                                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                                 builder: (ctx) => const Request_Manage()));
                           },
                           child: const Text(
