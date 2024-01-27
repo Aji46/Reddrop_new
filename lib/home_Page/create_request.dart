@@ -143,6 +143,7 @@ int _currentIndex = 2;
           appBar: customAppBar.buildAppBar(context),
           body: SafeArea(
             child: Form(
+            
               key: _formKey,
               child: ListView(
                 children: [
@@ -161,6 +162,7 @@ int _currentIndex = 2;
                             )
                           ]),
                       child: TextFormField(
+                           autovalidateMode: AutovalidateMode.onUserInteraction, 
                         controller: _usernameController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -195,6 +197,7 @@ int _currentIndex = 2;
                             )
                           ]),
                       child: TextFormField(
+                           autovalidateMode: AutovalidateMode.onUserInteraction, 
                         controller: _dateController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -236,6 +239,7 @@ int _currentIndex = 2;
                             )
                           ]),
                       child: FormField<String>(
+                           autovalidateMode: AutovalidateMode.onUserInteraction, 
                         builder: (FormFieldState<String> state) {
                           return InputDecorator(
                             decoration: InputDecoration(
@@ -298,39 +302,70 @@ int _currentIndex = 2;
                           ]),
                     ),
                   ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 120, 120),
-                              blurRadius: 10,
-                              // spreadRadius: 15,
-                            )
-                          ]),
-                      child: TextFormField(
-                        controller: _phoneController,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            fillColor: Colors.white,
-                            filled: true,
-                            labelText: "Phone Number",
-                            labelStyle: const TextStyle(color: Colors.black)),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Value is Empty';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
+                   Padding(
+  padding: const EdgeInsets.only(top: 20, right: 30, left: 30),
+  child: Container(
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(20),
+      color: Colors.white,
+      boxShadow: const [
+        BoxShadow(
+          color: Color.fromARGB(255, 255, 120, 120),
+          blurRadius: 10,
+        ),
+      ],
+    ),
+    child: StatefulBuilder(
+      builder: (BuildContext context, StateSetter setState) {
+        return Column(
+          children: [
+            TextFormField(
+                 autovalidateMode: AutovalidateMode.onUserInteraction, 
+              controller: _phoneController,
+              keyboardType: TextInputType.phone,
+              maxLength: 10,
+              onChanged: (value) {
+                setState(() {}); // Trigger a rebuild when text changes
+              },
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                fillColor: Colors.white,
+                filled: true,
+                labelText: "Phone Number",
+                labelStyle: const TextStyle(color: Colors.black),
+                counterText: '', // Remove the default counter text
+                suffixIcon: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: Text(
+                    '${_phoneController.text.length}/10',
+                    style: TextStyle(color: Colors.black),
                   ),
+                ),
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Phone number is required';
+                } else if (value.length != 10) {
+                  return 'Phone number must be 10 digits';
+                }
+                return null;
+              },
+            ),
+            // Show phone number length validation text
+            if (_phoneController.text.isNotEmpty &&
+                _phoneController.text.length != 10)
+              Text(
+                'Phone number must be 10 digits',
+                style: TextStyle(color: Colors.red),
+              ),
+          ],
+        );
+      },
+    ),
+  ),
+),
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 20, right: 30, left: 30),
@@ -346,6 +381,7 @@ int _currentIndex = 2;
                             )
                           ]),
                       child: TextFormField(
+                           autovalidateMode: AutovalidateMode.onUserInteraction, 
                         controller: _placeController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -379,6 +415,7 @@ int _currentIndex = 2;
                             )
                           ]),
                       child: TextFormField(
+                           autovalidateMode: AutovalidateMode.onUserInteraction, 
                         controller: _districtController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -412,6 +449,7 @@ int _currentIndex = 2;
                             )
                           ]),
                       child: TextFormField(
+                           autovalidateMode: AutovalidateMode.onUserInteraction, 
                         controller: _stateController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(

@@ -4,7 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:reddrop/Register_page/registerlogin.dart';
-import 'package:reddrop/home_Page/home%20grid.dart';
+import 'package:reddrop/home_Page/bottomnav.dart';
+import 'package:reddrop/widget/extention.dart';
 
 class Update extends StatefulWidget {
   const Update({Key? key}) : super(key: key);
@@ -73,7 +74,6 @@ class _UpdateState extends State<Update> {
 
           // Set the values for each field based on the retrieved data
           _usernameController.text = data['name'] ?? '';
-          _passwordController.text = data['password'] ?? '';
           _phoneController.text = data['phone'] ?? '';
           _districtController.text = data['district'] ?? '';
           _placeController.text = data['place'] ?? '';
@@ -93,33 +93,43 @@ class _UpdateState extends State<Update> {
     }
   }
 
-  void _updateUser(BuildContext context) async {
-    if (_formKey.currentState?.validate() == true) {
-      final data = {
-        'name': _usernameController.text,
-        'phone': _phoneController.text,
-        'password': _passwordController.text,
-        'district': _districtController.text,
-        'place': _placeController.text,
-        'state': _stateController.text,
-        'group': bloodGroup,
-      };
+void _updateUser(BuildContext context) async {
+  if (_formKey.currentState?.validate() == true) {
+    final data = {
+      'name': _usernameController.text,
+      'phone': _phoneController.text,
+      'district': _districtController.text,
+      'place': _placeController.text,
+      'state': _stateController.text,
+      'group': bloodGroup,
+    };
 
-      try {
-        await FirebaseFirestore.instance
-            .collection('Donor')
-            .doc(_currentUser.uid)
-            .update(data);
-
+    try {
+      final userDocRef = FirebaseFirestore.instance.collection('Donor').doc(_currentUser.uid);
+      
+      // Check if the user's document exists
+      final userDocSnapshot = await userDocRef.get();
+      
+      if (userDocSnapshot.exists) {
+        // Update existing document
+        await userDocRef.update(data);
         print("Donor data updated successfully");
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (ctx) => const HomeGrid()),
-        );
-      } catch (error) {
-        print("Error updating donor data: $error");
+      } else {
+        // Create a new document
+        await userDocRef.set(data);
+        print("New donor document created successfully");
       }
+
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (ctx) =>  BottomNavBar()),
+      );
+    } catch (error) {
+      print("Error updating/creating donor data: $error");
     }
   }
+}
+
+
 
 void deactivateFirebaseAccount() async {
   try {
@@ -239,6 +249,7 @@ void deactivateFirebaseAccount() async {
           ),
           body: SafeArea(
             child: Form(
+          
               key: _formKey,
               child: ListView(
                 children: [
@@ -257,6 +268,7 @@ void deactivateFirebaseAccount() async {
                             )
                           ]),
                       child: TextFormField(
+                            autovalidateMode: AutovalidateMode.onUserInteraction, 
                         controller: _usernameController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -291,6 +303,7 @@ void deactivateFirebaseAccount() async {
                             )
                           ]),
                       child: FormField<String>(
+                            autovalidateMode: AutovalidateMode.onUserInteraction, 
                         builder: (FormFieldState<String> state) {
                           return InputDecorator(
                             decoration: InputDecoration(
@@ -330,38 +343,69 @@ void deactivateFirebaseAccount() async {
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 120, 120),
-                              blurRadius: 10,
-                              // spreadRadius: 15,
-                            )
-                          ]),
-                      child: TextFormField(
-                        controller: _passwordController,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            fillColor: Colors.white,
-                            filled: true,
-                            labelText: "Password",
-                            labelStyle: const TextStyle(color: Colors.black)),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Value is Empty';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
+  padding: const EdgeInsets.only(top: 20, right: 30, left: 30),
+  child: Container(
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(20),
+      color: Colors.white,
+      boxShadow: const [
+        BoxShadow(
+          color: Color.fromARGB(255, 255, 120, 120),
+          blurRadius: 10,
+        ),
+      ],
+    ),
+    child: StatefulBuilder(
+      builder: (BuildContext context, StateSetter setState) {
+        return Column(
+          children: [
+            TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction, 
+              controller: _phoneController,
+              keyboardType: TextInputType.phone,
+              maxLength: 10,
+              onChanged: (value) {
+                setState(() {}); // Trigger a rebuild when text changes
+              },
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                fillColor: Colors.white,
+                filled: true,
+                labelText: "Phone Number",
+                labelStyle: const TextStyle(color: Colors.black),
+                counterText: '', // Remove the default counter text
+                suffixIcon: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: Text(
+                    '${_phoneController.text.length}/10',
+                    style: TextStyle(color: Colors.black),
                   ),
+                ),
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Phone number is required';
+                } else if (value.length != 10) {
+                  return 'Phone number must be 10 digits';
+                }
+                return null;
+              },
+            ),
+            // Show phone number length validation text
+            if (_phoneController.text.isNotEmpty &&
+                _phoneController.text.length != 10)
+              Text(
+                'Phone number must be 10 digits',
+                style: TextStyle(color: Colors.red),
+              ),
+          ],
+        );
+      },
+    ),
+  ),
+),
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 20, right: 30, left: 30),
@@ -377,39 +421,7 @@ void deactivateFirebaseAccount() async {
                             )
                           ]),
                       child: TextFormField(
-                        controller: _phoneController,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            fillColor: Colors.white,
-                            filled: true,
-                            labelText: "Phone Number",
-                            labelStyle: const TextStyle(color: Colors.black)),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Value is Empty';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 120, 120),
-                              blurRadius: 10,
-                              // spreadRadius: 15,
-                            )
-                          ]),
-                      child: TextFormField(
+                            autovalidateMode: AutovalidateMode.onUserInteraction, 
                         controller: _placeController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -425,6 +437,11 @@ void deactivateFirebaseAccount() async {
                           }
                           return null;
                         },
+                         onSaved: (value) {
+    // Convert the value to lowercase with the first letter as capital
+    _stateController.text = value!.toLowerCase().capitalizeFirstLetter();
+  },
+    
                       ),
                     ),
                   ),
@@ -443,6 +460,7 @@ void deactivateFirebaseAccount() async {
                             )
                           ]),
                       child: TextFormField(
+                            autovalidateMode: AutovalidateMode.onUserInteraction, 
                         controller: _districtController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -458,6 +476,11 @@ void deactivateFirebaseAccount() async {
                           }
                           return null;
                         },
+                         onSaved: (value) {
+    // Convert the value to lowercase with the first letter as capital
+    _stateController.text = value!.toLowerCase().capitalizeFirstLetter();
+  },
+    
                       ),
                     ),
                   ),
@@ -476,6 +499,7 @@ void deactivateFirebaseAccount() async {
                             )
                           ]),
                       child: TextFormField(
+                            autovalidateMode: AutovalidateMode.onUserInteraction, 
                         controller: _stateController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -493,6 +517,11 @@ void deactivateFirebaseAccount() async {
                           }
                           return null;
                         },
+                         onSaved: (value) {
+    // Convert the value to lowercase with the first letter as capital
+    _stateController.text = value!.toLowerCase().capitalizeFirstLetter();
+  },
+    
                       ),
                     ),
                   ),

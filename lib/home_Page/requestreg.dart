@@ -85,6 +85,7 @@ class _Register_pageState extends State<register_req> {
           appBar: customAppBar.buildAppBar(context),
           body: SafeArea(
             child: Form(
+               autovalidateMode: AutovalidateMode.onUserInteraction, 
                key: _formKey,
               child: ListView(
                 children: [
@@ -121,8 +122,9 @@ class _Register_pageState extends State<register_req> {
                       ),
                     ),
                   ),
-                   Padding(
-                    padding: const EdgeInsets.only(top: 20, right: 30, left: 30),
+                     Padding(
+                    padding:
+                        const EdgeInsets.only(top: 20, right: 30, left: 30),
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
@@ -136,20 +138,26 @@ class _Register_pageState extends State<register_req> {
                           ]),
                       child: TextFormField(
                         controller: _emailController,
+                        keyboardType: TextInputType
+                            .emailAddress, // Set keyboard type to email
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
                           fillColor: Colors.white,
                           filled: true,
-                          labelText: "e_mail",labelStyle: TextStyle(color: Colors.black)
+                          labelText: "Email",
+                          labelStyle: const TextStyle(color: Colors.black),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Value is Empty';
-                          }else{
-                            return null;
+                            return 'Email is required';
+                          } else if (!RegExp(
+                                  r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$')
+                              .hasMatch(value)) {
+                            return 'Enter a valid email address';
                           }
+                          return null;
                         },
                       ),
                     ),
@@ -187,38 +195,69 @@ class _Register_pageState extends State<register_req> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 120, 120),
-                              blurRadius: 10,
-                              // spreadRadius: 15,
-                            )
-                          ]),
-                      child: TextFormField(
-                        controller: _phoneController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          fillColor: Colors.white,
-                          filled: true,
-                          labelText: "Phone Number",labelStyle: const TextStyle(color: Colors.black)
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Value is Empty';
-                          }
-                           return null;
-                        },
-                      ),
-                    ),
+                      Padding(
+  padding: const EdgeInsets.only(top: 20, right: 30, left: 30),
+  child: Container(
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(20),
+      color: Colors.white,
+      boxShadow: const [
+        BoxShadow(
+          color: Color.fromARGB(255, 255, 120, 120),
+          blurRadius: 10,
+        ),
+      ],
+    ),
+    child: StatefulBuilder(
+      builder: (BuildContext context, StateSetter setState) {
+        return Column(
+          children: [
+            TextFormField(
+              controller: _phoneController,
+              keyboardType: TextInputType.phone,
+              maxLength: 10,
+              onChanged: (value) {
+                setState(() {}); // Trigger a rebuild when text changes
+              },
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                fillColor: Colors.white,
+                filled: true,
+                labelText: "Phone Number",
+                labelStyle: const TextStyle(color: Colors.black),
+                counterText: '', // Remove the default counter text
+                suffixIcon: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: Text(
+                    '${_phoneController.text.length}/10',
+                    style: TextStyle(color: Colors.black),
                   ),
+                ),
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Phone number is required';
+                } else if (value.length != 10) {
+                  return 'Phone number must be 10 digits';
+                }
+                return null;
+              },
+            ),
+            // Show phone number length validation text
+            if (_phoneController.text.isNotEmpty &&
+                _phoneController.text.length != 10)
+              Text(
+                'Phone number must be 10 digits',
+                style: TextStyle(color: Colors.red),
+              ),
+          ],
+        );
+      },
+    ),
+  ),
+),
 
 
                   Padding(
