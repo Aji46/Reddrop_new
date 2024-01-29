@@ -150,17 +150,7 @@ int _currentIndex = 2;
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 120, 120),
-                              blurRadius: 10,
-                              // spreadRadius: 15,
-                            )
-                          ]),
+                
                       child: TextFormField(
                            autovalidateMode: AutovalidateMode.onUserInteraction, 
                         controller: _usernameController,
@@ -180,22 +170,12 @@ int _currentIndex = 2;
                           }
                         },
                       ),
-                    ),
+                    
                   ),
                     Padding(
                     padding:
                         const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 120, 120),
-                              blurRadius: 10,
-                              // spreadRadius: 15,
-                            )
-                          ]),
+                   
                       child: TextFormField(
                            autovalidateMode: AutovalidateMode.onUserInteraction, 
                         controller: _dateController,
@@ -221,23 +201,13 @@ int _currentIndex = 2;
                         },
                       ),
                       
-                    ),
+                    
                   ),
                   
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 10, right: 30, left: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 120, 120),
-                              blurRadius: 10,
-                              // spreadRadius: 15,
-                            )
-                          ]),
+                  
                       child: FormField<String>(
                            autovalidateMode: AutovalidateMode.onUserInteraction, 
                         builder: (FormFieldState<String> state) {
@@ -276,7 +246,7 @@ int _currentIndex = 2;
                           return null;
                         },
                       ),
-                    ),
+                    
                   ),
 
                
@@ -289,32 +259,11 @@ int _currentIndex = 2;
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 120, 120),
-                              blurRadius: 10,
-                              // spreadRadius: 15,
-                            )
-                          ]),
-                    ),
+                 
                   ),
                    Padding(
   padding: const EdgeInsets.only(top: 20, right: 30, left: 30),
-  child: Container(
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(20),
-      color: Colors.white,
-      boxShadow: const [
-        BoxShadow(
-          color: Color.fromARGB(255, 255, 120, 120),
-          blurRadius: 10,
-        ),
-      ],
-    ),
+
     child: StatefulBuilder(
       builder: (BuildContext context, StateSetter setState) {
         return Column(
@@ -364,22 +313,11 @@ int _currentIndex = 2;
         );
       },
     ),
-  ),
+  
 ),
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 120, 120),
-                              blurRadius: 10,
-                              // spreadRadius: 15,
-                            )
-                          ]),
                       child: TextFormField(
                            autovalidateMode: AutovalidateMode.onUserInteraction, 
                         controller: _placeController,
@@ -398,22 +336,12 @@ int _currentIndex = 2;
                           return null;
                         },
                       ),
-                    ),
+                    
                   ),
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 120, 120),
-                              blurRadius: 10,
-                              // spreadRadius: 15,
-                            )
-                          ]),
+                    
                       child: TextFormField(
                            autovalidateMode: AutovalidateMode.onUserInteraction, 
                         controller: _districtController,
@@ -432,22 +360,12 @@ int _currentIndex = 2;
                           return null;
                         },
                       ),
-                    ),
+                    
                   ),
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 120, 120),
-                              blurRadius: 10,
-                              // spreadRadius: 15,
-                            )
-                          ]),
+                
                       child: TextFormField(
                            autovalidateMode: AutovalidateMode.onUserInteraction, 
                         controller: _stateController,
@@ -468,7 +386,7 @@ int _currentIndex = 2;
                           return null;
                         },
                       ),
-                    ),
+                    
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 50),

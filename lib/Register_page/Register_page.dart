@@ -107,20 +107,12 @@ class _Register_pageState extends State<register_page> {
               key: _formKey,
               child: ListView(
                 children: [
+                  
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 120, 120),
-                              blurRadius: 10,
-                              // spreadRadius: 15,
-                            )
-                          ]),
+
+                        
                       child: TextFormField(
                            autovalidateMode: AutovalidateMode.onUserInteraction, 
                         controller: _usernameController,
@@ -131,32 +123,24 @@ class _Register_pageState extends State<register_page> {
                             fillColor: Colors.white,
                             filled: true,
                             labelText: "Username",
-                            labelStyle: const TextStyle(color: Colors.black)),
+                            labelStyle: const TextStyle(color: Colors.black),
+                            
+                            ),
                            
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Value is Empty';
+                            return 'Username is required';
                           } else {
                             return null;
                           }
                         },
                       ),
-                    ),
+                    
                   ),
+                  
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 120, 120),
-                              blurRadius: 10,
-                              // spreadRadius: 15,
-                            )
-                          ]),
                       child: TextFormField(
                            autovalidateMode: AutovalidateMode.onUserInteraction, 
                         controller: _emailController,
@@ -182,22 +166,12 @@ class _Register_pageState extends State<register_page> {
                           return null;
                         },
                       ),
-                    ),
+                    
                   ),
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 10, right: 30, left: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 120, 120),
-                              blurRadius: 10,
-                              // spreadRadius: 15,
-                            )
-                          ]),
+              
                       child: FormField<String>(
                            autovalidateMode: AutovalidateMode.onUserInteraction, 
                         builder: (FormFieldState<String> state) {
@@ -237,22 +211,11 @@ class _Register_pageState extends State<register_page> {
                           return null;
                         },
                       ),
-                    ),
+                    
                   ),
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 120, 120),
-                              blurRadius: 10,
-                              // spreadRadius: 15,
-                            )
-                          ]),
                       child:TextFormField(
                            autovalidateMode: AutovalidateMode.onUserInteraction, 
   controller: _passwordController,
@@ -275,23 +238,12 @@ class _Register_pageState extends State<register_page> {
   },
 ),
 
-                    ),
+                    
                   ),
 
 
            Padding(
   padding: const EdgeInsets.only(top: 20, right: 30, left: 30),
-  child: Container(
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(20),
-      color: Colors.white,
-      boxShadow: const [
-        BoxShadow(
-          color: Color.fromARGB(255, 255, 120, 120),
-          blurRadius: 10,
-        ),
-      ],
-    ),
     child: StatefulBuilder(
       builder: (BuildContext context, StateSetter setState) {
         return Column(
@@ -341,7 +293,7 @@ class _Register_pageState extends State<register_page> {
         );
       },
     ),
-  ),
+  
 ),
 
 
@@ -349,17 +301,7 @@ class _Register_pageState extends State<register_page> {
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 120, 120),
-                              blurRadius: 10,
-                              // spreadRadius: 15,
-                            )
-                          ]),
+                  
                       child: TextFormField(
                            autovalidateMode: AutovalidateMode.onUserInteraction, 
                         controller: _placeController,
@@ -373,7 +315,7 @@ class _Register_pageState extends State<register_page> {
                             labelStyle: const TextStyle(color: Colors.black)),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Value is Empty';
+                            return 'Place is required';
                           }
                           return null;
                         },
@@ -383,22 +325,12 @@ class _Register_pageState extends State<register_page> {
   },
     
                       ),
-                    ),
+                    
                   ),
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 120, 120),
-                              blurRadius: 10,
-                              // spreadRadius: 15,
-                            )
-                          ]),
+                 
                       child: TextFormField(
                            autovalidateMode: AutovalidateMode.onUserInteraction, 
                         controller: _districtController,
@@ -412,7 +344,7 @@ class _Register_pageState extends State<register_page> {
                             labelStyle: const TextStyle(color: Colors.black)),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Value is Empty';
+                            return 'District is required';
                           }
                           return null;
                         },
@@ -422,22 +354,12 @@ class _Register_pageState extends State<register_page> {
   },
     
                       ),
-                    ),
+                    
                   ),
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 120, 120),
-                              blurRadius: 10,
-                              // spreadRadius: 15,
-                            )
-                          ]),
+                
                       child: TextFormField(
                            autovalidateMode: AutovalidateMode.onUserInteraction, 
                         controller: _stateController,
@@ -453,7 +375,7 @@ class _Register_pageState extends State<register_page> {
                             )),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Value is Empty';
+                            return 'State is required';
                           }
                           return null;
                         },
@@ -462,7 +384,7 @@ class _Register_pageState extends State<register_page> {
     _stateController.text = value!.toLowerCase().capitalizeFirstLetter();
   },
                       ),
-                    ),
+                    
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 50),
@@ -479,7 +401,7 @@ class _Register_pageState extends State<register_page> {
                             backgroundColor:
                                 MaterialStatePropertyAll(Colors.red),
                           ),
-                          child: const Text('Submit'),
+                          child: const Text('Submit', style: TextStyle(color: Colors.white)),
                         ),
                         TextButton(
                           onPressed: () {

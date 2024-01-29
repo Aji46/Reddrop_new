@@ -75,6 +75,7 @@ class _UpdateState extends State<Update> {
           // Set the values for each field based on the retrieved data
           _usernameController.text = data['name'] ?? '';
           _phoneController.text = data['phone'] ?? '';
+       
           _districtController.text = data['district'] ?? '';
           _placeController.text = data['place'] ?? '';
           _stateController.text = data['state'] ?? '';
@@ -99,6 +100,7 @@ void _updateUser(BuildContext context) async {
       'name': _usernameController.text,
       'phone': _phoneController.text,
       'district': _districtController.text,
+    
       'place': _placeController.text,
       'state': _stateController.text,
       'group': bloodGroup,
@@ -256,17 +258,6 @@ void deactivateFirebaseAccount() async {
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 120, 120),
-                              blurRadius: 10,
-                              // spreadRadius: 15,
-                            )
-                          ]),
                       child: TextFormField(
                             autovalidateMode: AutovalidateMode.onUserInteraction, 
                         controller: _usernameController,
@@ -286,22 +277,12 @@ void deactivateFirebaseAccount() async {
                           }
                         },
                       ),
-                    ),
+      
                   ),
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 10, right: 30, left: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 120, 120),
-                              blurRadius: 10,
-                              // spreadRadius: 15,
-                            )
-                          ]),
+                  
                       child: FormField<String>(
                             autovalidateMode: AutovalidateMode.onUserInteraction, 
                         builder: (FormFieldState<String> state) {
@@ -340,21 +321,10 @@ void deactivateFirebaseAccount() async {
                           return null;
                         },
                       ),
-                    ),
+                    
                   ),
                   Padding(
   padding: const EdgeInsets.only(top: 20, right: 30, left: 30),
-  child: Container(
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(20),
-      color: Colors.white,
-      boxShadow: const [
-        BoxShadow(
-          color: Color.fromARGB(255, 255, 120, 120),
-          blurRadius: 10,
-        ),
-      ],
-    ),
     child: StatefulBuilder(
       builder: (BuildContext context, StateSetter setState) {
         return Column(
@@ -404,22 +374,12 @@ void deactivateFirebaseAccount() async {
         );
       },
     ),
-  ),
+  
 ),
+
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 120, 120),
-                              blurRadius: 10,
-                              // spreadRadius: 15,
-                            )
-                          ]),
                       child: TextFormField(
                             autovalidateMode: AutovalidateMode.onUserInteraction, 
                         controller: _placeController,
@@ -443,22 +403,12 @@ void deactivateFirebaseAccount() async {
   },
     
                       ),
-                    ),
+                    
                   ),
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 120, 120),
-                              blurRadius: 10,
-                              // spreadRadius: 15,
-                            )
-                          ]),
+                   
                       child: TextFormField(
                             autovalidateMode: AutovalidateMode.onUserInteraction, 
                         controller: _districtController,
@@ -482,22 +432,12 @@ void deactivateFirebaseAccount() async {
   },
     
                       ),
-                    ),
+                    
                   ),
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 120, 120),
-                              blurRadius: 10,
-                              // spreadRadius: 15,
-                            )
-                          ]),
+      
                       child: TextFormField(
                             autovalidateMode: AutovalidateMode.onUserInteraction, 
                         controller: _stateController,
@@ -523,7 +463,7 @@ void deactivateFirebaseAccount() async {
   },
     
                       ),
-                    ),
+                    
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 50),
