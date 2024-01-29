@@ -208,99 +208,107 @@ class _HomeGridState extends State<HomeGrid> {
                   ),
                 ),
               ),
-              Container(
-                height: 215,
-                margin: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.white,
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color.fromARGB(255, 104, 41, 41),
-                      blurRadius: 20,
-                    )
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      height: 200,
-                      width: 160,
-                      margin: const EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color.fromARGB(97, 19, 82, 153),
-                            blurRadius: 20,
-                          )
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.of(context)
-                                  .push(MaterialPageRoute(
-                                builder: (ctx) => const Request(),
-                              ));
-                            },
-                            child: const Text(
-                              'Request for blood',
-                              style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color.fromARGB(255, 19, 82, 153)),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Container(
-                      height: 200,
-                      width: 160,
-                      margin: const EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color.fromARGB(58, 19, 82, 153),
-                            blurRadius: 20,
-                          )
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.of(context)
-                                  .push(MaterialPageRoute(
-                                builder: (ctx) => const register_login(),
-                              ));
-                            },
-                            child: const Text(
-                              'I want to be a Donor',
-                              style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color.fromARGB(255, 19, 82, 153)),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+
+
+
+        Container(
+  height: MediaQuery.of(context).size.height * 0.4,
+  margin: const EdgeInsets.all(8.0),
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(20),
+    color: Colors.white,
+    boxShadow: const [
+      BoxShadow(
+        color: Color.fromARGB(255, 104, 41, 41),
+        blurRadius: 20,
+      )
+    ],
+  ),
+  child: Row(
+    children: [
+      Expanded(
+        child: Container(
+          margin: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: const Color.fromARGB(255, 255, 255, 255),
+            boxShadow: const [
+              BoxShadow(
+                color: Color.fromARGB(97, 19, 82, 153),
+                blurRadius: 20,
+              )
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Align(
+              alignment: Alignment.center,
+              child: InkWell(
+                onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+    builder: (ctx) => const Request(),
+  ));// Function to handle navigation
+                },
+                child: const Text(
+                  'Request for blood',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 19, 82, 153),
+                  ),
                 ),
               ),
+            ),
+          ),
+        ),
+      ),
+      const SizedBox(
+        width: 15,
+      ),
+      Expanded(
+        child: Container(
+          margin: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: const Color.fromARGB(255, 255, 255, 255),
+            boxShadow: const [
+              BoxShadow(
+                color: Color.fromARGB(58, 19, 82, 153),
+                blurRadius: 20,
+              )
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Align(
+              alignment: Alignment.center,
+              child: InkWell(
+                onTap: () {
+                   Navigator.of(context).push(MaterialPageRoute(
+    builder: (ctx) => const register_login(),
+  )); // Function to handle navigation
+                },
+                child: const Text(
+                  'I want to be a Donor',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 19, 82, 153),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ],
+  ),
+)
+
+
+
+
+
             ],
           ),
     )
