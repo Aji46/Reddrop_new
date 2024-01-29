@@ -90,9 +90,9 @@ class _HomeSearchState extends State<Home_search> {
                 (newValue) {
                   setState(() {
                     selectedDistrict = newValue;
-                    selectedBloodGroup = getDefaultSelection(selectedState, bloodGroups);
-                    selectedDistrict = getDefaultSelection(newValue, districts);
-                    selectedState = getDefaultSelection(newValue, states);
+                    selectedBloodGroup = getDefaultSelection(selectedBloodGroup, bloodGroups);
+                    selectedDistrict = getDefaultSelection(selectedDistrict, districts);
+                    selectedState = getDefaultSelection(selectedState, states);
                   });
                   getFilteredStream();
                 },
@@ -105,8 +105,8 @@ class _HomeSearchState extends State<Home_search> {
                 (newValue) {
                   setState(() {
                     selectedBloodGroup = newValue;
-                    selectedDistrict = getDefaultSelection(newValue, districts);
-                    selectedState = getDefaultSelection(newValue, states);
+                    selectedDistrict = getDefaultSelection(selectedDistrict, districts);
+                    selectedState = getDefaultSelection(selectedState, states);
                   });
                   getFilteredStream();
                 },
