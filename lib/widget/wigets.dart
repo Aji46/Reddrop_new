@@ -30,18 +30,6 @@ class CustomAppBar {
           ),
         ),
       ),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: 20),
-          child: IconButton(
-            icon: const Icon(
-              Icons.more_vert,
-              color: Colors.black,
-            ),
-            onPressed: () {},
-          ),
-        ),
-      ],
     );
   }
 }

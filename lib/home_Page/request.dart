@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:reddrop/Doner_view/Request_view.dart';
-import 'package:reddrop/Settings_page/settings_page_home.dart';
 import 'package:reddrop/home_Page/loginrequest.dart';
+import 'package:reddrop/widget/wigets.dart';
 import 'package:share/share.dart';
 
 class Request extends StatefulWidget {
@@ -42,56 +42,14 @@ void getCollectionId() async {
 
   @override
   Widget build(BuildContext context) {
-    
+CustomAppBar customAppBar = CustomAppBar(); 
     return Stack(
       children: [
         // const Background_Image(),
         Scaffold(
+          
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-          appBar: AppBar(
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            title: Align(
-              alignment: Alignment.topLeft,
-              child: RichText(
-                text: const TextSpan(
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: 'Red',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 255, 0, 0),
-                        fontFamily: 'Italiana',
-                        fontSize: 24,
-                      ),
-                    ),
-                    TextSpan(
-                      text: 'Drop ',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 0, 0, 0),
-                        fontFamily: 'Italiana',
-                        fontSize: 24,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: IconButton(
-                  icon: const Icon(Icons.more_vert, color: Colors.black),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (ctx) => const Setting(),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
+       appBar: customAppBar.buildAppBar(context),
           body: Column(
             children: [
               Container(
