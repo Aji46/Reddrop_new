@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reddrop/policy/termsandpolicy.dart';
 //App bar
 class CustomAppBar {
   PreferredSizeWidget buildAppBar(BuildContext context) {
@@ -30,6 +31,27 @@ class CustomAppBar {
           ),
         ),
       ),
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: 20),
+          child: PopupMenuButton(
+                      itemBuilder: (context) => [   
+                            PopupMenuItem(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Pryvacypage(),
+                                      ));
+                                },
+                                child: const Text('Terms & policy')),
+                          ],
+                      child: const Icon(
+                        Icons.more_vert,
+                        color: Color.fromARGB(255, 0, 0, 0),
+                      )),
+        ),
+      ],
     );
   }
 }
