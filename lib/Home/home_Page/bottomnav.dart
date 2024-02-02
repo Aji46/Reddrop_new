@@ -2,8 +2,8 @@
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:reddrop/Home/home_Page/Home.dart';
 import 'package:reddrop/Register_page/registerlogin.dart';
-import 'package:reddrop/home_Page/Home.dart';
 import 'package:reddrop/pageview/pageview.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -16,7 +16,7 @@ class BottomNavBar extends StatefulWidget {
 class HomePageState extends State<BottomNavBar> {
   var selectedIndex = 1;
   final screens = [
-    const Home_search(),
+    const HomeSearch(),
     const MyPageView(),
      register_login(),
   ];
@@ -24,13 +24,6 @@ class HomePageState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     Navigator.of(context)
-      //         .push(MaterialPageRoute(builder: (ctx) => AddingWorkouts()));
-      //   },
-      //   child: Icon(Icons.add),
-      // ),
       extendBody: true,
       bottomNavigationBar: CurvedNavigationBar(
         items: const [

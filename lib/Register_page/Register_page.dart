@@ -81,17 +81,22 @@ class _Register_pageState extends State<register_page> {
       );
     } catch (e) {
       print("Error during registration: $e");
+
       // Handle registration errors
       if (e is FirebaseAuthException) {
         if (e.code == 'email-already-in-use') {
           print("User already exists. Try to log in");
           // You can show an alert or a message here
+        ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Email is already in use. Try logging in."),
+          backgroundColor: Colors.red,
+        ),
+      );
         }
       }
     }
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -103,288 +108,286 @@ class _Register_pageState extends State<register_page> {
           appBar: customAppBar.buildAppBar(context),
           body: SafeArea(
             child: Form(
-            
               key: _formKey,
               child: ListView(
                 children: [
-                  
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 20, right: 30, left: 30),
-
-                        
-                      child: TextFormField(
-                           autovalidateMode: AutovalidateMode.onUserInteraction, 
-                        controller: _usernameController,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            fillColor: Colors.white,
-                            filled: true,
-                            labelText: "Username",
-                            labelStyle: const TextStyle(color: Colors.black),
-                            
-                            ),
-                           
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Username is required';
-                          } else {
-                            return null;
-                          }
-                        },
-                      ),
-                    
-                  ),
-                  
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 20, right: 30, left: 30),
-                      child: TextFormField(
-                           autovalidateMode: AutovalidateMode.onUserInteraction, 
-                        controller: _emailController,
-                        keyboardType: TextInputType
-                            .emailAddress, // Set keyboard type to email
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          fillColor: Colors.white,
-                          filled: true,
-                          labelText: "Email",
-                          labelStyle: const TextStyle(color: Colors.black),
+                    child: TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: _usernameController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
                         ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Email is required';
-                          } else if (!RegExp(
-                                  r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$')
-                              .hasMatch(value)) {
-                            return 'Enter a valid email address';
-                          }
-                          return null;
-                        },
+                        fillColor: Colors.white,
+                        filled: true,
+                        labelText: "Username",
+                        labelStyle: const TextStyle(color: Colors.black),
                       ),
-                    
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Username is required';
+                        } else if (value.contains(' ')) {
+                          return 'Spaces are not allowed in the username';
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 20, right: 30, left: 30),
+                    child: TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: _emailController,
+                      keyboardType: TextInputType
+                          .emailAddress, // Set keyboard type to email
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        fillColor: Colors.white,
+                        filled: true,
+                        labelText: "Email",
+                        labelStyle: const TextStyle(color: Colors.black),
+                      ),
+    validator: (value) {
+      if (value == null || value.isEmpty) {
+        return 'Email is required';
+      } else if (!RegExp(r'^[\w-]+(\.[\w-]+)*@gmail\.com$').hasMatch(value)) {
+        return 'Please enter a valid Gmail address';
+      }
+      return null;
+    },
+                    ),
                   ),
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 10, right: 30, left: 30),
-              
-                      child: FormField<String>(
-                           autovalidateMode: AutovalidateMode.onUserInteraction, 
-                        builder: (FormFieldState<String> state) {
-                          return InputDecorator(
-                            decoration: InputDecoration(
+                    child: FormField<String>(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      builder: (FormFieldState<String> state) {
+                        return InputDecorator(
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              fillColor: Colors.white,
+                              filled: true,
+                              labelText: "Blood Group",
+                              labelStyle: const TextStyle(color: Colors.black)),
+                          child: DropdownButton<String>(
+                            value: BloodGroup,
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                BloodGroup = newValue;
+                              });
+                              state.didChange(newValue);
+                            },
+                            items: bloodGroupOptions
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
+                        );
+                      },
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please select a blood group';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 20, right: 30, left: 30),
+                    child: TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: _passwordController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        fillColor: Colors.white,
+                        filled: true,
+                        labelText: "Password",
+                        labelStyle: const TextStyle(color: Colors.black),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Password is required';
+                        } else if (value.length < 10) {
+                          return 'Password must be at least 10 characters';
+                        }else if(value.contains(' '))
+                       {
+    return 'Spaces are not allowed in the password';
+  } else {
+    return null;
+  }
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 20, right: 30, left: 30),
+                    child: StatefulBuilder(
+                      builder: (BuildContext context, StateSetter setState) {
+                        return Column(
+                          children: [
+                            TextFormField(
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              controller: _phoneController,
+                              keyboardType: TextInputType.phone,
+                              maxLength: 10,
+                              onChanged: (value) {
+                                setState(
+                                    () {}); // Trigger a rebuild when text changes
+                              },
+                              decoration: InputDecoration(
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 fillColor: Colors.white,
                                 filled: true,
-                                labelText: "Blood Group",
+                                labelText: "Phone Number",
                                 labelStyle:
-                                    const TextStyle(color: Colors.black)),
-                            child: DropdownButton<String>(
-                              value: BloodGroup,
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  BloodGroup = newValue;
-                                });
-                                state.didChange(newValue);
-                              },
-                              items: bloodGroupOptions
-                                  .map<DropdownMenuItem<String>>(
-                                      (String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                            ),
-                          );
-                        },
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please select a blood group';
-                          }
-                          return null;
-                        },
-                      ),
-                    
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 20, right: 30, left: 30),
-                      child:TextFormField(
-                           autovalidateMode: AutovalidateMode.onUserInteraction, 
-  controller: _passwordController,
-  decoration: InputDecoration(
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(20),
-    ),
-    fillColor: Colors.white,
-    filled: true,
-    labelText: "Password",
-    labelStyle: const TextStyle(color: Colors.black),
-  ),
-  validator: (value) {
-    if (value == null || value.isEmpty) {
-      return 'Password is required';
-    } else if (value.length < 10) {
-      return 'Password must be at least 10 characters';
-    }
+                                    const TextStyle(color: Colors.black),
+                                counterText:
+                                    '', // Remove the default counter text
+                                suffixIcon: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12.0),
+                                  child: Text(
+                                    '${_phoneController.text.length}/10',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ),
+                              ),
+                              validator: (value) {
+  if (value == null || value.isEmpty) {
+    return 'Phone number is required';
+  } else if (value.length != 10) {
+    return 'Phone number must be 10 digits';
+  } else if (value.contains(' ')) {
+    return 'Spaces are not allowed in the phone number';
+  } else if (RegExp(r'(\d)\1{9}').hasMatch(value)) {
+    return 'Repeated digits are not allowed';
+  } else {
     return null;
-  },
-),
-
-                    
-                  ),
-
-
-           Padding(
-  padding: const EdgeInsets.only(top: 20, right: 30, left: 30),
-    child: StatefulBuilder(
-      builder: (BuildContext context, StateSetter setState) {
-        return Column(
-          children: [
-            TextFormField(
-                 autovalidateMode: AutovalidateMode.onUserInteraction, 
-              controller: _phoneController,
-              keyboardType: TextInputType.phone,
-              maxLength: 10,
-              onChanged: (value) {
-                setState(() {}); // Trigger a rebuild when text changes
-              },
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                fillColor: Colors.white,
-                filled: true,
-                labelText: "Phone Number",
-                labelStyle: const TextStyle(color: Colors.black),
-                counterText: '', // Remove the default counter text
-                suffixIcon: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                  child: Text(
-                    '${_phoneController.text.length}/10',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ),
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Phone number is required';
-                } else if (value.length != 10) {
-                  return 'Phone number must be 10 digits';
-                }
-                return null;
-              },
-            ),
-            // Show phone number length validation text
-            if (_phoneController.text.isNotEmpty &&
-                _phoneController.text.length != 10)
-              Text(
-                'Phone number must be 10 digits',
-                style: TextStyle(color: Colors.red),
-              ),
-          ],
-        );
-      },
-    ),
-  
-),
-
-
-
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 20, right: 30, left: 30),
-                  
-                      child: TextFormField(
-                           autovalidateMode: AutovalidateMode.onUserInteraction, 
-                        controller: _placeController,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
+  }
+},
                             ),
-                            fillColor: Colors.white,
-                            filled: true,
-                            labelText: "Place",
-                            labelStyle: const TextStyle(color: Colors.black)),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Place is required';
-                          }
-                          return null;
-                        },
-                           onSaved: (value) {
-    // Convert the value to lowercase with the first letter as capital
-    _stateController.text = value!.toLowerCase().capitalizeFirstLetter();
-  },
-    
-                      ),
-                    
+                            // Show phone number length validation text
+                            if (_phoneController.text.isNotEmpty &&
+                                _phoneController.text.length != 10)
+                              Text(
+                                'Phone number must be 10 digits',
+                                style: TextStyle(color: Colors.red),
+                              ),
+                          ],
+                        );
+                      },
+                    ),
                   ),
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 20, right: 30, left: 30),
-                 
-                      child: TextFormField(
-                           autovalidateMode: AutovalidateMode.onUserInteraction, 
-                        controller: _districtController,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            fillColor: Colors.white,
-                            filled: true,
-                            labelText: "District",
-                            labelStyle: const TextStyle(color: Colors.black)),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'District is required';
-                          }
-                          return null;
-                        },
-                           onSaved: (value) {
-    // Convert the value to lowercase with the first letter as capital
-    _stateController.text = value!.toLowerCase().capitalizeFirstLetter();
-  },
-    
-                      ),
-                    
+                    child: TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: _placeController,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          fillColor: Colors.white,
+                          filled: true,
+                          labelText: "Place",
+                          labelStyle: const TextStyle(color: Colors.black)),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Place is required';
+                        }else if (value.contains(' ')) {
+    return 'Spaces are not allowed in the Place';
+  } else {
+    return null;
+  }
+                      },
+                      onSaved: (value) {
+                        // Convert the value to lowercase with the first letter as capital
+                        _stateController.text =
+                            value!.toLowerCase().capitalizeFirstLetter();
+                      },
+                    ),
                   ),
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 20, right: 30, left: 30),
-                
-                      child: TextFormField(
-                           autovalidateMode: AutovalidateMode.onUserInteraction, 
-                        controller: _stateController,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            fillColor: Colors.white,
-                            filled: true,
-                            labelText: "State",
-                            labelStyle: const TextStyle(
-                              color: Colors.black,
-                            )),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'State is required';
-                          }
-                          return null;
-                        },
-                        onSaved: (value) {
-    // Convert the value to lowercase with the first letter as capital
-    _stateController.text = value!.toLowerCase().capitalizeFirstLetter();
-  },
-                      ),
-                    
+                    child: TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: _districtController,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          fillColor: Colors.white,
+                          filled: true,
+                          labelText: "District",
+                          labelStyle: const TextStyle(color: Colors.black)),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'District is required';
+                        }else if (value.contains(' ')) {
+    return 'Spaces are not allowed in the District';
+  } else {
+    return null;
+  }
+                      },
+                      onSaved: (value) {
+                        // Convert the value to lowercase with the first letter as capital
+                        _stateController.text =
+                            value!.toLowerCase().capitalizeFirstLetter();
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 20, right: 30, left: 30),
+                    child: TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: _stateController,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          fillColor: Colors.white,
+                          filled: true,
+                          labelText: "State",
+                          labelStyle: const TextStyle(
+                            color: Colors.black,
+                          )),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'State is required';
+                        }else if (value.contains(' ')) {
+    return 'Spaces are not allowed in the State';
+  } else {
+    return null;
+  }
+                      },
+                      onSaved: (value) {
+                        // Convert the value to lowercase with the first letter as capital
+                        _stateController.text =
+                            value!.toLowerCase().capitalizeFirstLetter();
+                      },
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 50),
@@ -401,7 +404,8 @@ class _Register_pageState extends State<register_page> {
                             backgroundColor:
                                 MaterialStatePropertyAll(Colors.red),
                           ),
-                          child: const Text('Submit', style: TextStyle(color: Colors.white)),
+                          child: const Text('Submit',
+                              style: TextStyle(color: Colors.white)),
                         ),
                         TextButton(
                           onPressed: () {

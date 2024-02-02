@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:reddrop/home_Page/contact.dart';
-import 'package:reddrop/home_Page/home%20grid.dart';
+import 'package:reddrop/Home/home_Page/contact.dart';
+import 'package:reddrop/Home/home_Page/home%20grid.dart';
+
 
 class MyPageView extends StatefulWidget {
   const MyPageView({Key? key}) : super(key: key);

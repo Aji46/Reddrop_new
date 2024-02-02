@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:reddrop/constant/constant.dart';
 import 'package:reddrop/policy/termsandpolicy.dart';
+
 //App bar
+//.............................
 class CustomAppBar {
   PreferredSizeWidget buildAppBar(BuildContext context) {
     return AppBar(
@@ -57,12 +60,8 @@ class CustomAppBar {
 }
 
 
-//bottom navigation bar
-
-
-
-
 //dot indicator
+//.............................................
 
 class DotIndicator extends StatelessWidget {
   final int currentPageIndex;
@@ -92,7 +91,8 @@ class DotIndicator extends StatelessWidget {
   }
 }
 
-
+//grid pages blood boxes
+//.......................................
 class BloodCard extends StatelessWidget {
   const BloodCard({Key? key, required this.bloodGroup, required this.onTap})
       : super(key: key);
@@ -136,4 +136,51 @@ class BloodCard extends StatelessWidget {
   }
 }
 
+
+//grid pages container decoration
+//.......................................
+class MyDecorations {
+  static  BoxDecoration pageContainerDecoration = BoxDecoration(
+    borderRadius: BorderRadius.circular(20),
+    color: Colors.white,
+    boxShadow:  const [
+      BoxShadow(
+        color: Color.fromARGB(95, 104, 41, 41),
+        blurRadius: 20,
+      )
+    ],
+  );
+
+ static BoxDecoration bottomContainerDecoration = BoxDecoration(
+  borderRadius: BorderRadius.circular(20),
+  color: Colors.white,
+  boxShadow: const [
+    BoxShadow(
+      color: Color.fromARGB(95, 19, 82, 153), // Set alpha to 255 for full opacity
+      blurRadius: 20,
+    ),
+  ],
+);
+
+}
+
+//grid pages container text
+//.......................................
+class MyButton extends MaterialButton {
+  final String text;
+  final VoidCallback onTap;
+
+  MyButton({required this.text, required this.onTap})
+      : super(
+          onPressed: onTap,
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          child: Text(
+            text,
+            style: const TextStyle(color: MyColors.mycolor3, fontSize: 30,fontWeight:FontWeight.bold ),
+          ),
+        );
+}
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:reddrop/home_Page/bottomnav.dart';
+import 'package:reddrop/Home/home_Page/bottomnav.dart';
+
 
 
 class Splash extends StatefulWidget {

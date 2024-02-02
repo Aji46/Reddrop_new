@@ -3,8 +3,6 @@ import 'package:hive/hive.dart';
 part 'contactdatabase.g.dart';
 
 
-
-
 @HiveType(typeId: 1)
 class Contactdb {
   @HiveField(0)
