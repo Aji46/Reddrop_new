@@ -57,7 +57,7 @@ showDialog(
           onPressed: () {
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
-                builder: (ctx) => const register_login(),
+                builder: (ctx) => const RegisterLogin(),
               ),
             );
           },

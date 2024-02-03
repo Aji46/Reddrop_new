@@ -97,7 +97,7 @@ class _HomeGridState extends State<HomeGrid> {
                       text: 'I want to be a Donor',
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (ctx) => const register_login(),
+                          builder: (ctx) => const RegisterLogin(),
                         ));
                       },
                     ),

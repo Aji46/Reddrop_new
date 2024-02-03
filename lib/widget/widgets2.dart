@@ -26,10 +26,16 @@ class DonorListWidget extends StatelessWidget {
   }
 
   Widget buildDonorListItem(BuildContext context, DocumentSnapshot donorSnap, Animation<double> animation) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double listItemHeight = screenWidth > 600 ? 120.0 : 100.0;
+    double avatarRadius = screenWidth > 600 ? 35.0 : 30.0;
+    double fontSizeTitle = screenWidth > 600 ? 22.0 : 20.0;
+    double fontSizeSubtitle = screenWidth > 600 ? 17.0 : 15.0;
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Padding(
-        padding: const EdgeInsets.only(left: 10, right: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
@@ -44,7 +50,7 @@ class DonorListWidget extends StatelessWidget {
                 const SizedBox(height: 5),
                 CircleAvatar(
                   backgroundColor: const Color.fromARGB(255, 190, 24, 24),
-                  radius: 30,
+                  radius: avatarRadius,
                   child: Text(
                     donorSnap['group'] as String? ?? '',
                     style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -56,11 +62,11 @@ class DonorListWidget extends StatelessWidget {
                     children: [
                       Text(
                         donorSnap['name'] as String? ?? '',
-                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: fontSizeTitle, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         donorSnap['phone'].toString(),
-                        style: const TextStyle(fontSize: 15),
+                        style: TextStyle(fontSize: fontSizeSubtitle),
                       ),
                     ],
                   ),
@@ -83,7 +89,6 @@ class DonorListWidget extends StatelessWidget {
   }
 }
 
-
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String labelText;
@@ -99,8 +104,12 @@ class CustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    double paddingValue = screenWidth > 600 ? 50 : 30;
+
     return Padding(
-      padding: const EdgeInsets.only(top: 20, right: 30, left: 30),
+      padding: EdgeInsets.only(top: 20, right: paddingValue, left: paddingValue),
       child: TextFormField(
         autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: controller,
@@ -118,8 +127,6 @@ class CustomTextFormField extends StatelessWidget {
     );
   }
 }
-
-
 
 
   String? _validate(String? value, String fieldName) {

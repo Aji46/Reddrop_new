@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:reddrop/Register_page/Register_page.dart';
 import 'package:reddrop/Register_page/update.dart';
+import 'package:reddrop/widget/login%20widgets.dart';
 import 'package:reddrop/widget/wigets.dart';
 
 class Signup extends StatefulWidget {
@@ -25,7 +26,7 @@ class _Register_pageState extends State<Signup> {
   List<String> items = List.generate(50, (index) => 'Item $index');
   late DocumentSnapshot donorSnap;
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+   final FirebaseAuth _auth = FirebaseAuth.instance;
   int _currentIndex = 2;
 
   @override
@@ -37,24 +38,18 @@ class _Register_pageState extends State<Signup> {
 
   Future<void> _signInWithEmailAndPassword() async {
     try {
-      // ignore: unused_local_variable
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text,
       );
 
-      // If sign in is successful, navigate to the desired page
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (ctx) => const Update(),
         ),
       );
-       
-
     } catch (e) {
-      // Handle sign-in errors
       print("Error signing in: $e");
-      // You can show an error message here
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Invalid email or password. Please check your credentials."),
@@ -72,12 +67,12 @@ class _Register_pageState extends State<Signup> {
       );
     } catch (e) {
       print("Error during login: $e");
-        ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text("Error signing in: $e"),
-      duration: Duration(seconds: 3),
-    ),
-  );
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Error signing in: $e"),
+          duration: Duration(seconds: 3),
+        ),
+      );
     }
   }
 
@@ -90,12 +85,12 @@ class _Register_pageState extends State<Signup> {
 
   @override
   Widget build(BuildContext context) {
-     CustomAppBar customAppBar = CustomAppBar();
+    CustomAppBar customAppBar = CustomAppBar();
     return Stack(
       children: [
         Scaffold(
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-            appBar: customAppBar.buildAppBar(context),
+          appBar: customAppBar.buildAppBar(context),
           body: Container(
             margin: const EdgeInsets.only(left: 25, right: 25),
             alignment: Alignment.center,
@@ -103,124 +98,45 @@ class _Register_pageState extends State<Signup> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    'lib/assets/images/background1.png',
-                    width: 150,
-                    height: 150,
+                  CustomImage(),
+                  const SizedBox(height: 25),
+                  const CustomText(
+                    text: "Account Verification",
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
                   ),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  const Text(
-                    "Account Verification",
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const Text(
-                    "We need to signin your phone with your email and Your password",
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
+                  const SizedBox(height: 10),
+                  const CustomText(
+                    text: "You need to manage your request you want to login using your email and Your password",
+                    fontSize: 16,
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(
-                    height: 30,
+                  const SizedBox(height: 30),
+                  CustomTextField(
+                    controller: _emailController,
+                    hintText: "email",
                   ),
-                  Container(
-                    height: 55,
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 1, color: Colors.grey),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                          child: TextField(
-                            controller: _emailController,
-                            decoration: const InputDecoration(
-                              border: InputBorder.none,
-                              hintText: "email",
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  const SizedBox(height: 15),
+                  CustomTextField(
+                    controller: _passwordController,
+                    keyboardType: TextInputType.visiblePassword,
+                    obscureText: true,
+                    hintText: "Password",
                   ),
-                  const SizedBox(
-                    height: 15,
+                  const SizedBox(height: 20),
+                  CustomElevatedButton(
+                    onPressed: _signInWithEmailAndPassword,
+                    text: "Signup",
                   ),
-                  Container(
-                    height: 55,
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 1, color: Colors.grey),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                          child: TextField(
-                            controller: _passwordController,
-                            keyboardType: TextInputType.visiblePassword,
-                            obscureText: true,
-                            decoration: const InputDecoration(
-                              border: InputBorder.none,
-                              hintText: "Password",
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 45,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: const Color.fromARGB(255, 153, 19, 19),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: () {
-                       _signInWithEmailAndPassword();
-                      },
-                      child: const Text(
-                        "Signup",
-                        style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-                      ),
-                    ),
-                  ),
-                  TextButton(
+                  CustomTextButton(
                     onPressed: () {
-                      
-                     Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (ctx) => const register_page(),
-        ),
-      );
-
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (ctx) => const RegisterPage(),
+                        ),
+                      );
                     },
-                    child: const Text(
-                      "I don't have an account",
-                      style: TextStyle(
-                        color: Colors.black,
-                        decoration: TextDecoration.underline,
-                        fontStyle: FontStyle.italic,
-                      ),
-                    ),
+                    text: "I don't have an account",
                   ),
                 ],
               ),
@@ -231,3 +147,4 @@ class _Register_pageState extends State<Signup> {
     );
   }
 }
+

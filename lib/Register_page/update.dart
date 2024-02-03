@@ -5,7 +5,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:reddrop/Home/home_Page/bottomnav.dart';
 import 'package:reddrop/Register_page/registerlogin.dart';
-import 'package:reddrop/widget/extention.dart';
+import 'package:reddrop/widget/validation_utils.dart';
+import 'package:reddrop/widget/widgets2.dart';
+import 'package:reddrop/widget/widgets3.dart';
 
 class Update extends StatefulWidget {
   const Update({Key? key}) : super(key: key);
@@ -21,20 +23,10 @@ class _UpdateState extends State<Update> {
   final _districtController = TextEditingController();
   final _placeController = TextEditingController();
   final _stateController = TextEditingController();
-
-  final _formKey = GlobalKey<FormState>();
   String? bloodGroup;
-  List<String> bloodGroupOptions = [
-    "A+",
-    "A-",
-    "B+",
-    "B-",
-    "O+",
-    "O-",
-    "AB+",
-    "AB-",
-    "INRA"
-  ];
+  final _formKey = GlobalKey<FormState>();
+
+ 
 
   int _currentIndex = 2;
 
@@ -152,7 +144,7 @@ class _UpdateState extends State<Update> {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (ctx) =>
-                register_login(), // Change this to your login page
+                RegisterLogin(), // Change this to your login page
           ),
         );
       }
@@ -211,7 +203,7 @@ class _UpdateState extends State<Update> {
                           TextButton(
                             onPressed: () {
                               // Close the dialog
-                              Navigator.of(context).pop();
+                              Navigator.of(context).pop();                                                                                  
                             },
                             child: const Text("Cancel"),
                           ),
@@ -251,228 +243,42 @@ class _UpdateState extends State<Update> {
               key: _formKey,
               child: ListView(
                 children: [
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: TextFormField(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      controller: _usernameController,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          fillColor: Colors.white,
-                          filled: true,
-                          labelText: "Username",
-                          labelStyle: const TextStyle(color: Colors.black)),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Username is required';
-                        } else if (value.contains(' ')) {
-                          return 'Spaces are not allowed in the username';
-                        } else {
-                          return null;
-                        }
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 10, right: 30, left: 30),
-                    child: FormField<String>(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      builder: (FormFieldState<String> state) {
-                        return InputDecorator(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              fillColor: Colors.white,
-                              filled: true,
-                              labelText: "Blood Group",
-                              labelStyle: const TextStyle(color: Colors.black)),
-                          child: DropdownButton<String>(
-                            value: bloodGroup,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                bloodGroup = newValue;
-                              });
-                              state.didChange(newValue);
-                            },
-                            items: bloodGroupOptions
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
-                        );
-                      },
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please select a blood group';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: StatefulBuilder(
-                      builder: (BuildContext context, StateSetter setState) {
-                        return Column(
-                          children: [
-                            TextFormField(
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              controller: _phoneController,
-                              keyboardType: TextInputType.phone,
-                              maxLength: 10,
-                              onChanged: (value) {
-                                setState(
-                                    () {}); // Trigger a rebuild when text changes
-                              },
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                fillColor: Colors.white,
-                                filled: true,
-                                labelText: "Phone Number",
-                                labelStyle:
-                                    const TextStyle(color: Colors.black),
-                                counterText:
-                                    '', // Remove the default counter text
-                                suffixIcon: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 12.0),
-                                  child: Text(
-                                    '${_phoneController.text.length}/10',
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Phone number is required';
-                                } else if (value.length != 10) {
-                                  return 'Phone number must be 10 digits';
-                                } else if (value.contains(' ')) {
-                                  return 'Spaces are not allowed in the phone number';
-                                } else if (RegExp(r'(\d)\1{9}')
-                                    .hasMatch(value)) {
-                                  return 'Repeated digits are not allowed';
-                                } else {
-                                  return null;
-                                }
-                              },
-                            ),
-                            // Show phone number length validation text
-                            if (_phoneController.text.isNotEmpty &&
-                                _phoneController.text.length != 10)
-                              Text(
-                                'Phone number must be 10 digits',
-                                style: TextStyle(color: Colors.red),
-                              ),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: TextFormField(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      controller: _placeController,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          fillColor: Colors.white,
-                          filled: true,
-                          labelText: "Place",
-                          labelStyle: const TextStyle(color: Colors.black)),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Place is required';
-                        } else if (value.contains(' ')) {
-                          return 'Spaces are not allowed in the Place';
-                        } else {
-                          return null;
-                        }
-                      },
-                      onSaved: (value) {
-                        // Convert the value to lowercase with the first letter as capital
-                        _stateController.text =
-                            value!.toLowerCase().capitalizeFirstLetter();
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: TextFormField(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      controller: _districtController,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          fillColor: Colors.white,
-                          filled: true,
-                          labelText: "District",
-                          labelStyle: const TextStyle(color: Colors.black)),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'District is required';
-                        } else if (value.contains(' ')) {
-                          return 'Spaces are not allowed in the District';
-                        } else {
-                          return null;
-                        }
-                      },
-                      onSaved: (value) {
-                        // Convert the value to lowercase with the first letter as capital
-                        _stateController.text =
-                            value!.toLowerCase().capitalizeFirstLetter();
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 20, right: 30, left: 30),
-                    child: TextFormField(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      controller: _stateController,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          fillColor: Colors.white,
-                          filled: true,
-                          labelText: "State",
-                          labelStyle: const TextStyle(
-                            color: Colors.black,
-                          )),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'State is required';
-                        } else if (value.contains(' ')) {
-                          return 'Spaces are not allowed in the State';
-                        } else {
-                          return null;
-                        }
-                      },
-                      onSaved: (value) {
-                        // Convert the value to lowercase with the first letter as capital
-                        _stateController.text =
-                            value!.toLowerCase().capitalizeFirstLetter();
-                      },
-                    ),
-                  ),
+                  CustomTextFormField(
+                controller: _usernameController,
+                labelText: "Donor Name",
+                validator: (value) => ValidationUtils.validate(value, 'Username'),
+              ),
+                 BloodGroupDropdownFormField(
+                value: bloodGroup,
+                onChanged: (String? newValue) {
+                  setState(() {
+                    bloodGroup = newValue;
+                  });
+                },
+                validator: (value) => ValidationUtils.validate(
+                    value, 'Please select a blood group'),
+              ),
+                   CustomTextFormField(
+                controller: _phoneController,
+                labelText: "Phone Number",
+                keyboardType: TextInputType.phone,
+                validator: (value) => ValidationUtils.validatePhoneNumber(value),
+              ),
+                   CustomTextFormField(
+                controller: _placeController,
+                labelText: "Place",
+                validator: (value) => ValidationUtils.validate(value, 'Place'),
+              ),
+                 CustomTextFormField(
+                controller: _districtController,
+                labelText: "District",
+                validator: (value) => ValidationUtils.validate(value, 'District'),
+              ),
+                  CustomTextFormField(
+                controller: _stateController,
+                labelText: "State",
+                validator: (value) => ValidationUtils.validate(value, 'State'),
+              ),
                   Padding(
                     padding: const EdgeInsets.only(left: 50),
                     child: Row(

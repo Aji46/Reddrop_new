@@ -18,7 +18,7 @@ class HomePageState extends State<BottomNavBar> {
   final screens = [
     const HomeSearch(),
     const MyPageView(),
-     register_login(),
+    const  RegisterLogin(),
   ];
 
   @override
