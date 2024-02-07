@@ -18,12 +18,14 @@ class Pryvacypage extends StatelessWidget {
       body: SafeArea(
         child: ListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 30),
+            const Padding(
+              padding: EdgeInsets.only(left: 20, top: 30),
               child: Text(
                 "How We Collect And Use Your  Personal Data",
                 style: TextStyle(
-                    fontWeight: FontWeight.w700, fontSize: 18, color:Colors.black),
+                    fontWeight: FontWeight.w700,
+                    fontSize: 18,
+                    color: Colors.black),
               ),
             ),
             Padding(
@@ -33,7 +35,8 @@ class Pryvacypage extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 16, // Set your desired font size
-                    color: Color.fromARGB(255, 0, 0, 0), // Set your desired text color
+                    color: Color.fromARGB(
+                        255, 0, 0, 0), // Set your desired text color
                   ),
                   children: [
                     TextSpan(
@@ -60,7 +63,8 @@ class Pryvacypage extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 16, // Set your desired font size
-                    color: Color.fromARGB(255, 0, 0, 0), // Set your desired text color
+                    color: Color.fromARGB(
+                        255, 0, 0, 0), // Set your desired text color
                   ),
                   children: [
                     TextSpan(
@@ -87,7 +91,8 @@ class Pryvacypage extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 16, // Set your desired font size
-                    color: Color.fromARGB(255, 0, 0, 0), // Set your desired text color
+                    color: Color.fromARGB(
+                        255, 0, 0, 0), // Set your desired text color
                   ),
                   children: [
                     TextSpan(
@@ -114,7 +119,8 @@ class Pryvacypage extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 16, // Set your desired font size
-                    color: Color.fromARGB(255, 0, 0, 0), // Set your desired text color
+                    color: Color.fromARGB(
+                        255, 0, 0, 0), // Set your desired text color
                   ),
                   children: [
                     TextSpan(
@@ -141,7 +147,8 @@ class Pryvacypage extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 16, // Set your desired font size
-                    color: Color.fromARGB(255, 0, 0, 0), // Set your desired text color
+                    color: Color.fromARGB(
+                        255, 0, 0, 0), // Set your desired text color
                   ),
                   children: [
                     TextSpan(
@@ -153,8 +160,7 @@ class Pryvacypage extends StatelessWidget {
                       style: TextStyle(
                         fontStyle:
                             FontStyle.italic, // Example of using italic style
-                        color: Colors
-                            .red, // Example of using a different text color
+                        color: Colors.red,
                       ),
                     ),
                     TextSpan(
@@ -162,7 +168,8 @@ class Pryvacypage extends StatelessWidget {
                       style: TextStyle(
                         fontStyle:
                             FontStyle.italic, // Example of using italic style
-                        color: Color.fromARGB(255, 0, 0, 0), // Example of using a different text color
+                        color: Color.fromARGB(255, 0, 0,
+                            0), // Example of using a different text color
                       ),
                     ),
                   ],
@@ -172,18 +179,6 @@ class Pryvacypage extends StatelessWidget {
             const SizedBox(
               height: 50,
             )
-            // Padding(
-            //     padding: const EdgeInsets.only(top: 30),
-            //     child: Text(
-            //       'Retention',
-            //       style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
-            //     )),
-            //      Padding(
-            //     padding: const EdgeInsets.only(top: 30),
-            //     child: Text(
-            //       '',
-            //       style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
-            //     )),
           ],
         ),
       ),

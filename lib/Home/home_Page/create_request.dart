@@ -1,8 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:reddrop/database/database.dart';
+import 'package:reddrop/database/firestoew_services.dart';
 import 'package:reddrop/widget/validation_utils.dart';
 import 'package:reddrop/widget/widgets2.dart';
 import 'package:reddrop/widget/widgets3.dart';
@@ -25,13 +25,13 @@ class _CreateRequestState extends State<CreateRequest> {
   final _formKey = GlobalKey<FormState>();
   FirebaseAuth auth = FirebaseAuth.instance;
   String? bloodgroup;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   late FirebaseUpdate firebaseUpdate;
 
   @override
   void initState() {
     super.initState();
     _getCurrentUser();
+      FirestoreService.fetchUserDataAndUpdateControllers(_usernameController, _phoneController);
     firebaseUpdate = FirebaseUpdate(
       usernameController: _usernameController,
       phoneController: _phoneController,
@@ -45,28 +45,13 @@ class _CreateRequestState extends State<CreateRequest> {
   }
 
   Future<void> _getCurrentUser() async {
-    User? currentUser = _auth.currentUser;
+    User? currentUser = auth.currentUser;
     if (currentUser != null) {
-      await _fetchUserData(currentUser.uid);
+    
     }
   }
 
-  Future<void> _fetchUserData(String uid) async {
-    try {
-      DocumentSnapshot documentSnapshot =
-          await FirebaseFirestore.instance.collection('Request').doc(uid).get();
-      if (documentSnapshot.exists) {
-        Map<String, dynamic>? data =
-            documentSnapshot.data() as Map<String, dynamic>?;
 
-        if (data != null) {
-          _usernameController.text = data['name'] ?? '';
-          _phoneController.text = data['phone'] ?? '';
-          setState(() {});
-        }
-      }
-    } catch (error) {}
-  }
 
   bool _validateFields() {
     if (_usernameController.text.isEmpty ||
@@ -86,10 +71,9 @@ class _CreateRequestState extends State<CreateRequest> {
 
   @override
   Widget build(BuildContext context) {
-    CustomAppBar customAppBar = CustomAppBar();
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-      appBar: customAppBar.buildAppBar(context),
+      appBar: CustomAppBar().buildAppBar(context),
       body: SafeArea(
         child: Form(
           key: _formKey,
@@ -98,8 +82,7 @@ class _CreateRequestState extends State<CreateRequest> {
               CustomTextFormField(
                 controller: _usernameController,
                 labelText: "Recipient Name",
-                validator: (value) =>
-                    ValidationUtils.validate(value, 'Username'),
+                validator: (value) => ValidationUtils.validate(value, 'Username'),
               ),
               DatePickerFormField(
                 controller: _dateController,
@@ -112,27 +95,24 @@ class _CreateRequestState extends State<CreateRequest> {
                     bloodgroup = newValue;
                   });
                 },
-                validator: (value) => ValidationUtils.validate(
-                    value, 'Please select a blood group'),
+                validator: (value) =>
+                    ValidationUtils.validate(value, 'Please select a blood group'),
               ),
               CustomTextFormField(
                 controller: _phoneController,
                 labelText: "Phone Number",
                 keyboardType: TextInputType.phone,
-                validator: (value) =>
-                    ValidationUtils.validatePhoneNumber(value),
+                validator: (value) => ValidationUtils.validatePhoneNumber(value),
               ),
               CustomTextFormField(
                 controller: _placeController,
                 labelText: "Hospital",
-                validator: (value) =>
-                    ValidationUtils.validate(value, 'Hospital'),
+                validator: (value) => ValidationUtils.validate(value, 'Hospital'),
               ),
               CustomTextFormField(
                 controller: _districtController,
                 labelText: "District",
-                validator: (value) =>
-                    ValidationUtils.validate(value, 'District'),
+                validator: (value) => ValidationUtils.validate(value, 'District'),
               ),
               CustomTextFormField(
                 controller: _stateController,
@@ -146,7 +126,7 @@ class _CreateRequestState extends State<CreateRequest> {
                     ElevatedButton(
                       onPressed: () {
                         if (_validateFields()) {
-                          String? uid = _auth.currentUser?.uid;
+                          String? uid = auth.currentUser?.uid;
                           if (uid != null) {
                             firebaseUpdate.updateUser(context, uid, bloodgroup);
                           } else {
@@ -154,8 +134,8 @@ class _CreateRequestState extends State<CreateRequest> {
                           }
                         }
                       },
-                      style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.red),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Colors.red),
                       ),
                       child: const Text(
                         'Submit',
