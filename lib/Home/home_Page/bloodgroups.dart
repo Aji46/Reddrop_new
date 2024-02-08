@@ -88,6 +88,8 @@ class _BloodGroupState extends State<BloodDonorGroup> {
                                   'phone': donorSnap['phone'].toString(),
                                   'group': donorSnap['group'],
                                   'place': donorSnap['place'],
+                                  'district': donorSnap['district'],
+                                  'state': donorSnap['state'],
                                   'id': donorSnap.id,
                                 },
                               ),

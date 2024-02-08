@@ -111,7 +111,6 @@ class FirebaseUpdate {
           'state': stateController.text,
           'group': bloodgroup,
           'date': dateController.text,
-          'timestamp': FieldValue.serverTimestamp(),
         });
 
         // Print a success message after the update

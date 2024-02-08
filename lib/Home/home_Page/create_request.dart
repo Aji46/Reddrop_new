@@ -33,33 +33,19 @@ class _CreateRequestState extends State<CreateRequest> {
     _getCurrentUser();
       FirestoreService.fetchUserDataAndUpdateControllers(_usernameController, _phoneController);
     firebaseUpdate = FirebaseUpdate(
-      usernameController: _usernameController,
-      phoneController: _phoneController,
-      districtController: _districtController,
-      placeController: _placeController,
-      stateController: _stateController,
-      dateController: _dateController,
-      bloodgroup: bloodgroup,
-      formKey: _formKey,
-    );
+      usernameController: _usernameController,phoneController: _phoneController,
+      districtController: _districtController, placeController: _placeController,
+      stateController: _stateController, dateController: _dateController,
+      bloodgroup: bloodgroup,formKey: _formKey,);
   }
 
   Future<void> _getCurrentUser() async {
     User? currentUser = auth.currentUser;
-    if (currentUser != null) {
-    
-    }
+    if (currentUser != null) {}
   }
 
-
-
   bool _validateFields() {
-    if (_usernameController.text.isEmpty ||
-        _phoneController.text.isEmpty ||
-        _districtController.text.isEmpty ||
-        _placeController.text.isEmpty ||
-        _stateController.text.isEmpty ||
-        _dateController.text.isEmpty ||
+    if (_usernameController.text.isEmpty || _phoneController.text.isEmpty || _districtController.text.isEmpty || _placeController.text.isEmpty || _stateController.text.isEmpty || _dateController.text.isEmpty ||
         bloodgroup == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('All fields must be filled.')),
@@ -72,7 +58,6 @@ class _CreateRequestState extends State<CreateRequest> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       appBar: CustomAppBar().buildAppBar(context),
       body: SafeArea(
         child: Form(
@@ -129,8 +114,6 @@ class _CreateRequestState extends State<CreateRequest> {
                           String? uid = auth.currentUser?.uid;
                           if (uid != null) {
                             firebaseUpdate.updateUser(context, uid, bloodgroup);
-                          } else {
-                            print("object");
                           }
                         }
                       },
@@ -155,12 +138,10 @@ class _CreateRequestState extends State<CreateRequest> {
   Future<void> _selectDate(BuildContext context) async {
     DateTime currentDate = DateTime.now();
     DateTime? selectedDate = await showDatePicker(
-      context: context,
-      initialDate: currentDate,
+      context: context,initialDate: currentDate,
       firstDate: currentDate,
       lastDate: DateTime(currentDate.year + 1),
     );
-
     if (selectedDate != null && selectedDate.isAfter(currentDate)) {
       setState(() {
         _dateController.text = DateFormat('yyyy-MM-dd').format(selectedDate);

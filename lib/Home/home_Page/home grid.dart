@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:reddrop/Home/home_Page/request.dart';
 import 'package:reddrop/Register_page/registerlogin.dart';
-import 'package:reddrop/constant/constant.dart';
 import 'package:reddrop/widget/container_pageview.dart';
 import 'package:reddrop/widget/wigets.dart';
 
@@ -16,7 +15,6 @@ class HomeGrid extends StatefulWidget {
 class _HomeGridState extends State<HomeGrid> {
   late DocumentSnapshot donorSnap;
   bool _isVisible = true;
-  int _currentPageIndex = 0;
 
   @override
   void initState() {
@@ -31,7 +29,6 @@ class _HomeGridState extends State<HomeGrid> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.backgroundColor,
       appBar: CustomAppBar().buildAppBar(context),
       body: Column(
         children: [
@@ -43,6 +40,7 @@ class _HomeGridState extends State<HomeGrid> {
               child: Column(
                 children: [
                   Container(
+                    
                     height: 215,
                     margin: const EdgeInsets.all(8.0),
                     decoration: MyDecorations.pageContainerDecoration,
@@ -50,14 +48,12 @@ class _HomeGridState extends State<HomeGrid> {
                       children: [
                         Expanded(
                           child: Containerpageview(),
+                          
                         ),
                       ],
                     ),
                   ),
-                  DotIndicator(
-                    currentPageIndex: _currentPageIndex,
-                    pageCount: (bloodGroups.length ~/ 4),
-                  ),
+                 
                 ],
               ),
             ),

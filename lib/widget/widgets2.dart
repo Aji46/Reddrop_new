@@ -128,7 +128,6 @@ class CustomTextFormField extends StatelessWidget {
   }
 }
 
-
   String? _validate(String? value, String fieldName) {
     if (value == null || value.isEmpty) {
       return '$fieldName is required';

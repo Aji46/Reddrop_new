@@ -59,38 +59,6 @@ class CustomAppBar {
   }
 }
 
-
-//dot indicator
-//.............................................
-
-class DotIndicator extends StatelessWidget {
-  final int currentPageIndex;
-  final int pageCount;
-
-  const DotIndicator({super.key, required this.currentPageIndex, required this.pageCount});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(
-        pageCount,
-        (index) {
-          return Container(
-            width: 8.0,
-            height: 8.0,
-            margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 4.0),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: currentPageIndex == index ? Colors.red : Colors.grey,
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
-
 //grid pages blood boxes
 //.......................................
 class BloodCard extends StatelessWidget {
@@ -102,9 +70,14 @@ class BloodCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final cardWidth = screenWidth < 400 ? 80.0 : 100.0;
+    final cardHeight = screenWidth < 400 ? 60.0 : 80.0;
+    final avatarRadius = screenWidth < 400 ? 20.0 : 30.0;
+
     return Container(
-      width: 100,
-      height: 90,
+      width: cardWidth,
+      height: cardHeight,
       margin: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -121,7 +94,7 @@ class BloodCard extends StatelessWidget {
         child: Center(
           child: CircleAvatar(
             backgroundColor: const Color.fromARGB(255, 190, 24, 24),
-            radius: 30,
+            radius: avatarRadius,
             child: Text(
               bloodGroup,
               style: const TextStyle(
@@ -135,7 +108,6 @@ class BloodCard extends StatelessWidget {
     );
   }
 }
-
 
 //grid pages container decoration
 //.......................................

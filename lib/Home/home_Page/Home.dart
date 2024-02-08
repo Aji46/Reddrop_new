@@ -27,13 +27,21 @@ class _HomeSearchState extends State<HomeSearch> {
     fetchData(donorCollection, setData);
   }
 
-  void setData(List<String> uniqueBloodGroups, List<String> uniqueStates, List<String> uniqueDistricts) {
+  void dispose() {
+
+  super.dispose();
+}
+
+void setData(List<String> uniqueBloodGroups, List<String> uniqueStates, List<String> uniqueDistricts) {
+  if (mounted) {
     setState(() {
       bloodGroups = uniqueBloodGroups;
       states = uniqueStates;
       districts = uniqueDistricts;
     });
   }
+}
+
 
   @override
   Widget build(BuildContext context) {

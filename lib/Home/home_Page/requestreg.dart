@@ -28,16 +28,10 @@ class RegisterPageState extends State<RegisterreqPage> {
 
   bool _validateFields() {
     final controllers = [
-      _usernameController,
-      _phoneController,
-      _districtController,
-      _placeController,
-      _stateController,
-      _dateController,
-      _emailController,
-      _passwordController,
+      _usernameController,_phoneController,_districtController,
+      _placeController,_stateController,_dateController,
+      _emailController,_passwordController,
     ];
-
     if (controllers.any((controller) => controller.text.isEmpty) || bloodgroup == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('All fields must be filled.')),
@@ -50,7 +44,6 @@ class RegisterPageState extends State<RegisterreqPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       appBar: CustomAppBar().buildAppBar(context),
       body: SafeArea(
         child: Form(
@@ -111,16 +104,9 @@ class RegisterPageState extends State<RegisterreqPage> {
                       onPressed: () {
                         if (_validateFields()) {
                           RegisterUserPage().registerUser(
-                            _emailController.text,
-                            _passwordController.text,
-                            _usernameController,
-                            _phoneController,
-                            _districtController,
-                            _placeController,
-                            _stateController,
-                            _dateController,
-                            bloodgroup,
-                            context,
+                            _emailController.text,_passwordController.text,_usernameController,_phoneController,
+                            _districtController,_placeController,_stateController,_dateController,
+                            bloodgroup, context,
                           );
                         }
                       },
@@ -133,8 +119,7 @@ class RegisterPageState extends State<RegisterreqPage> {
                       ),
                     ),
                     TextButton(
-                      onPressed: () => Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (ctx) => const requestSignup()),
+                      onPressed: () => Navigator.of(context).pushReplacement( MaterialPageRoute(builder: (ctx) => const requestSignup()),
                       ),
                       child: const Text(
                         'Already have an account',
@@ -158,8 +143,7 @@ class RegisterPageState extends State<RegisterreqPage> {
   Future<void> _selectDate(BuildContext context) async {
     DateTime currentDate = DateTime.now();
     DateTime? selectedDate = await showDatePicker(
-      context: context,
-      initialDate: currentDate,
+      context: context,initialDate: currentDate,
       firstDate: currentDate,
       lastDate: DateTime(currentDate.year + 1),
     );
