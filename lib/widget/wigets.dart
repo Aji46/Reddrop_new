@@ -17,7 +17,7 @@ class CustomAppBar {
               TextSpan(
                 text: 'Red',
                 style: TextStyle(
-                  color: Color.fromARGB(255, 255, 0, 0),
+                  color: MyColors.mycolor4,
                   fontFamily: 'Italiana',
                   fontSize: 24,
                 ),
@@ -61,6 +61,7 @@ class CustomAppBar {
 
 //grid pages blood boxes
 //.......................................
+
 class BloodCard extends StatelessWidget {
   const BloodCard({Key? key, required this.bloodGroup, required this.onTap})
       : super(key: key);
@@ -70,44 +71,48 @@ class BloodCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final cardWidth = screenWidth < 400 ? 80.0 : 100.0;
-    final cardHeight = screenWidth < 400 ? 60.0 : 80.0;
-    final avatarRadius = screenWidth < 400 ? 20.0 : 30.0;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final cardWidth = constraints.maxWidth < 400 ? 80.0 : 100.0;
+        final cardHeight = constraints.maxWidth < 400 ? 60.0 : 80.0;
+        final avatarRadius = constraints.maxWidth < 400 ? 20.0 : 30.0;
 
-    return Container(
-      width: cardWidth,
-      height: cardHeight,
-      margin: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Colors.white,
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.grey,
-            blurRadius: 10,
-          )
-        ],
-      ),
-      child: InkWell(
-        onTap: onTap,
-        child: Center(
-          child: CircleAvatar(
-            backgroundColor: const Color.fromARGB(255, 190, 24, 24),
-            radius: avatarRadius,
-            child: Text(
-              bloodGroup,
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
+        return Container(
+          width: cardWidth,
+          height: cardHeight,
+          margin: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: MyColors.mycolor2,
+            boxShadow: const [
+              BoxShadow(
+                color: MyColors.mycolor5,
+                blurRadius: 10,
+              )
+            ],
+          ),
+          child: InkWell(
+            onTap: onTap,
+            child: Center(
+              child: CircleAvatar(
+                backgroundColor: MyColors.mycolor4,
+                radius: avatarRadius,
+                child: Text(
+                  bloodGroup,
+                  style: const TextStyle(
+                    color: MyColors.mycolor2,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
+
 
 //grid pages container decoration
 //.......................................

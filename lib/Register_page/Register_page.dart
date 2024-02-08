@@ -66,16 +66,17 @@ class RegisterPageState extends State<RegisterPage> {
               bloodGroup = newValue;
             });
           },
-          onSubmit: () {
-                 if (_validateFields()) {
-                          String? uid = _auth.currentUser?.uid;
-                          if (uid != null) {
-                            registerUser();
-                          } else {
-                            print("object");
-                          }
-                        }
-          },
+         onSubmit: () {
+  if (_validateFields()) {
+    if (bloodGroup != null) {
+      registerUser();
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please select a blood group.')),
+      );
+    }
+  }
+},
         ),
       ),
     );

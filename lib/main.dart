@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:reddrop/Home/home_Page/box.dart';
 import 'package:reddrop/Home/home_Page/contactdatabase.dart';
@@ -32,7 +33,13 @@ Future<void> main() async {
     print("Error initializing Firebase: $e");
   }
   
-  runApp(const MyApp());
+   // Set preferred orientations to portrait only
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((_) {
+    runApp(MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {

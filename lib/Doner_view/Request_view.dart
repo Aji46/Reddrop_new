@@ -3,6 +3,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:reddrop/constant/constant.dart';
 import 'package:reddrop/functions/functions.dart';
 import 'package:reddrop/widget/wigets.dart';
 
@@ -34,7 +35,7 @@ class _ViewerState extends State<View_Request> {
       children: [
         // const Background_Image(),
         Scaffold(
-          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+          backgroundColor:MyColors.mycolor2,
             appBar: customAppBar.buildAppBar(context),
           body: SafeArea(
             child: Padding(
@@ -42,10 +43,10 @@ class _ViewerState extends State<View_Request> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.white,
+                  color: MyColors.mycolor2,
                   boxShadow: const [
                     BoxShadow(
-                      color: Colors.grey,
+                      color: MyColors.mycolor5,
                       blurRadius: 10,
                     ),
                   ],
@@ -60,12 +61,12 @@ class _ViewerState extends State<View_Request> {
                           child: Text(
                             widget.arguments['group'] as String? ?? '',
                             style: const TextStyle(
-                              color: Colors.white,
+                              color: MyColors.mycolor2,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           radius: 60,
-                          backgroundColor: Colors.red,
+                          backgroundColor: MyColors.mycolor4,
                         ),
                       ),
                     ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reddrop/constant/constant.dart';
 import 'package:reddrop/functions/functions.dart';
 import 'package:reddrop/widget/wigets.dart';
 
@@ -24,7 +25,6 @@ class _ViewerState extends State<ViewDonor> {
   Widget build(BuildContext context) {
     CustomAppBar customAppBar = CustomAppBar();
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: customAppBar.buildAppBar(context),
       body: SafeArea(
         child: Padding(
@@ -32,22 +32,23 @@ class _ViewerState extends State<ViewDonor> {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: Colors.white,
+              color: MyColors.mycolor2,
               boxShadow: const [BoxShadow(color: Colors.grey, blurRadius: 10)],
             ),
             child: Column(
               children: [
-                   SizedBox(height: 20,),
+                   const SizedBox(height: 20,),
                    CircleAvatar(
+                    radius: 60,
+                    backgroundColor: MyColors.mycolor4,
                     child: Text(
                       widget.arguments['group'] as String? ?? '',
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: MyColors.mycolor2,
                         fontWeight: FontWeight.bold,
+                        fontSize: 30,
                       ),
                     ),
-                    radius: 60,
-                    backgroundColor: Colors.red,
                   ),
                 
                 buildInfoRow('Name', widget.arguments['name']),

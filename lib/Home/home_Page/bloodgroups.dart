@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:reddrop/Doner_view/Doner_view.dart';
 import 'package:reddrop/Home/home_Page/box.dart';
 import 'package:reddrop/Home/home_Page/contactdatabase.dart';
+import 'package:reddrop/constant/constant.dart';
 import 'package:reddrop/functions/functions.dart';
 
 class BloodDonorGroup extends StatefulWidget {
@@ -61,8 +62,8 @@ class _BloodGroupState extends State<BloodDonorGroup> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: Colors.black),
-                color: const Color.fromARGB(255, 252, 252, 252),
-                boxShadow: const [BoxShadow(color: Color.fromARGB(255, 255, 255, 255), blurRadius: 20)],
+                color: MyColors.mycolor2,
+                boxShadow: const [BoxShadow(color: MyColors.mycolor2, blurRadius: 20)],
               ),
               child: ListView.separated(
                 itemCount: snapshot.data!.docs.length,
@@ -76,8 +77,8 @@ class _BloodGroupState extends State<BloodDonorGroup> {
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          boxShadow: const [BoxShadow(color: Colors.grey, blurRadius: 10)],
+                          color: MyColors.mycolor2,
+                          boxShadow: const [BoxShadow(color: MyColors.mycolor5, blurRadius: 10)],
                         ),
                         child: InkWell(
                           onTap: () => Navigator.of(context).push(
@@ -100,7 +101,7 @@ class _BloodGroupState extends State<BloodDonorGroup> {
                             children: [
                               const SizedBox(height: 5),
                               CircleAvatar(
-                                backgroundColor: Colors.red,
+                                backgroundColor: MyColors.mycolor4,
                                 radius: 30,
                                 child: Text(
                                   donorSnap['group'] as String? ?? '',
