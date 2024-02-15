@@ -95,7 +95,7 @@ class RequestCreateCard extends StatelessWidget {
           child: InkWell(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (ctx) => const requestSignup(),
+                builder: (ctx) => const RequestSignup(),
               ));
             },
             child: const Align(

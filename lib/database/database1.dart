@@ -33,35 +33,69 @@ class FirebaseDonorUpdate {
       formKey: formKey,
     );
   }
+void updateUser(BuildContext context, String uid) async {
+  try {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      showDialog(
+        context: context,
+        barrierDismissible: false, // Prevents user from dismissing the dialog
+        builder: (BuildContext context) {
+          return AlertDialog(
+             backgroundColor: Colors.transparent,
+            content: Column(
+             mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(const Color.fromARGB(255, 255, 255, 255)),),
+                
+                SizedBox(height: 10),
+                Text(
+                  'User data updating...',
+                  style: TextStyle(
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      );
 
-  void updateUser(BuildContext context, String uid) async {
-    try {
-      User? user = FirebaseAuth.instance.currentUser;
-      if (user != null) {
-        DocumentReference userDocument =
-            FirebaseFirestore.instance.collection('Donor').doc(uid);
-        await userDocument.set({
-          'name': usernameController.text,
-          'phone': phoneController.text,
-          'district': districtController.text,
-          'place': placeController.text,
-          'state': stateController.text,
-          'group': bloodgroup,
-        });
+      DocumentReference userDocument =
+          FirebaseFirestore.instance.collection('Donor').doc(uid);
+      await userDocument.set({
+        'name': usernameController.text,
+        'phone': phoneController.text,
+        'district': districtController.text,
+        'place': placeController.text,
+        'state': stateController.text,
+        'group': bloodgroup,
+      });
 
-        // Print a success message after the update
-        print('User data updated successfully');
+      // Print a success message after the update
+      print('User data updated successfully');
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("User data updated successfully"),
+        duration: const Duration(seconds: 2),
+      ));
 
-        // ignore: use_build_context_synchronously
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (ctx) => const RegisterLogin()),
-        );
-      }
-    } catch (error) {
-      // Print any error that occurs during the update
-      print('Error updating user data: $error');
+      Navigator.of(context).pop(); // Dismiss the dialog
+
+      // Navigate to the next screen
+      Navigator.of(context).pop(
+        MaterialPageRoute(builder: (ctx) => const RegisterLogin(),
+        ),
+
+      );
     }
+  } catch (error) {
+    // Print any error that occurs during the update
+    print('Error updating user data: $error');
+    Navigator.of(context).pop(); // Dismiss the dialog if there's an error
   }
+}
+
 }
 
 

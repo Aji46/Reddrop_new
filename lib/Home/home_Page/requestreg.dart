@@ -119,7 +119,7 @@ class RegisterPageState extends State<RegisterreqPage> {
                       ),
                     ),
                     TextButton(
-                      onPressed: () => Navigator.of(context).pushReplacement( MaterialPageRoute(builder: (ctx) => const requestSignup()),
+                      onPressed: () => Navigator.of(context).pushReplacement( MaterialPageRoute(builder: (ctx) => const RequestSignup()),
                       ),
                       child: const Text(
                         'Already have an account',

@@ -27,65 +27,74 @@ class _HomeSearchState extends State<HomeSearch> {
     fetchData(donorCollection, setData);
   }
 
-  void dispose() {
-
-  super.dispose();
-}
-
 void setData(List<String> uniqueBloodGroups, List<String> uniqueStates, List<String> uniqueDistricts) {
-  if (mounted) {
-    setState(() {
-      bloodGroups = uniqueBloodGroups;
-      states = uniqueStates;
-      districts = uniqueDistricts;
+  if (mounted) { setState(() {bloodGroups = uniqueBloodGroups; states = uniqueStates; districts = uniqueDistricts;
     });
   }
 }
 
-
-  @override
-  Widget build(BuildContext context) {
-    fetchData(donorCollection, setData);
-    return Scaffold(
-      appBar: CustomAppBar().buildAppBar(context),
-      body: Column(
-        children: [
-          for (var dropdown in [
-            {'hintText': 'Choose State', 'items': states, 'value': selectedState},
-            {'hintText': 'Choose District', 'items': districts, 'value': selectedDistrict},
-            {'hintText': 'Choose Blood Group', 'items': bloodGroups, 'value': selectedBloodGroup},
-          ])
-            buildDropdown(
-              dropdown['hintText'] as String,
-              dropdown['items'] as List<String>,
-              dropdown['value'] as String?,
-              (newValue) {
-                setState(() {
-                  if (states.contains(newValue)) selectedState = newValue;
-                  if (districts.contains(newValue)) selectedDistrict = newValue;
-                  if (bloodGroups.contains(newValue)) selectedBloodGroup = newValue;
-                });
-                getFilteredStream();
-              },
-            ),
-          const SizedBox(height: 10),
-          Expanded(
-            child: StreamBuilder<QuerySnapshot>(
-              stream: getFilteredStream(),
-              builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.hasData) {
-                  return snapshot.data!.docs.isEmpty
-                      ? const Center(child: Text('No available donors.'))
-                      : buildDonorList(snapshot.data!.docs);
-                }
-                return const Center(child: CircularProgressIndicator());
-              },
+@override
+Widget build(BuildContext context) {
+  fetchData(donorCollection, setData);
+  return Material(
+    child: Stack(
+      children: [
+        Scaffold(
+          appBar: CustomAppBar().buildAppBar(context),
+          body: Column(
+            children: [
+              for (var dropdown in [
+                {'hintText': 'Choose State', 'items': states, 'value': selectedState},
+                {'hintText': 'Choose District', 'items': districts, 'value': selectedDistrict},
+                {'hintText': 'Choose Blood Group', 'items': bloodGroups, 'value': selectedBloodGroup},
+              ])
+                buildDropdown(
+                  dropdown['hintText'] as String,
+                  dropdown['items'] as List<String>,
+                  dropdown['value'] as String?,
+                  (newValue) {
+                    setState(() {
+                      if (states.contains(newValue)) selectedState = newValue;
+                      if (districts.contains(newValue)) selectedDistrict = newValue;
+                      if (bloodGroups.contains(newValue)) selectedBloodGroup = newValue;
+                    });
+                    getFilteredStream();
+                  },
+                ),const SizedBox(height: 10),
+              Expanded(
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: getFilteredStream(),
+                  builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.hasData) {
+                      return snapshot.data!.docs.isEmpty
+                          ? const Center(child: Text('No available donors.'))
+                          : buildDonorList(snapshot.data!.docs); }
+                    return const Center(child: CircularProgressIndicator());
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+        if (states.isEmpty && districts.isEmpty && bloodGroups.isEmpty)
+        Container(
+            color: Colors.black.withOpacity(0.5),
+            child: const Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>( Color.fromARGB(255, 255, 255, 255)),),
+                  SizedBox(height: 10),
+                  Text('Please wait...',style: TextStyle(color: Colors.white,fontSize: 20,),
+                  ),
+                ],
+              ),
             ),
           ),
-        ],
-      ),
-    );
-  }
+      ],
+    ),
+  );
+}
 
   Widget buildDropdown(String hintText, List<String> items, String? value, Function(String?) onChanged) {
     return Padding(
@@ -99,10 +108,10 @@ void setData(List<String> uniqueBloodGroups, List<String> uniqueStates, List<Str
                 child: DropdownButton<String>(
                   value: value,
                   hint: Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Text(
                       hintText,
-                      style: TextStyle(color: Colors.black),
+                      style: const TextStyle(color: Colors.black),
                     ),
                   ),
                   onChanged: onChanged,
@@ -114,11 +123,7 @@ void setData(List<String> uniqueBloodGroups, List<String> uniqueStates, List<Str
                   }).toList(),
                 ),
               ),
-              if (value != null)
-                IconButton(
-                  onPressed: () => clearDropdowns(),
-                  icon: Icon(Icons.clear),
-                ),
+                if (value != null) IconButton(onPressed: () => clearDropdowns(), icon: Icon(Icons.clear)),
             ],
           ),
           const SizedBox(height: 10),
@@ -128,11 +133,8 @@ void setData(List<String> uniqueBloodGroups, List<String> uniqueStates, List<Str
   }
 
   void clearDropdowns() {
-    setState(() {
-      selectedState = selectedDistrict = selectedBloodGroup = null;
-    });
-    getFilteredStream();
-  }
+    setState(() => selectedState = selectedDistrict = selectedBloodGroup = null);
+     getFilteredStream();}
 
   Widget buildDonorList(List<QueryDocumentSnapshot> donors) {
     return Container(
@@ -144,13 +146,10 @@ void setData(List<String> uniqueBloodGroups, List<String> uniqueStates, List<Str
         boxShadow: const [BoxShadow(color: Color.fromARGB(255, 255, 255, 255), blurRadius: 20)],
       ),
       child: DonorListWidget(
-        listKey: _listKey,
-        donors: donors,
+        listKey: _listKey,donors: donors,
       ),
     );
   }
 
-  Stream<QuerySnapshot> getFilteredStream() {
-    return firebaseService.getFilteredStream(selectedState, selectedDistrict, selectedBloodGroup);
-  }
+ Stream<QuerySnapshot> getFilteredStream() => firebaseService.getFilteredStream(selectedState, selectedDistrict, selectedBloodGroup);
 }

@@ -69,7 +69,7 @@ class RegisterPageState extends State<RegisterPage> {
          onSubmit: () {
   if (_validateFields()) {
     if (bloodGroup != null) {
-      registerUser();
+      registerUser(context); 
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please select a blood group.')),
@@ -82,41 +82,69 @@ class RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Future<void> registerUser() async {
-    try {
-      await _auth.createUserWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-      User? user = _auth.currentUser;
-      FirebaseFirestore firestore = FirebaseFirestore.instance;
-      CollectionReference donor = firestore.collection('Donor');
-      await donor.doc(user?.uid).set({
-        'name': _usernameController.text,
-        'phone': _phoneController.text,
-        'password': _passwordController.text,
-        'district': _districtController.text,
-        'place': _placeController.text,
-        'state': _stateController.text,
-        'group': bloodGroup,
-      });
+Future<void> registerUser(BuildContext context) async {
+  try {
+    // Show circular progress indicator
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return const Center(
+          child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Color.fromARGB(255, 255, 255, 255)),),
+        );
+      },
+    );
 
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (ctx) => const RegisterLogin(),
-        ),
-      );
-    } catch (e) {
-      if (e is FirebaseAuthException) {
-        if (e.code == 'email-already-in-use') {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("Email is already in use. Try logging in."),
-              backgroundColor: Colors.red,
-            ),
-          );
-        }
+    await _auth.createUserWithEmailAndPassword(
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
+    User? user = _auth.currentUser;
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    CollectionReference donor = firestore.collection('Donor');
+    await donor.doc(user?.uid).set({
+      'name': _usernameController.text,
+      'phone': _phoneController.text,
+      'password': _passwordController.text,
+      'district': _districtController.text,
+      'place': _placeController.text,
+      'state': _stateController.text,
+      'group': bloodGroup,
+    });
+
+    // Hide circular progress indicator
+    Navigator.of(context).pop();
+        ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Data stored successfully.",style: TextStyle(
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    fontSize: 16,
+                  ),),
+                   duration: const Duration(seconds: 2),
+      ),
+    );
+
+
+    Navigator.of(context).pop(
+      MaterialPageRoute(
+        builder: (ctx) => const RegisterLogin(),
+      ),
+    );
+  } catch (e) {
+    // Hide circular progress indicator
+    Navigator.of(context).pop();
+
+    if (e is FirebaseAuthException) {
+      if (e.code == 'email-already-in-use') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Email is already in use. Try logging in."),
+            backgroundColor: Colors.red,
+          ),
+        );
       }
     }
   }
+}
+
 }

@@ -53,7 +53,6 @@ class _HomeGridState extends State<HomeGrid> {
                       ],
                     ),
                   ),
-                 
                 ],
               ),
             ),
@@ -87,8 +86,7 @@ class _HomeGridState extends State<HomeGrid> {
                   child: Container(
                     margin: const EdgeInsets.all(8.0),
                     decoration: MyDecorations.bottomContainerDecoration,
-                     height: MediaQuery.of(context).size.height * 0.4,
-                   
+                     height: MediaQuery.of(context).size.height * 0.4, 
                     child: MyButton(
                       text: 'I want to be a Donor',
                       onTap: () {

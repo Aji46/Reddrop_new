@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:reddrop/Home/home_Page/box.dart';
+import 'package:reddrop/Home/home_Page/contactdatabase.dart';
 import 'package:reddrop/constant/constant.dart';
 import 'package:reddrop/functions/functions.dart';
 import 'package:reddrop/widget/wigets.dart';
@@ -55,10 +57,15 @@ class _ViewerState extends State<ViewDonor> {
                 buildInfoRow('Phone', widget.arguments['phone']),
                 Row(
                   children: [
-                    buildIconRow(
+                   buildIconRow(
                       Icons.call,
                       Colors.green,
-                      () => PhoneUtils.makeCall(phoneNumber),
+                      () {
+                        setState(() {
+                          boxcontact.put('key_${widget.arguments['name'] as String? ?? ''}', Contactdb(name:widget.arguments['name'] as String? ?? '',group:widget.arguments['group'] as String? ?? '',phone:widget.arguments['phone'] as String? ?? ''));
+                        });
+                        PhoneUtils.makeCall(phoneNumber);
+                      },
                     ),
                      buildIconRow(
                   Icons.share_outlined,
@@ -106,6 +113,7 @@ class _ViewerState extends State<ViewDonor> {
               color: color,
             ),
             onPressed: onPressed,
+            
             tooltip: icon == Icons.call ? 'Make a Call' : 'Share',
           ),
           const SizedBox(width: 40),

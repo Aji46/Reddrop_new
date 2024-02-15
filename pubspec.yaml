@@ -51,6 +51,8 @@ dependencies:
   flutter_slidable: ^3.0.1
   flutter_phone_direct_caller: ^2.1.1
   calendar_date_picker2: ^0.5.3
+  firebase_analytics: ^10.8.5
+  cloud_firestore_web: ^3.10.4
  
 
 

@@ -63,7 +63,7 @@ class RegisterForm extends StatelessWidget {
               CustomTextFormField(
                 controller: phoneController,
                 labelText: "Phone Number",
-                keyboardType: TextInputType.phone,
+                keyboardType: TextInputType.number,
                 validator: (value) => ValidationUtils.validatePhoneNumber(value),
               ),
               CustomTextFormField(
