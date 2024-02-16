@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:reddrop/Home/home_Page/loginrequest.dart';
+import 'package:reddrop/constant/constant.dart';
 import 'package:reddrop/requestwidget/requestreg.dart';
 import 'package:reddrop/widget/validation_utils.dart';
 import 'package:reddrop/widget/widgets2.dart';
@@ -29,16 +30,14 @@ class RegisterPageState extends State<RegisterreqPage> {
   bool _validateFields() {
     final controllers = [
       _usernameController,_phoneController,_districtController,
-      _placeController,_stateController,_dateController,
-      _emailController,_passwordController,
+      _placeController,_stateController,_dateController, _emailController,_passwordController,
     ];
     if (controllers.any((controller) => controller.text.isEmpty) || bloodgroup == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('All fields must be filled.')),
       );
       return false;
-    }
-    return true;
+    } return true;
   }
 
   @override
@@ -99,8 +98,7 @@ class RegisterPageState extends State<RegisterreqPage> {
               Padding(
                 padding: const EdgeInsets.only(left: 50),
                 child: Row(
-                  children: [
-                    ElevatedButton(
+                  children: [ElevatedButton(
                       onPressed: () {
                         if (_validateFields()) {
                           RegisterUserPage().registerUser(
@@ -111,11 +109,11 @@ class RegisterPageState extends State<RegisterreqPage> {
                         }
                       },
                       style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.red),
+                        backgroundColor: MaterialStatePropertyAll(MyColors.mycolor4),
                       ),
                       child: const Text(
                         'Submit',
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(color: MyColors.mycolor7),
                       ),
                     ),
                     TextButton(
@@ -124,7 +122,7 @@ class RegisterPageState extends State<RegisterreqPage> {
                       child: const Text(
                         'Already have an account',
                         style: TextStyle(
-                          color: Colors.black,
+                          color: MyColors.mycolor7,
                           decoration: TextDecoration.underline,
                           fontStyle: FontStyle.italic,
                         ),
@@ -147,7 +145,6 @@ class RegisterPageState extends State<RegisterreqPage> {
       firstDate: currentDate,
       lastDate: DateTime(currentDate.year + 1),
     );
-
     if (selectedDate != null && selectedDate.isAfter(currentDate)) {
       setState(() {
         _dateController.text = DateFormat('yyyy-MM-dd').format(selectedDate);

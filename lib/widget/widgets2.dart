@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:reddrop/constant/constant.dart';
 import 'package:reddrop/functions/functions.dart';
 import 'package:reddrop/navigator/navigator.dart';
 
@@ -39,8 +40,8 @@ class DonorListWidget extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: Colors.white,
-            boxShadow: const [BoxShadow(color: Colors.grey, blurRadius: 10)],
+            color: MyColors.mycolor2,
+            boxShadow: const [BoxShadow(color: MyColors.mycolor5, blurRadius: 10)],
           ),
           child: InkWell(
             onTap: () => navigateToViewDonor(context, donorSnap),
@@ -49,11 +50,11 @@ class DonorListWidget extends StatelessWidget {
               children: [
                 const SizedBox(height: 5),
                 CircleAvatar(
-                  backgroundColor: const Color.fromARGB(255, 190, 24, 24),
+                  backgroundColor: MyColors.mycolor4,
                   radius: avatarRadius,
                   child: Text(
                     donorSnap['group'] as String? ?? '',
-                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    style: const TextStyle(color: MyColors.mycolor2, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Expanded(
@@ -77,7 +78,7 @@ class DonorListWidget extends StatelessWidget {
                   },
                   tooltip: 'Share',
                   icon: const Icon(Icons.share_outlined),
-                  color: const Color.fromARGB(255, 6, 135, 233),
+                  color: MyColors.mycolor3,
                 ),
                 const SizedBox(height: 15),
               ],
@@ -118,10 +119,10 @@ class CustomTextFormField extends StatelessWidget {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          fillColor: Colors.white,
+          fillColor: MyColors.mycolor2,
           filled: true,
           labelText: labelText,
-          labelStyle: TextStyle(color: Colors.black),
+          labelStyle: TextStyle(color: MyColors.mycolor7),
         ),
         validator: validator,
       ),

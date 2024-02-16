@@ -18,7 +18,7 @@ class _MyPageViewState extends State<MyPageView> {
     return Scaffold(
       body: PageView(
         controller: _pageController,
-        children: [
+        children: const [
           HomeGrid(),
           ContactListPage(),
         ],

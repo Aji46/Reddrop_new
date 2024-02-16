@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:reddrop/constant/constant.dart';
 import 'package:reddrop/database/database.dart';
 import 'package:reddrop/database/firestoew_services.dart';
 import 'package:reddrop/widget/validation_utils.dart';
@@ -118,11 +119,11 @@ class _CreateRequestState extends State<CreateRequest> {
                         }
                       },
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.red),
+                        backgroundColor: MaterialStateProperty.all(MyColors.mycolor4),
                       ),
                       child: const Text(
                         'Submit',
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(color: MyColors.mycolor7),
                       ),
                     ),
                   ],

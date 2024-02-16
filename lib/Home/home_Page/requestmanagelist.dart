@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:reddrop/Doner_view/Request_view.dart';
+import 'package:reddrop/constant/constant.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Requestlist extends StatefulWidget {
@@ -32,14 +33,14 @@ class _RequestlistState extends State<Requestlist> {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: Colors.white,
-                      boxShadow: const [BoxShadow(color: Colors.grey, blurRadius: 10)],
+                      color: MyColors.mycolor2,
+                      boxShadow: const [BoxShadow(color: MyColors.mycolor5, blurRadius: 10)],
                     ),
                     child: InkWell(
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (ctx) => View_Request(
+                            builder: (ctx) => Viewrequest(
                               arguments: {
                                 'name': donorSnap['name'],
                                 'phone': donorSnap['phone'].toString(),
@@ -56,7 +57,7 @@ class _RequestlistState extends State<Requestlist> {
                         children: [
                           const SizedBox(height: 5),
                           CircleAvatar(
-                            backgroundColor: Colors.red,
+                            backgroundColor: MyColors.mycolor4,
                             radius: 30,
                             child: Text(
                               donorSnap['group'] as String? ?? '',
@@ -92,7 +93,7 @@ class _RequestlistState extends State<Requestlist> {
                               makeCall(donorSnap['phone'].toString());
                             },
                             icon: const Icon(Icons.call),
-                            color: Colors.green,
+                            color: MyColors.mycolor6,
                           ),
                           const SizedBox(height: 15),
                         ],

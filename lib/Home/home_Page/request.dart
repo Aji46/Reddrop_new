@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:reddrop/Home/home_Page/loginrequest.dart';
+import 'package:reddrop/constant/constant.dart';
 import 'package:reddrop/widget/requestpagewidgets.dart';
 import 'package:reddrop/widget/wigets.dart';
 import 'package:share/share.dart';
@@ -19,7 +20,7 @@ class _RequestState extends State<Request> {
 
     return 
         Scaffold(
-          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: MyColors.mycolor2,
           appBar: customAppBar.buildAppBar(context),
           body: RequestList(),
         );
@@ -80,7 +81,7 @@ class RequestCreateCard extends StatelessWidget {
       margin: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: const Color.fromARGB(255, 255, 255, 255),
+        color: MyColors.mycolor2,
         boxShadow: const [
           BoxShadow(
             color: Color.fromARGB(97, 19, 82, 153),
@@ -107,7 +108,7 @@ class RequestCreateCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 19, 82, 153),
+                    color: MyColors.mycolor3,
                   ),
                 ),
               ),

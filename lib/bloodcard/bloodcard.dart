@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:reddrop/constant/constant.dart';
 
 class BloodCard extends StatelessWidget {
   const BloodCard({Key? key, required this.bloodGroup, required this.onTap})
@@ -17,10 +18,10 @@ class BloodCard extends StatelessWidget {
       margin: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: Colors.white,
+        color: MyColors.mycolor2,
         boxShadow: const [
           BoxShadow(
-            color: Colors.grey,
+            color: MyColors.mycolor5,
             blurRadius: 10,
           )
         ],
@@ -29,12 +30,12 @@ class BloodCard extends StatelessWidget {
         onTap: onTap,
         child: Center(
           child: CircleAvatar(
-            backgroundColor: const Color.fromARGB(255, 190, 24, 24),
+            backgroundColor: MyColors.mycolor4,
             radius: 30,
             child: Text(
               bloodGroup,
               style: const TextStyle(
-                color: Colors.white,
+                color: MyColors.mycolor2,
                 fontWeight: FontWeight.bold,
               ),
             ),

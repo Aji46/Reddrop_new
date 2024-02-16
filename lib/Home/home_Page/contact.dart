@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:reddrop/Home/home_Page/box.dart';
+import 'package:reddrop/constant/constant.dart';
 import 'package:reddrop/functions/functions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -35,8 +36,8 @@ class _ContactListPageState extends State<ContactListPage> {
                       boxcontact.deleteAt(index);
                     });
                   },
-                  backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                  foregroundColor: const Color.fromARGB(255, 255, 0, 0),
+                  backgroundColor: MyColors.mycolor2,
+                  foregroundColor: MyColors.mycolor4,
                   icon: Icons.delete,
                   label: 'Delete',
                 ),
@@ -44,12 +45,12 @@ class _ContactListPageState extends State<ContactListPage> {
             ),
             child: ListTile(
               leading: CircleAvatar(
-                backgroundColor: Colors.red,
+                backgroundColor: MyColors.mycolor4,
                 radius: 30,
                 child: Text(
                   contact.group,
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: MyColors.mycolor2,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -62,7 +63,7 @@ class _ContactListPageState extends State<ContactListPage> {
                 },
                 icon: const Icon(
                   Icons.call,
-                  color: Colors.green,
+                  color: MyColors.mycolor6,
                 ),
               ),
             ),

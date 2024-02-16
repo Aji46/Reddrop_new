@@ -19,6 +19,15 @@ class RegisterUserPage {
       String? bloodgroup,
       BuildContext context) async {
     try {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return const Center(
+            child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>( Color.fromARGB(255, 255, 255, 255)),),
+          );
+        },
+      );
+
       await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
@@ -41,22 +50,38 @@ class RegisterUserPage {
         'timestamp': FieldValue.serverTimestamp(),
       });
 
-      Navigator.of(context).pushReplacement(
+      Navigator.of(context).pop();
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            "Data stored successfully.",
+            style: TextStyle(
+              color: const Color.fromARGB(255, 255, 255, 255),
+              fontSize: 16,
+            ),
+          ),
+          duration: const Duration(seconds: 3),
+        ),
+      );
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).pop(
         MaterialPageRoute(
-          builder: (ctx) => Request_Manage(),
+          builder: (ctx) => Requestmanage(),
         ),
       );
     } catch (e) {
       print("Error during registration: $e");
       if (e is FirebaseAuthException) {
         if (e.code == 'email-already-in-use') {
+          Navigator.of(context).pop();
           print("User already exists. Try to log in");
           ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("email already exists. Try to log in"),
-          duration: Duration(seconds: 3),
-        ),
-      );
+            const SnackBar(
+              content: Text("email already exists. Try to log in"),
+              duration: Duration(seconds: 3),
+            ),
+          );
         }
       }
     }

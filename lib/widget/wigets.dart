@@ -25,7 +25,7 @@ class CustomAppBar {
               TextSpan(
                 text: 'Drop ',
                 style: TextStyle(
-                  color: Color.fromARGB(255, 0, 0, 0),
+                  color: MyColors.mycolor7,
                   fontFamily: 'Italiana',
                   fontSize: 24,
                 ),
@@ -51,17 +51,15 @@ class CustomAppBar {
                           ],
                       child: const Icon(
                         Icons.more_vert,
-                        color: Color.fromARGB(255, 0, 0, 0),
+                        color: MyColors.mycolor7,
                       )),
         ),
       ],
     );
   }
 }
-
 //grid pages blood boxes
 //.......................................
-
 class BloodCard extends StatelessWidget {
   const BloodCard({Key? key, required this.bloodGroup, required this.onTap})
       : super(key: key);
@@ -112,8 +110,6 @@ class BloodCard extends StatelessWidget {
     );
   }
 }
-
-
 //grid pages container decoration
 //.......................................
 class MyDecorations {
@@ -138,9 +134,7 @@ class MyDecorations {
     ),
   ],
 );
-
 }
-
 //grid pages container text
 //.......................................
 class MyButton extends MaterialButton {

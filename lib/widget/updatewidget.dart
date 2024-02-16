@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:reddrop/Register_page/registerlogin.dart';
+import 'package:reddrop/constant/constant.dart';
 
 class CustomAppBar {
   final BuildContext context;
@@ -20,7 +21,7 @@ class CustomAppBar {
               TextSpan(
                 text: 'Red',
                 style: TextStyle(
-                  color: Color.fromARGB(255, 255, 0, 0),
+                  color: MyColors.mycolor4,
                   fontFamily: 'Italiana',
                   fontSize: 24,
                 ),
@@ -28,7 +29,7 @@ class CustomAppBar {
               TextSpan(
                 text: 'Drop ',
                 style: TextStyle(
-                  color: Color.fromARGB(255, 0, 0, 0),
+                  color: MyColors.mycolor7,
                   fontFamily: 'Italiana',
                   fontSize: 24,
                 ),
@@ -72,14 +73,14 @@ class CustomAppBar {
             width: 170,
             height: 30,
             decoration: BoxDecoration(
-              color: Colors.red,
+              color: MyColors.mycolor4,
               borderRadius: BorderRadius.circular(15),
             ),
             child: const Align(
               alignment: Alignment.center,
               child: Text(
                 'Deactivate Account',
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: TextStyle(color: MyColors.mycolor2, fontSize: 18),
               ),
             ),
           ),
@@ -95,10 +96,10 @@ class CustomAppBar {
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(
-                Colors.white,
+                MyColors.mycolor2,
               ),
             ),
           );

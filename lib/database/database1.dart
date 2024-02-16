@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:reddrop/Register_page/registerlogin.dart';
+import 'package:reddrop/constant/constant.dart';
 
 class FirebaseDonorUpdate {
   final TextEditingController usernameController;
@@ -41,18 +42,18 @@ void updateUser(BuildContext context, String uid) async {
         context: context,
         barrierDismissible: false, // Prevents user from dismissing the dialog
         builder: (BuildContext context) {
-          return AlertDialog(
+          return const AlertDialog(
              backgroundColor: Colors.transparent,
             content: Column(
              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(const Color.fromARGB(255, 255, 255, 255)),),
+                CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Color.fromARGB(255, 255, 255, 255)),),
                 
                 SizedBox(height: 10),
                 Text(
                   'User data updating...',
                   style: TextStyle(
-                    color: const Color.fromARGB(255, 255, 255, 255),
+                    color: MyColors.mycolor2,
                     fontSize: 16,
                   ),
                 ),
@@ -75,9 +76,9 @@ void updateUser(BuildContext context, String uid) async {
 
       // Print a success message after the update
       print('User data updated successfully');
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("User data updated successfully"),
-        duration: const Duration(seconds: 2),
+        duration: Duration(seconds: 2),
       ));
 
       Navigator.of(context).pop(); // Dismiss the dialog

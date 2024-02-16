@@ -1,5 +1,3 @@
-// ignore: file_names
-// ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -7,16 +5,16 @@ import 'package:reddrop/constant/constant.dart';
 import 'package:reddrop/functions/functions.dart';
 import 'package:reddrop/widget/wigets.dart';
 
-class View_Request extends StatefulWidget {
-  const View_Request({Key? key, required this.arguments}) : super(key: key);
+class Viewrequest extends StatefulWidget {
+  const Viewrequest({Key? key, required this.arguments}) : super(key: key);
 
   final Map<String, dynamic> arguments;
 
   @override
-  State<View_Request> createState() => _ViewerState();
+  State<Viewrequest> createState() => _ViewerState();
 }
 
-class _ViewerState extends State<View_Request> {
+class _ViewerState extends State<Viewrequest> {
   final CollectionReference request=
       FirebaseFirestore.instance.collection('Request');
   
@@ -58,6 +56,8 @@ class _ViewerState extends State<View_Request> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 120, top: 50),
                         child: CircleAvatar(
+                          radius: 60,
+                          backgroundColor: MyColors.mycolor4,
                           child: Text(
                             widget.arguments['group'] as String? ?? '',
                             style: const TextStyle(
@@ -65,8 +65,6 @@ class _ViewerState extends State<View_Request> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          radius: 60,
-                          backgroundColor: MyColors.mycolor4,
                         ),
                       ),
                     ),
@@ -76,7 +74,7 @@ class _ViewerState extends State<View_Request> {
                         alignment: Alignment.topLeft,
                         child: Text(
                           'Name  : ${widget.arguments['name'] as String? ?? ''} ',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
                           ),
@@ -89,7 +87,7 @@ class _ViewerState extends State<View_Request> {
                         alignment: Alignment.topLeft,
                         child: Text(
                           'Blood wanted Date  : ${widget.arguments['date'] as String? ?? ''} ',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
                           ),
@@ -102,7 +100,7 @@ class _ViewerState extends State<View_Request> {
                         alignment: Alignment.topLeft,
                         child: Text(
                           'Phone : ${widget.arguments['phone'] as String? ?? ''}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
                           ),
@@ -115,7 +113,7 @@ class _ViewerState extends State<View_Request> {
                         children: [
                           IconButton(
                             iconSize: 45,
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.call,
                               color: Colors.green,
                             ),
@@ -129,7 +127,7 @@ class _ViewerState extends State<View_Request> {
                           ),
                           IconButton(
                             iconSize: 45,
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.share_outlined,
                               color: Colors.blue,
                             ),
@@ -148,7 +146,7 @@ class _ViewerState extends State<View_Request> {
                         alignment: Alignment.topLeft,
                         child: Text(
                           'Hospital  : ${widget.arguments['hospital'] as String? ?? ''}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
                           ),
@@ -161,7 +159,7 @@ class _ViewerState extends State<View_Request> {
                         alignment: Alignment.topLeft,
                         child: Text(
                           'District  : ${widget.arguments['district'] as String? ?? ''}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
                           ),
@@ -174,7 +172,7 @@ class _ViewerState extends State<View_Request> {
                         alignment: Alignment.topLeft,
                         child: Text(
                           'State  : ${widget.arguments['state'] as String? ?? ''}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
                           ),

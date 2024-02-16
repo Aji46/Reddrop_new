@@ -59,7 +59,7 @@ class _ViewerState extends State<ViewDonor> {
                   children: [
                    buildIconRow(
                       Icons.call,
-                      Colors.green,
+                      MyColors.mycolor6,
                       () {
                         setState(() {
                           boxcontact.put('key_${widget.arguments['name'] as String? ?? ''}', Contactdb(name:widget.arguments['name'] as String? ?? '',group:widget.arguments['group'] as String? ?? '',phone:widget.arguments['phone'] as String? ?? ''));
@@ -69,7 +69,7 @@ class _ViewerState extends State<ViewDonor> {
                     ),
                      buildIconRow(
                   Icons.share_outlined,
-                  Colors.blue,
+                  MyColors.mycolor3,
                   () => PhoneUtils.shareContact(phoneNumber),
                 ),
                   ],
@@ -93,7 +93,7 @@ class _ViewerState extends State<ViewDonor> {
         alignment: Alignment.topLeft,
         child: Text(
           '$label: ${value as String? ?? ''}',
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 25,
           ),
@@ -112,8 +112,7 @@ class _ViewerState extends State<ViewDonor> {
               icon,
               color: color,
             ),
-            onPressed: onPressed,
-            
+            onPressed: onPressed,         
             tooltip: icon == Icons.call ? 'Make a Call' : 'Share',
           ),
           const SizedBox(width: 40),

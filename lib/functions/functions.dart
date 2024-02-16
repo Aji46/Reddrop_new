@@ -2,14 +2,7 @@ import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:share/share.dart';
 
 class PhoneUtils {
-  // static void makeCall(String phoneNumber) async {
-  //   final url = 'tel:$phoneNumber';
-  //   if (await canLaunch(url)) {
-  //     await launch(url);
-  //   } else {
-  //     throw 'Could not launch $url';
-  //   }
-  // }
+
 
 static void makeCall(String phoneNumber) async {
   final number = 'tel:$phoneNumber'; // set the number here

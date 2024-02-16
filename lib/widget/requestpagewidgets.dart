@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:reddrop/Doner_view/Request_view.dart';
+import 'package:reddrop/constant/constant.dart';
 import 'package:share/share.dart';
 
 class RequestCard extends StatelessWidget {
@@ -17,10 +18,10 @@ class RequestCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: Colors.white,
+        color: MyColors.mycolor2,
         boxShadow: const [
           BoxShadow(
-            color: Colors.grey,
+            color: MyColors.mycolor5,
             blurRadius: 10,
           )
         ],
@@ -29,7 +30,7 @@ class RequestCard extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (ctx) => View_Request(
+              builder: (ctx) => Viewrequest(
                 arguments: {
                   'name': requestSnap['name'],
                   'date': requestSnap['date'],
@@ -49,12 +50,12 @@ class RequestCard extends StatelessWidget {
           children: [
             const SizedBox(height: 5),
             CircleAvatar(
-              backgroundColor: const Color.fromARGB(255, 190, 24, 24),
+              backgroundColor: MyColors.mycolor4,
               radius: 30,
               child: Text(
                 requestSnap['group'] as String? ?? '',
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: MyColors.mycolor2,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -88,7 +89,7 @@ class RequestCard extends StatelessWidget {
                   },
                   tooltip: 'Share',
                   icon: const Icon(Icons.share_outlined),
-                  color: const Color.fromARGB(255, 6, 135, 233),
+                  color: MyColors.mycolor3,
                 ),
               ],
             ),
@@ -112,10 +113,10 @@ class RequestListView extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: Colors.black),
-        color: const Color.fromARGB(255, 252, 252, 252),
+        color: MyColors.mycolor2,
         boxShadow: const [
           BoxShadow(
-            color: Color.fromARGB(255, 255, 255, 255),
+            color: MyColors.mycolor2,
             blurRadius: 20,
           )
         ],

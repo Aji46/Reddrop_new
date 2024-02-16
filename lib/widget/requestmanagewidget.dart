@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:reddrop/Doner_view/Request_view.dart';
+import 'package:reddrop/constant/constant.dart';
 
 class CreateRequestButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -13,16 +14,14 @@ class CreateRequestButton extends StatelessWidget {
     return Align(
       alignment: Alignment.center,
       child: Container(
-        height: 130,
-        width: 150,
+        height: 130, width: 150,
         margin: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: const Color.fromARGB(255, 255, 255, 255),
+          color: MyColors.mycolor2,
           boxShadow: const [
             BoxShadow(
-              color: Color.fromARGB(97, 19, 82, 153),
-              blurRadius: 20,
+              color: MyColors.mycolor3, blurRadius: 20,
             )
           ],
         ),
@@ -40,8 +39,7 @@ class CreateRequestButton extends StatelessWidget {
                     "Create a Request",
                     style: TextStyle(
                       fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 19, 82, 153),
+                      fontWeight: FontWeight.bold, color: MyColors.mycolor3,
                     ),
                   ),
                 ),
@@ -57,7 +55,6 @@ class CreateRequestButton extends StatelessWidget {
 class RequestItem extends StatelessWidget {
   final Map<String, dynamic> requestSnap;
   final VoidCallback onDelete;
-
   const RequestItem({required this.requestSnap, required this.onDelete});
 
   @override
@@ -69,11 +66,10 @@ class RequestItem extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: Colors.white,
+            color: MyColors.mycolor2,
             boxShadow: const [
               BoxShadow(
-                color: Colors.grey,
-                blurRadius: 10,
+                color: MyColors.mycolor5, blurRadius: 10,
               )
             ],
           ),
@@ -81,7 +77,7 @@ class RequestItem extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (ctx) => View_Request(
+                  builder: (ctx) => Viewrequest(
                     arguments: {
                       'name': requestSnap['name'],
                       'date': requestSnap['date'],
@@ -101,12 +97,12 @@ class RequestItem extends StatelessWidget {
               children: [
                 const SizedBox(height: 5),
                 CircleAvatar(
-                  backgroundColor: const Color.fromARGB(255, 190, 24, 24),
+                  backgroundColor: MyColors.mycolor4,
                   radius: 30,
                   child: Text(
                     requestSnap['group'] as String? ?? '',
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: MyColors.mycolor2,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -118,8 +114,7 @@ class RequestItem extends StatelessWidget {
                       Text(
                         requestSnap['date'] as String? ?? '',
                         style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 20,fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
@@ -139,7 +134,7 @@ class RequestItem extends StatelessWidget {
                       icon: const Icon(
                         Icons.delete,
                       ),
-                      color: const Color.fromARGB(255, 6, 135, 233),
+                      color: MyColors.mycolor3,
                     ),
                   ],
                 ),

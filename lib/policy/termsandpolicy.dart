@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reddrop/constant/constant.dart';
 
 class Pryvacypage extends StatelessWidget {
   Pryvacypage({super.key});
@@ -6,9 +7,9 @@ class Pryvacypage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: MyColors.mycolor2,
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: MyColors.mycolor2,
         title: const Text('Privacy & policy'),
       ),
       body: SafeArea(
@@ -18,7 +19,7 @@ class Pryvacypage extends StatelessWidget {
               "How We Collect And Use Your Personal Data",
               FontWeight.w700,
               18,
-              Colors.black,
+             MyColors.mycolor7,
             ),
             _buildRichText(
               'Non-Personal Information.',
@@ -70,13 +71,13 @@ class Pryvacypage extends StatelessWidget {
           style: const TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 16,
-            color: Colors.black,
+            color: MyColors.mycolor7,
           ),
           children: [
             TextSpan(text: '$title '),
             TextSpan(
               text: content,
-              style: const TextStyle(fontStyle: FontStyle.italic, color: Colors.red),
+              style: const TextStyle(fontStyle: FontStyle.italic, color: MyColors.mycolor4),
             ),
             if (email != null) TextSpan(text: email, style: const TextStyle(fontStyle: FontStyle.italic)),
           ],

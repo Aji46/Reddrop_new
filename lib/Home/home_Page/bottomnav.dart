@@ -4,6 +4,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:reddrop/Home/home_Page/Home.dart';
 import 'package:reddrop/Register_page/registerlogin.dart';
+import 'package:reddrop/constant/constant.dart';
 import 'package:reddrop/pageview/pageview.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -27,13 +28,13 @@ class HomePageState extends State<BottomNavBar> {
       extendBody: true,
       bottomNavigationBar: CurvedNavigationBar(
         items: const [
-          Icon(Icons.bloodtype,color: Colors.white,),
-          Icon(Icons.home,color: Colors.white,),
-          Icon(Icons.settings,color: Colors.white,)
+          Icon(Icons.bloodtype,color: MyColors.mycolor2,),
+          Icon(Icons.home,color: MyColors.mycolor2,),
+          Icon(Icons.settings,color: MyColors.mycolor2,)
         ],
-        color: Color.fromARGB(255, 91, 12, 12),
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
-        buttonBackgroundColor: Color.fromARGB(255, 91, 12, 12),
+        color: MyColors.mycolor1,
+        backgroundColor: MyColors.mycolor2,
+        buttonBackgroundColor: MyColors.mycolor1,
         index: selectedIndex,
         height: 50,
         onTap: (index) {

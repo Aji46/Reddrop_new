@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:reddrop/constant/constant.dart';
 
 class CustomImage extends StatelessWidget {
   @override
@@ -53,7 +54,7 @@ class CustomTextField extends StatelessWidget {
     return Container(
       height: 55,
       decoration: BoxDecoration(
-        border: Border.all(width: 1, color: Colors.grey),
+        border: Border.all(width: 1, color: MyColors.mycolor5),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
@@ -93,7 +94,7 @@ class CustomElevatedButton extends StatelessWidget {
       height: 45,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: const Color.fromARGB(255, 153, 19, 19),
+          primary: MyColors.mycolor1,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -124,7 +125,7 @@ class CustomTextButton extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          color: Colors.black,
+          color: MyColors.mycolor7,
           decoration: TextDecoration.underline,
           fontStyle: FontStyle.italic,
         ),

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:reddrop/Home/home_Page/requestreg.dart';
 import 'package:reddrop/Home/home_Page/requestsmanage.dart';
+import 'package:reddrop/constant/constant.dart';
 import 'package:reddrop/widget/login%20widgets.dart';
 import 'package:reddrop/widget/wigets.dart';
 
@@ -29,19 +30,20 @@ class _register_pagestate extends State<RequestSignup> {
 
   Future<void> _signInWithEmailAndPassword() async {
     try {
-      showDialog(context: context, barrierDismissible: false, builder: (BuildContext context) => Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(const Color.fromARGB(255, 255, 255, 255)),)));
+      showDialog(context: context, barrierDismissible: false, builder: (BuildContext context) => const Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(MyColors.mycolor2),)));
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(email: _emailController.text.trim(), password: _passwordController.text);
       // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
      if (userCredential != null) {
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Login Successful"),
           duration: Duration(seconds: 2),
         ),
       );
-      // Navigate to the Request_Manage page
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) => const Request_Manage()));
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) => const Requestmanage()));
     }
     } catch (e) {
       // ignore: use_build_context_synchronously
@@ -55,7 +57,6 @@ class _register_pagestate extends State<RequestSignup> {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
     } catch (e) {
-      print("Error during login: $e");
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Error signing in: $e"), duration: const Duration(seconds: 3)));
     }
@@ -72,7 +73,7 @@ class _register_pagestate extends State<RequestSignup> {
   Widget build(BuildContext context) {
     return Stack(children: [
       Scaffold(
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: MyColors.mycolor2,
         appBar: CustomAppBar().buildAppBar(context),
         body: Container(
           margin: const EdgeInsets.only(left: 25, right: 25),

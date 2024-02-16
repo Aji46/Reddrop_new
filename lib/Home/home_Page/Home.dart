@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:reddrop/constant/constant.dart';
 import 'package:reddrop/database/database.dart';
 import 'package:reddrop/widget/widgets2.dart';
 import 'package:reddrop/widget/wigets.dart';
@@ -83,9 +84,8 @@ Widget build(BuildContext context) {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>( Color.fromARGB(255, 255, 255, 255)),),
-                  SizedBox(height: 10),
-                  Text('Please wait...',style: TextStyle(color: Colors.white,fontSize: 20,),
+                  CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>( MyColors.mycolor2),),
+                  SizedBox(height: 10),Text('Please wait...',style: TextStyle(color: MyColors.mycolor2,fontSize: 20,),
                   ),
                 ],
               ),
@@ -109,16 +109,14 @@ Widget build(BuildContext context) {
                   value: value,
                   hint: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      hintText,
-                      style: const TextStyle(color: Colors.black),
+                    child: Text( hintText,
+                      style: const TextStyle(color: MyColors.mycolor7),
                     ),
                   ),
                   onChanged: onChanged,
                   items: items.map((String value) {
                     return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
+                      value: value, child: Text(value),
                     );
                   }).toList(),
                 ),
@@ -141,15 +139,14 @@ Widget build(BuildContext context) {
       margin: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.black),
-        color: const Color.fromARGB(255, 252, 252, 252),
-        boxShadow: const [BoxShadow(color: Color.fromARGB(255, 255, 255, 255), blurRadius: 20)],
+        border: Border.all(color: MyColors.mycolor7),
+        color: MyColors.mycolor2,
+        boxShadow: const [BoxShadow(color: MyColors.mycolor2, blurRadius: 20)],
       ),
       child: DonorListWidget(
         listKey: _listKey,donors: donors,
       ),
     );
   }
-
  Stream<QuerySnapshot> getFilteredStream() => firebaseService.getFilteredStream(selectedState, selectedDistrict, selectedBloodGroup);
 }

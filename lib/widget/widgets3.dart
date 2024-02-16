@@ -25,10 +25,10 @@ class BloodGroupDropdownFormField extends StatelessWidget {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
-              fillColor: Colors.white,
+              fillColor: MyColors.mycolor2,
               filled: true,
               labelText: "Blood Group",
-              labelStyle: TextStyle(color: Colors.black),
+              labelStyle: TextStyle(color: MyColors.mycolor7),
             ),
             child: DropdownButton<String>(
               value: value,

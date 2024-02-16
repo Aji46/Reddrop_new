@@ -10,7 +10,6 @@ import 'package:reddrop/functions/functions.dart';
 
 class BloodDonorGroup extends StatefulWidget {
   final String selectedBloodGroup;
-
   const BloodDonorGroup({Key? key, required this.selectedBloodGroup}) : super(key: key);
 
   @override
@@ -32,7 +31,6 @@ class _BloodGroupState extends State<BloodDonorGroup> {
     Stream<QuerySnapshot> stream = widget.selectedBloodGroup.isNotEmpty
         ? donor.where('group', isEqualTo: widget.selectedBloodGroup).orderBy('name').snapshots()
         : donor.orderBy('name').snapshots();
-
     stream.listen((snapshot) {
       _controller.add(snapshot.docs);
     }, onError: _controller.addError);
@@ -105,7 +103,7 @@ class _BloodGroupState extends State<BloodDonorGroup> {
                                 radius: 30,
                                 child: Text(
                                   donorSnap['group'] as String? ?? '',
-                                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                                  style: const TextStyle(color:MyColors.mycolor2, fontWeight: FontWeight.bold),
                                 ),
                               ),
                               Expanded(
@@ -131,8 +129,7 @@ class _BloodGroupState extends State<BloodDonorGroup> {
                                 boxcontact.put('key_${donorSnap['name'] as String? ?? ''}', Contactdb(name:donorSnap['name'] as String? ?? '',group:donorSnap['group'] as String? ?? '',phone:donorSnap['phone'] as String? ?? ''));
                                 });
                                   },
-                                icon: const Icon(Icons.call),
-                                color: Colors.green,
+                                icon: const Icon(Icons.call), color: MyColors.mycolor6,
                               ),
                               const SizedBox(height: 15),
                             ],

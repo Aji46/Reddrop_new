@@ -5,11 +5,9 @@ import 'package:reddrop/widget/wigets.dart' as widgets;
 
 class Containerpageview extends StatefulWidget {
   const Containerpageview({super.key});
-
   @override
   State<Containerpageview> createState() => _ContainerpageviewState();
 }
-
 class _ContainerpageviewState extends State<Containerpageview> {
   int _currentPageIndex = 0;
 
@@ -21,7 +19,6 @@ class _ContainerpageviewState extends State<Containerpageview> {
         final cardWidth = screenWidth < 400 ? 70.0 : 100.0;
         final cardHeight = screenWidth < 400 ? 55.0 : 80.0;
         final horizontalSpacing = screenWidth < 400 ? 20.0 : 40.0;
-
         return Container(
           child: Column(
             children: [
@@ -36,7 +33,6 @@ class _ContainerpageviewState extends State<Containerpageview> {
                   },
                   itemBuilder: (context, index) {
                     final firstItemIndex = index * 4;
-
                     if (firstItemIndex >= bloodGroups.length) {
                       return Container();
                     }
@@ -49,15 +45,12 @@ class _ContainerpageviewState extends State<Containerpageview> {
                                   widgets.BloodCard(
                                     bloodGroup: bloodGroups[firstItemIndex],
                                     onTap: () {
-                                      String selectedBloodGroup =
-                                          bloodGroups[firstItemIndex];
-                                      Navigator.push(
-                                        context,
+                                      String selectedBloodGroup = bloodGroups[firstItemIndex];
+                                      Navigator.push( context,
                                         MaterialPageRoute(
                                           builder: (context) =>
                                               BloodDonorGroup(
-                                            selectedBloodGroup:
-                                                selectedBloodGroup,
+                                            selectedBloodGroup: selectedBloodGroup,
                                           ),
                                         ),
                                       );
@@ -65,18 +58,14 @@ class _ContainerpageviewState extends State<Containerpageview> {
                                   ),
                                   SizedBox(width: horizontalSpacing),
                                   widgets.BloodCard(
-                                    bloodGroup:
-                                        bloodGroups[firstItemIndex + 1],
+                                    bloodGroup: bloodGroups[firstItemIndex + 1],
                                     onTap: () {
-                                      String selectedBloodGroup =
-                                          bloodGroups[firstItemIndex + 1];
-                                      Navigator.push(
-                                        context,
+                                      String selectedBloodGroup = bloodGroups[firstItemIndex + 1];
+                                      Navigator.push(context,
                                         MaterialPageRoute(
                                           builder: (context) =>
                                               BloodDonorGroup(
-                                            selectedBloodGroup:
-                                                selectedBloodGroup,
+                                            selectedBloodGroup:  selectedBloodGroup,
                                           ),
                                         ),
                                       );
@@ -84,22 +73,18 @@ class _ContainerpageviewState extends State<Containerpageview> {
                                   ),
                                 ],
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                              Row( mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   widgets.BloodCard(
-                                    bloodGroup:
-                                        bloodGroups[firstItemIndex + 2],
+                                    bloodGroup: bloodGroups[firstItemIndex + 2],
                                     onTap: () {
-                                      String selectedBloodGroup =
-                                          bloodGroups[firstItemIndex + 2];
+                                      String selectedBloodGroup = bloodGroups[firstItemIndex + 2];
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
                                               BloodDonorGroup(
-                                            selectedBloodGroup:
-                                                selectedBloodGroup,
+                                            selectedBloodGroup: selectedBloodGroup,
                                           ),
                                         ),
                                       );
@@ -107,18 +92,15 @@ class _ContainerpageviewState extends State<Containerpageview> {
                                   ),
                                   SizedBox(width: horizontalSpacing),
                                   widgets.BloodCard(
-                                    bloodGroup:
-                                        bloodGroups[firstItemIndex + 3],
+                                    bloodGroup:bloodGroups[firstItemIndex + 3],
                                     onTap: () {
-                                      String selectedBloodGroup =
-                                          bloodGroups[firstItemIndex + 3];
+                                      String selectedBloodGroup = bloodGroups[firstItemIndex + 3];
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
                                               BloodDonorGroup(
-                                            selectedBloodGroup:
-                                                selectedBloodGroup,
+                                            selectedBloodGroup: selectedBloodGroup,
                                           ),
                                         ),
                                       );
@@ -127,14 +109,11 @@ class _ContainerpageviewState extends State<Containerpageview> {
                                 ],
                               ),
                             ],
-                          ),
-                        
-                      
+                          ), 
                     );
                   },
                 ),
-              ),
-              
+              ),      
               DotIndicator(
                 currentPageIndex: _currentPageIndex,
                 pageCount: (bloodGroups.length ~/ 4),
@@ -147,11 +126,9 @@ class _ContainerpageviewState extends State<Containerpageview> {
   }
 }
 
-
 class DotIndicator extends StatelessWidget {
   final int currentPageIndex;
   final int pageCount;
-
   const DotIndicator({
     Key? key,
     required this.currentPageIndex,
@@ -162,16 +139,13 @@ class DotIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(
-        pageCount,
+      children: List.generate(pageCount,
         (index) {
           return Container(
-            width: 7.0,
-            height: 10.0,
+            width: 7.0, height: 10.0,
             margin: const EdgeInsets.symmetric( horizontal: 5),
             decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: currentPageIndex == index ? MyColors.mycolor4 : Colors.grey,
+              shape: BoxShape.circle, color: currentPageIndex == index ? MyColors.mycolor4 : MyColors.mycolor5,
             ),
           );
         },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reddrop/constant/constant.dart';
 import 'package:reddrop/widget/validation_utils.dart';
 import 'package:reddrop/widget/widgets2.dart';
 import 'package:reddrop/widget/widgets3.dart';
@@ -33,7 +34,7 @@ class RegisterForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: MyColors.mycolor2,
       body: SafeArea(
         child: Form(
           key: _formKey,
@@ -97,9 +98,9 @@ class RegisterForm extends StatelessWidget {
           ElevatedButton(
             onPressed: onSubmit,
             style: const ButtonStyle(
-              backgroundColor: MaterialStatePropertyAll(Colors.red),
+              backgroundColor: MaterialStatePropertyAll(MyColors.mycolor4),
             ),
-            child: const Text('Submit', style: TextStyle(color: Colors.white)),
+            child: const Text('Submit', style: TextStyle(color: MyColors.mycolor2)),
           ),
           TextButton(
             onPressed: () {
