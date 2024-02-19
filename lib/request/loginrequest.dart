@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:reddrop/Home/home_Page/requestreg.dart';
-import 'package:reddrop/Home/home_Page/requestsmanage.dart';
 import 'package:reddrop/constant/constant.dart';
+import 'package:reddrop/request/requestreg.dart';
+import 'package:reddrop/request/requestsmanage.dart';
 import 'package:reddrop/widget/login%20widgets.dart';
 import 'package:reddrop/widget/wigets.dart';
 

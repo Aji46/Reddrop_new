@@ -4,8 +4,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:reddrop/Home/home_Page/box.dart';
-import 'package:reddrop/Home/home_Page/contactdatabase.dart';
+import 'package:reddrop/contact/box.dart';
+import 'package:reddrop/contact/contactdatabase.dart';
 import 'package:reddrop/splash/splash.dart';
 
 const SAVE_KEY_NAME ="userLoggedin";
@@ -44,14 +44,16 @@ try {
   print("Error initializing Firebase: $e");
 }
 
-
-  // Set preferred orientations to portrait only
-  SystemChrome.setPreferredOrientations([
+  await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
-  ]).then((_) {
-    runApp(MyApp());
-  });
+  ]);
+    final WidgetsBinding binding = WidgetsFlutterBinding.ensureInitialized();
+    assert(binding.debugCheckZone('runApp'));
+    binding
+      // ignore: invalid_use_of_protected_member
+      ..scheduleAttachRootWidget(binding.wrapWithDefaultView(const MyApp()))
+      ..scheduleWarmUpFrame();
 }
 
 class MyApp extends StatelessWidget {
@@ -62,10 +64,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
        initialRoute: 'phone',
       debugShowCheckedModeBanner: false,
-      // routes: {
-      //   'phone': (context) => MyPhone(),
-      //   'verify': (context) => MyVerify(verificationId: '',)
-      // },
       theme: ThemeData(
         textTheme: const TextTheme(),
       ),

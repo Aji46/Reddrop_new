@@ -1,103 +1,82 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:reddrop/Home/home_Page/request.dart';
 import 'package:reddrop/Register_page/registerlogin.dart';
+import 'package:reddrop/constant/constant.dart';
+import 'package:reddrop/request/request.dart';
 import 'package:reddrop/widget/container_pageview.dart';
 import 'package:reddrop/widget/wigets.dart';
 
-class HomeGrid extends StatefulWidget {
+class HomeGrid extends StatelessWidget {
   const HomeGrid({Key? key}) : super(key: key);
 
   @override
-  State<HomeGrid> createState() => _HomeGridState();
-}
-
-class _HomeGridState extends State<HomeGrid> {
-  late DocumentSnapshot donorSnap;
-  bool _isVisible = true;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    MediaQueryData mediaQuery = MediaQuery.of(context);
     return Scaffold(
       appBar: CustomAppBar().buildAppBar(context),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: AnimatedOpacity(
-              duration: const Duration(milliseconds: 500),
-              opacity: _isVisible ? 1.0 : 0.0,
-              child: Column(
-                children: [
-                  Container(
-                    
-                    height: 215,
-                    margin: const EdgeInsets.all(8.0),
-                    decoration: MyDecorations.pageContainerDecoration,
-                    child: const Column(
-                      children: [
-                        Expanded(
-                          child: Containerpageview(),
-                          
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+            child: Container(
+              decoration: MyDecorations.pageContainerDecoration,
+              child: Containerpageview(),
             ),
           ),
-          Container(
-            height: MediaQuery.of(context).size.height * 0.4,
-            margin: const EdgeInsets.all(8.0),
-            decoration: MyDecorations.pageContainerDecoration,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.all(8.0),
-                    decoration: MyDecorations.bottomContainerDecoration,
-                     height: MediaQuery.of(context).size.height * 0.4,
-                  
-                    child: MyButton(
-                      text: 'Request for blood',
+          Flexible(
+            child: Container(
+              height: mediaQuery.size.height * 0.3,
+              margin: const EdgeInsets.all(8.0),
+              decoration: MyDecorations.pageContainerDecoration,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (ctx) => const Request(),
                         ));
                       },
+                      child: Container(
+                        margin: const EdgeInsets.all(8.0),
+                        decoration: MyDecorations.bottomContainerDecoration,
+                        child: const Center(
+                          child: Text(
+                            'Request for blood',
+                            style: TextStyle(
+                                fontSize: 25,
+                                color: MyColors.mycolor3,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  width: 15,
-                ),
-                Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.all(8.0),
-                    decoration: MyDecorations.bottomContainerDecoration,
-                     height: MediaQuery.of(context).size.height * 0.4, 
-                    child: MyButton(
-                      text: 'I want to be a Donor',
+                  Expanded(
+                    child: GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (ctx) => const RegisterLogin(),
                         ));
                       },
+                      child: Container(
+                        margin: const EdgeInsets.all(8.0),
+                        decoration: MyDecorations.bottomContainerDecoration,
+                        child: const Center(
+                          child: Text(
+                            'I want to be a Donor',
+                            style: TextStyle(
+                                fontSize: 25,
+                                color: MyColors.mycolor3,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],

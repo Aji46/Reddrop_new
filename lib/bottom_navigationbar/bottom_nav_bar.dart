@@ -6,10 +6,10 @@ class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
 
   @override
-  _BottomNavBarState createState() => _BottomNavBarState();
+  BottomNavBarState createState() => BottomNavBarState();
 }
 
-class _BottomNavBarState extends State<BottomNavBar> {
+class BottomNavBarState extends State<BottomNavBar> {
   var selectedIndex = 1;
 
   @override
@@ -21,7 +21,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         Icon(Icons.settings, color: MyColors.mycolor2),
       ],
       color: MyColors.mycolor1,
-      backgroundColor: MyColors.mycolor2,
+      backgroundColor: const Color.fromARGB(0, 255, 255, 255),
       buttonBackgroundColor: MyColors.mycolor1,
       index: selectedIndex,
       height: 50,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:reddrop/Home/home_Page/contact.dart';
 import 'package:reddrop/Home/home_Page/home%20grid.dart';
+import 'package:reddrop/contact/contact.dart';
 
 
 class MyPageView extends StatefulWidget {
