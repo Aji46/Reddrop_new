@@ -141,7 +141,7 @@ class MyButton extends MaterialButton {
   final String text;
   final VoidCallback onTap;
 
-  MyButton({required this.text, required this.onTap})
+  MyButton({super.key, required this.text, required this.onTap})
       : super(
           onPressed: onTap,
           color: Colors.white,

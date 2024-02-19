@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:reddrop/Doner_view/Request_view.dart';
+import 'package:reddrop/Doner_view/request_view.dart';
 import 'package:reddrop/constant/constant.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -19,7 +19,7 @@ class _RequestlistState extends State<Requestlist> {
         stream: FirebaseFirestore.instance.collection('Request').snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return CircularProgressIndicator(); // Add a loading indicator if data is not available yet.
+            return const CircularProgressIndicator();
           }
           return ListView.separated(
             itemCount: snapshot.data!.docs.length,
@@ -111,7 +111,9 @@ class _RequestlistState extends State<Requestlist> {
 
   static void makeCall(String phoneNumber) async {
     final url = 'tel:$phoneNumber';
+    // ignore: deprecated_member_use
     if (await canLaunch(url)) {
+      // ignore: deprecated_member_use
       await launch(url);
     } else {
       throw 'Could not launch $url';

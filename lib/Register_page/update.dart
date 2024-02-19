@@ -22,7 +22,6 @@ class _UpdateState extends State<Update> {
   final _stateController = TextEditingController();
   String? bloodGroup;
   final _formKey = GlobalKey<FormState>();
-  late User _currentUser;
 
   @override
   void initState() {
@@ -34,7 +33,6 @@ class _UpdateState extends State<Update> {
     User? currentUser = FirebaseAuth.instance.currentUser;
 
     if (currentUser != null) {
-      setState(() => _currentUser = currentUser);
       await _fetchUserData(currentUser.uid);
     }
   }

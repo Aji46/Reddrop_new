@@ -21,7 +21,7 @@ class RegisterPageState extends State<RegisterPage> {
   final TextEditingController _placeController = TextEditingController();
   final TextEditingController _stateController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -66,7 +66,7 @@ class RegisterPageState extends State<RegisterPage> {
               bloodGroup = newValue;
             });
           },
-         onSubmit: () {
+      onSubmit: () {
   if (_validateFields()) {
     if (bloodGroup != null) {
       registerUser(context); 
@@ -84,7 +84,6 @@ class RegisterPageState extends State<RegisterPage> {
 
 Future<void> registerUser(BuildContext context) async {
   try {
-    // Show circular progress indicator
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -112,30 +111,32 @@ Future<void> registerUser(BuildContext context) async {
       'group': bloodGroup,
     });
 
-    // Hide circular progress indicator
+    // ignore: use_build_context_synchronously
     Navigator.of(context).pop();
+        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text("Data stored successfully.",style: TextStyle(
-                    color: const Color.fromARGB(255, 255, 255, 255),
+                    color: Color.fromARGB(255, 255, 255, 255),
                     fontSize: 16,
                   ),),
-                   duration: const Duration(seconds: 2),
+                   duration: Duration(seconds: 2),
       ),
     );
 
-
+    // ignore: use_build_context_synchronously
     Navigator.of(context).pop(
       MaterialPageRoute(
         builder: (ctx) => const RegisterLogin(),
       ),
     );
   } catch (e) {
-    // Hide circular progress indicator
+    // ignore: use_build_context_synchronously
     Navigator.of(context).pop();
 
     if (e is FirebaseAuthException) {
       if (e.code == 'email-already-in-use') {
+        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text("Email is already in use. Try logging in."),
@@ -146,5 +147,4 @@ Future<void> registerUser(BuildContext context) async {
     }
   }
 }
-
 }

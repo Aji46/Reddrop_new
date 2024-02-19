@@ -24,5 +24,5 @@ class FirestoreService {
     }
   }
   
-  // Add more methods here for fetching/updating data from Firestore
+  
 }

@@ -15,7 +15,6 @@ static void makeCall(String phoneNumber) async {
     // ... rest of your code
   } else {
     // Handle the case when the result is null (optional)
-    print("Call failed or was cancelled.");
   }
 }
 

@@ -76,12 +76,14 @@ void updateUser(BuildContext context, String uid) async {
 
       // Print a success message after the update
       print('User data updated successfully');
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("User data updated successfully"),
         duration: Duration(seconds: 2),
       ));
 
-      Navigator.of(context).pop(); // Dismiss the dialog
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).pop();
 
       // Navigate to the next screen
       Navigator.of(context).pop(
@@ -92,7 +94,7 @@ void updateUser(BuildContext context, String uid) async {
     }
   } catch (error) {
     // Print any error that occurs during the update
-    print('Error updating user data: $error');
+    // ignore: use_build_context_synchronously
     Navigator.of(context).pop(); // Dismiss the dialog if there's an error
   }
 }
@@ -106,8 +108,8 @@ class DatabaseManager {
   Future<void> updateUserData(String uid, Map<String, dynamic> data) async {
     try {
       await FirebaseFirestore.instance.collection('Request').doc(uid).set(data);
+    // ignore: empty_catches
     } catch (error) {
-      print("Error updating user data: $error");
     }
   }
 
@@ -117,8 +119,8 @@ class DatabaseManager {
       if (documentSnapshot.exists) {
         return documentSnapshot.data() as Map<String, dynamic>;
       }
+    // ignore: empty_catches
     } catch (error) {
-      print("Error fetching user data: $error");
     }
     return null;
   }

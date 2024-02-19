@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:reddrop/Doner_view/Request_view.dart';
+import 'package:reddrop/Doner_view/request_view.dart';
 import 'package:reddrop/constant/constant.dart';
 import 'package:share/share.dart';
 
@@ -104,7 +104,7 @@ class RequestCard extends StatelessWidget {
 class RequestListView extends StatelessWidget {
   final List<DocumentSnapshot> requests;
 
-  RequestListView({required this.requests});
+  const RequestListView({super.key, required this.requests});
 
   @override
   Widget build(BuildContext context) {

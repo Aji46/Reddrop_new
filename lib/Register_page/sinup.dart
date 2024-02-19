@@ -2,24 +2,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:reddrop/Register_page/Register_page.dart';
 import 'package:reddrop/Register_page/update.dart';
-import 'package:reddrop/request/requestreg.dart';
-import 'package:reddrop/widget/login%20widgets.dart';
+import 'package:reddrop/widget/loginwidgets.dart';
 import 'package:reddrop/widget/wigets.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
   @override
-  State<Signup> createState() => _register_pagestate();
+  State<Signup> createState() => RegisterPagestate();
 }
 
 
-class _register_pagestate extends State<Signup> {
+class RegisterPagestate extends State<Signup> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final CollectionReference donor = FirebaseFirestore.instance.collection('Request');
-  int _currentIndex = 2;
 
   @override
   void initState() {
@@ -35,13 +34,14 @@ class _register_pagestate extends State<Signup> {
       // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
      if (userCredential != null) {
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Login Successful"),
           duration: Duration(seconds: 2),
         ),
       );
-      // Navigate to the Request_Manage page
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) => const Update()));
     }
     } catch (e) {
@@ -56,7 +56,6 @@ class _register_pagestate extends State<Signup> {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
     } catch (e) {
-      print("Error during login: $e");
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Error signing in: $e"), duration: const Duration(seconds: 3)));
     }
@@ -80,7 +79,7 @@ class _register_pagestate extends State<Signup> {
           alignment: Alignment.center,
           child: SingleChildScrollView(
             child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              CustomImage(),
+              const CustomImage(),
               const SizedBox(height: 25),
               const CustomText(text: "Account Verification", fontSize: 22, fontWeight: FontWeight.bold),
               const SizedBox(height: 10),
@@ -92,7 +91,7 @@ class _register_pagestate extends State<Signup> {
               const SizedBox(height: 20),
               CustomElevatedButton(onPressed: _signInWithEmailAndPassword, text: "Signup"),
               CustomTextButton(
-                onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) => const RegisterreqPage())),
+                onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) => const RegisterPage())),
                 text: "I don't have an account",
               ),
             ]),

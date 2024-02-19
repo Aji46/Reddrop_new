@@ -1,13 +1,13 @@
 // widgets.dart
 
 import 'package:flutter/material.dart';
-import 'package:reddrop/Doner_view/Request_view.dart';
+import 'package:reddrop/Doner_view/request_view.dart';
 import 'package:reddrop/constant/constant.dart';
 
 class CreateRequestButton extends StatelessWidget {
   final VoidCallback onPressed;
 
-  const CreateRequestButton({required this.onPressed});
+  const CreateRequestButton({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class CreateRequestButton extends StatelessWidget {
 class RequestItem extends StatelessWidget {
   final Map<String, dynamic> requestSnap;
   final VoidCallback onDelete;
-  const RequestItem({required this.requestSnap, required this.onDelete});
+  const RequestItem({super.key, required this.requestSnap, required this.onDelete});
 
   @override
   Widget build(BuildContext context) {

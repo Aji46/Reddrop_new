@@ -7,7 +7,7 @@ class BloodGroupDropdownFormField extends StatelessWidget {
   final void Function(String?)? onChanged;
   final String? Function(String?)? validator;
 
-  BloodGroupDropdownFormField({
+  const BloodGroupDropdownFormField({super.key, 
     required this.value,
     required this.onChanged,
     required this.validator,
@@ -28,7 +28,7 @@ class BloodGroupDropdownFormField extends StatelessWidget {
               fillColor: MyColors.mycolor2,
               filled: true,
               labelText: "Blood Group",
-              labelStyle: TextStyle(color: MyColors.mycolor7),
+              labelStyle: const TextStyle(color: MyColors.mycolor7),
             ),
             child: DropdownButton<String>(
               value: value,
@@ -55,7 +55,7 @@ class DatePickerFormField extends StatelessWidget {
   final TextEditingController controller;
   final Function(BuildContext) onSelectDate;
 
-   DatePickerFormField({
+   const DatePickerFormField({super.key, 
     required this.controller,
     required this.onSelectDate,
   });
@@ -78,7 +78,7 @@ class DatePickerFormField extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               labelText: 'Select Date Boold needed date',
-              suffixIcon: Icon(Icons.calendar_today),
+              suffixIcon: const Icon(Icons.calendar_today),
             ),
           ),
         ],

@@ -91,7 +91,6 @@ class CustomAppBar {
 
   void deactivateFirebaseAccount() async {
     try {
-      // Show the circular progress indicator
       showDialog(
         context: context,
         barrierDismissible: false,
@@ -106,34 +105,28 @@ class CustomAppBar {
         },
       );
 
-      // Assuming you have the current user
       User? user = FirebaseAuth.instance.currentUser;
 
       if (user != null) {
-        // Optionally, sign the user out
         await FirebaseAuth.instance.signOut();
 
         // Delete the user document from the "Donor" collection
         DocumentReference donorDocRef =
             FirebaseFirestore.instance.collection('Donor').doc(user.uid);
         await donorDocRef.delete();
-
-        // Dismiss the circular progress indicator
+        // ignore: use_build_context_synchronously
         Navigator.of(context).pop();
-
-        // Now, the user is deactivated, and they need to re-register to use the app
+        // ignore: use_build_context_synchronously
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (ctx) => RegisterLogin(), // Change this to your login page
+            builder: (ctx) => const RegisterLogin(),
           ),
         );
       }
     } catch (e) {
-      // Dismiss the circular progress indicator
+   
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
-
-      print("Error deactivating account: $e");
-      // Handle errors, e.g., show an error message to the user
     }
   }
 }

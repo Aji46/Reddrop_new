@@ -36,7 +36,7 @@ class _SplashState extends State<Splash> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white, // Set the background color of the app bar
+        backgroundColor: Colors.white, 
         title: Row(
           children: [
             Text(
@@ -59,7 +59,7 @@ class _SplashState extends State<Splash> {
         ),
       ),
       body: Container(
-        color: Colors.white, // Set the background color of the body
+        color: Colors.white, 
         child: SafeArea(
           child: ListView(
             children: [

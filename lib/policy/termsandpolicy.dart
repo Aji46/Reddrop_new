@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:reddrop/constant/constant.dart';
 
 class Pryvacypage extends StatelessWidget {
-  Pryvacypage({super.key});
+  const Pryvacypage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +63,7 @@ class Pryvacypage extends StatelessWidget {
     );
   }
 
-  Widget _buildRichText(String title, String content, [String? email = null]) {
+  Widget _buildRichText(String title, String content, [String? email]) {
     return Padding(
       padding: const EdgeInsets.only(left: 20, top: 30),
       child: RichText(

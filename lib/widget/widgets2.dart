@@ -8,7 +8,7 @@ class DonorListWidget extends StatelessWidget {
   final GlobalKey<AnimatedListState> listKey;
   final List<DocumentSnapshot> donors;
 
-  DonorListWidget({
+  const DonorListWidget({super.key, 
     required this.listKey,
     required this.donors,
   });
@@ -28,7 +28,6 @@ class DonorListWidget extends StatelessWidget {
 
   Widget buildDonorListItem(BuildContext context, DocumentSnapshot donorSnap, Animation<double> animation) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double listItemHeight = screenWidth > 600 ? 120.0 : 100.0;
     double avatarRadius = screenWidth > 600 ? 35.0 : 30.0;
     double fontSizeTitle = screenWidth > 600 ? 22.0 : 20.0;
     double fontSizeSubtitle = screenWidth > 600 ? 17.0 : 15.0;
@@ -96,7 +95,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final String? Function(String?)? validator;
 
-  const CustomTextFormField({
+  const CustomTextFormField({super.key, 
     required this.controller,
     required this.labelText,
     this.keyboardType,
@@ -122,7 +121,7 @@ class CustomTextFormField extends StatelessWidget {
           fillColor: MyColors.mycolor2,
           filled: true,
           labelText: labelText,
-          labelStyle: TextStyle(color: MyColors.mycolor7),
+          labelStyle: const TextStyle(color: MyColors.mycolor7),
         ),
         validator: validator,
       ),
@@ -130,22 +129,4 @@ class CustomTextFormField extends StatelessWidget {
   }
 }
 
-  String? _validate(String? value, String fieldName) {
-    if (value == null || value.isEmpty) {
-      return '$fieldName is required';
-    } else if (value.contains(' ')) {
-      return 'Spaces are not allowed in $fieldName';
-    }
-    return null;
-  }
 
-  String? _validatePhoneNumber(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Phone number is required';
-    } else if (value.contains(' ')) {
-      return 'Spaces are not allowed in the phone number';
-    } else if (RegExp(r'(\d)\1{9}').hasMatch(value)) {
-      return 'Repeated digits are not allowed';
-    }
-    return null;
-  }

@@ -4,22 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:reddrop/constant/constant.dart';
 import 'package:reddrop/request/requestreg.dart';
 import 'package:reddrop/request/requestsmanage.dart';
-import 'package:reddrop/widget/login%20widgets.dart';
+import 'package:reddrop/widget/loginwidgets.dart';
 import 'package:reddrop/widget/wigets.dart';
 
 class RequestSignup extends StatefulWidget {
   const RequestSignup({super.key});
   @override
-  State<RequestSignup> createState() => _register_pagestate();
+  State<RequestSignup> createState() => RegisterPagestate();
 }
 
 
-class _register_pagestate extends State<RequestSignup> {
+class RegisterPagestate extends State<RequestSignup> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final CollectionReference donor = FirebaseFirestore.instance.collection('Request');
-  int _currentIndex = 2;
+
 
   @override
   void initState() {
@@ -80,7 +80,7 @@ class _register_pagestate extends State<RequestSignup> {
           alignment: Alignment.center,
           child: SingleChildScrollView(
             child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              CustomImage(),
+              const CustomImage(),
               const SizedBox(height: 25),
               const CustomText(text: "Account Verification", fontSize: 22, fontWeight: FontWeight.bold),
               const SizedBox(height: 10),

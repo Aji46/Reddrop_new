@@ -9,44 +9,39 @@ class Containerpageview extends StatefulWidget {
   State<Containerpageview> createState() => _ContainerpageviewState();
 }
 class _ContainerpageviewState extends State<Containerpageview> {
-  int _currentPageIndex = 0;
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
         final screenWidth = constraints.maxWidth;
-        final cardWidth = screenWidth < 400 ? 70.0 : 100.0;
-        final cardHeight = screenWidth < 400 ? 55.0 : 80.0;
         final horizontalSpacing = screenWidth < 400 ? 20.0 : 40.0;
         
-        return Container(
-          child: Column(
-            children: [
-              SizedBox(height: 10), // Add space at the top
-              Wrap(
-                alignment: WrapAlignment.center,
-                spacing: horizontalSpacing,
-                runSpacing: 10.0, // Adjust as needed
-                children: [
-                  for (String bloodGroup in bloodGroups) ...[
-                    widgets.BloodCard(
-                      bloodGroup: bloodGroup,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BloodDonorGroup(
-                              selectedBloodGroup: bloodGroup,
-                            ),
+        return Column(
+          children: [
+           const SizedBox(height: 10), 
+            Wrap(
+              alignment: WrapAlignment.center,
+              spacing: horizontalSpacing,
+              runSpacing: 10.0,
+              children: [
+                for (String bloodGroup in bloodGroups) ...[
+                  widgets.BloodCard(
+                    bloodGroup: bloodGroup,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BloodDonorGroup(
+                            selectedBloodGroup: bloodGroup,
                           ),
-                        );
-                      },
-                    ),
-                  ],
+                        ),
+                      );
+                    },
+                  ),
                 ],
-              ),
-            ],
-          ),
+              ],
+            ),
+          ],
         );
       },
     );

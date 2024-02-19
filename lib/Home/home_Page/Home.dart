@@ -121,7 +121,7 @@ Widget build(BuildContext context) {
                   }).toList(),
                 ),
               ),
-                if (value != null) IconButton(onPressed: () => clearDropdowns(), icon: Icon(Icons.clear)),
+                if (value != null) IconButton(onPressed: () => clearDropdowns(), icon: const Icon(Icons.clear)),
             ],
           ),
           const SizedBox(height: 10),

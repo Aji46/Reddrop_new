@@ -9,11 +9,11 @@ Future<void> fetchData(CollectionReference donorCollection,
   final donorSnapshot = await donorCollection.get();
   Set<String> uniqueBloodGroups = {}, uniqueStates = {}, uniqueDistricts = {};
 
-  donorSnapshot.docs.forEach((doc) {
+  for (var doc in donorSnapshot.docs) {
     uniqueBloodGroups.add(doc['group'] as String? ?? '');
     uniqueStates.add(doc['state'] as String? ?? '');
     uniqueDistricts.add(doc['district'] as String? ?? '');
-  });
+  }
 
   setData(
     uniqueBloodGroups.toList(),
@@ -98,11 +98,19 @@ class FirebaseUpdate {
   void updateUser(BuildContext context, String uid, String? bloodgroup) async {
 
     try {
+        showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return const Center(
+          child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Color.fromARGB(255, 255, 255, 255)),),
+        );
+      },
+    );
       User? user = FirebaseAuth.instance.currentUser;
       if (user != null) {
         DocumentReference userDocument =
             FirebaseFirestore.instance.collection('Request').doc(uid);
-        // Print the data to be stored just before the update
         await userDocument.set({
           'name': usernameController.text,
           'phone': phoneController.text,
@@ -113,16 +121,21 @@ class FirebaseUpdate {
           'date': dateController.text,
         });
 
-        // Print a success message after the update
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Request stored successfully"),
+        duration: Duration(seconds: 2),
+      ));
 
         // ignore: use_build_context_synchronously
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (ctx) => const BottomNavBar()),
-        );
+       Navigator.of(context).pushAndRemoveUntil(
+  MaterialPageRoute(builder: (ctx) => const BottomNavBar()),
+  (route) => false,
+);
+
       } else {
       }
     } catch (error) {
-      // Print any error that occurs during the update
     }
   }
 }

@@ -15,7 +15,7 @@ class Requestmanage extends StatefulWidget {
 }
 
 class _RequestManageState extends State<Requestmanage> {
-   FirebaseAuth _auth = FirebaseAuth.instance;
+   final FirebaseAuth _auth = FirebaseAuth.instance;
    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   late User _currentUser;
   bool _isDeleting = false;
@@ -48,7 +48,7 @@ class _RequestManageState extends State<Requestmanage> {
         .collection("Request")
         .doc(_currentUser.uid);
          await documentReference.delete();
-         print('Document deleted successfully.');
+         // ignore: use_build_context_synchronously
          ScaffoldMessenger.of(context).showSnackBar(
          const SnackBar(
          content: Text("Document deleted successfully.",style: TextStyle(

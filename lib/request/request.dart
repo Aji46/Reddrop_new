@@ -22,13 +22,15 @@ class _RequestState extends State<Request> {
         Scaffold(
           backgroundColor: MyColors.mycolor2,
           appBar: customAppBar.buildAppBar(context),
-          body: RequestList(),
+          body: const RequestList(),
         );
   
   }
 }
 
 class RequestList extends StatelessWidget {
+  const RequestList({super.key});
+
   void shareContact(String contactDetails) {
     Share.share(contactDetails, subject: 'Contact Information');
   }
@@ -37,7 +39,7 @@ class RequestList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        RequestCreateCard(),
+        const RequestCreateCard(),
         const SizedBox(height: 10),
         Expanded(
           child: FutureBuilder<QuerySnapshot>(
@@ -73,6 +75,8 @@ class RequestList extends StatelessWidget {
 }
 
 class RequestCreateCard extends StatelessWidget {
+  const RequestCreateCard({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(

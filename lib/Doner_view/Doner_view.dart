@@ -39,42 +39,50 @@ class _ViewerState extends State<ViewDonor> {
             ),
             child: Column(
               children: [
-                   const SizedBox(height: 20,),
-                   CircleAvatar(
-                    radius: 60,
-                    backgroundColor: MyColors.mycolor4,
-                    child: Text(
-                      widget.arguments['group'] as String? ?? '',
-                      style: const TextStyle(
-                        color: MyColors.mycolor2,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                      ),
+                const SizedBox(
+                  height: 20,
+                ),
+                CircleAvatar(
+                  radius: 60,
+                  backgroundColor: MyColors.mycolor4,
+                  child: Text(
+                    widget.arguments['group'] as String? ?? '',
+                    style: const TextStyle(
+                      color: MyColors.mycolor2,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
                     ),
                   ),
-                
+                ),
                 buildInfoRow('Name', widget.arguments['name']),
                 buildInfoRow('Phone', widget.arguments['phone']),
                 Row(
                   children: [
-                   buildIconRow(
+                    buildIconRow(
                       Icons.call,
                       MyColors.mycolor6,
                       () {
                         setState(() {
-                          boxcontact.put('key_${widget.arguments['name'] as String? ?? ''}', Contactdb(name:widget.arguments['name'] as String? ?? '',group:widget.arguments['group'] as String? ?? '',phone:widget.arguments['phone'] as String? ?? ''));
+                          boxcontact.put(
+                              'key_${widget.arguments['name'] as String? ?? ''}',
+                              Contactdb(
+                                  name:
+                                      widget.arguments['name'] as String? ?? '',
+                                  group: widget.arguments['group'] as String? ??
+                                      '',
+                                  phone: widget.arguments['phone'] as String? ??
+                                      ''));
                         });
                         PhoneUtils.makeCall(phoneNumber);
                       },
                     ),
-                     buildIconRow(
-                  Icons.share_outlined,
-                  MyColors.mycolor3,
-                  () => PhoneUtils.shareContact(phoneNumber),
-                ),
+                    buildIconRow(
+                      Icons.share_outlined,
+                      MyColors.mycolor3,
+                      () => PhoneUtils.shareContact(phoneNumber),
+                    ),
                   ],
                 ),
-               
                 buildInfoRow('City', widget.arguments['place']),
                 buildInfoRow('District', widget.arguments['district']),
                 buildInfoRow('State', widget.arguments['state']),
@@ -103,21 +111,19 @@ class _ViewerState extends State<ViewDonor> {
   }
 
   Widget buildIconRow(IconData icon, Color color, Function() onPressed) {
-    return
-     Row(
-        children: [
-          IconButton(
-            iconSize: 45,
-            icon: Icon(
-              icon,
-              color: color,
-            ),
-            onPressed: onPressed,         
-            tooltip: icon == Icons.call ? 'Make a Call' : 'Share',
+    return Row(
+      children: [
+        IconButton(
+          iconSize: 45,
+          icon: Icon(
+            icon,
+            color: color,
           ),
-          const SizedBox(width: 40),
-        ],
-      );
-    
+          onPressed: onPressed,
+          tooltip: icon == Icons.call ? 'Make a Call' : 'Share',
+        ),
+        const SizedBox(width: 40),
+      ],
+    );
   }
 }

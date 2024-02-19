@@ -15,14 +15,12 @@ class RegisterLogin extends StatefulWidget {
 class _Register_pageState extends State<RegisterLogin> {
   // ignore: non_constant_identifier_names
 
-  int _currentIndex = 2;
 
   @override
   Widget build(BuildContext context) {
     CustomAppBar customAppBar = CustomAppBar();
     return Stack(
       children: [
-        //const Background_Image(),
         Scaffold(
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           appBar: customAppBar.buildAppBar(context),
@@ -63,7 +61,7 @@ class _Register_pageState extends State<RegisterLogin> {
                     height: 45,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: const Color.fromARGB(255, 153, 19, 19),
+                        backgroundColor: const Color.fromARGB(255, 153, 19, 19),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -90,7 +88,7 @@ class _Register_pageState extends State<RegisterLogin> {
                     height: 45,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: const Color.fromARGB(255, 153, 19, 19),
+                        backgroundColor: const Color.fromARGB(255, 153, 19, 19),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
