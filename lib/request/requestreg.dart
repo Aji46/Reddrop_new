@@ -58,6 +58,7 @@ class RegisterPageState extends State<RegisterreqPage> {
                 controller: _passwordController,
                 labelText: "Password",
                 validator: (value) => ValidationUtils.validate(value, 'password'),
+                isPassword: true,
               ),
               CustomTextFormField(
                 controller: _emailController,

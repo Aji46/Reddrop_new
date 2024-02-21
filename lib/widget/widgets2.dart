@@ -89,41 +89,61 @@ class DonorListWidget extends StatelessWidget {
   }
 }
 
-class CustomTextFormField extends StatelessWidget {
+class CustomTextFormField extends StatefulWidget {
   final TextEditingController controller;
   final String labelText;
   final TextInputType? keyboardType;
   final String? Function(String?)? validator;
+  final bool isPassword;
 
-  const CustomTextFormField({super.key, 
+  const CustomTextFormField({
+    Key? key,
     required this.controller,
     required this.labelText,
     this.keyboardType,
     this.validator,
-  });
+    this.isPassword = false,
+  }) : super(key: key);
+
+  @override
+  _CustomTextFormFieldState createState() => _CustomTextFormFieldState();
+}
+
+class _CustomTextFormFieldState extends State<CustomTextFormField> {
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-
     double paddingValue = screenWidth > 600 ? 50 : 30;
 
     return Padding(
       padding: EdgeInsets.only(top: 20, right: paddingValue, left: paddingValue),
       child: TextFormField(
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        controller: controller,
-          keyboardType: keyboardType,
+        controller: widget.controller,
+        keyboardType: widget.keyboardType,
+        obscureText: widget.isPassword && _obscureText,
         decoration: InputDecoration(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
           ),
           fillColor: MyColors.mycolor2,
           filled: true,
-          labelText: labelText,
+          labelText: widget.labelText,
           labelStyle: const TextStyle(color: MyColors.mycolor7),
+          suffixIcon: widget.isPassword
+              ? IconButton(
+                  icon: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
+                  onPressed: () {
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
+                  },
+                )
+              : null,
         ),
-        validator: validator,
+        validator: widget.validator,
       ),
     );
   }

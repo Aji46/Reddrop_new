@@ -116,7 +116,7 @@ Future<void> registerUser(BuildContext context) async {
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text("Data stored successfully.",style: TextStyle(
+        content: Text("Profile created successfully.",style: TextStyle(
                     color: Color.fromARGB(255, 255, 255, 255),
                     fontSize: 16,
                   ),),

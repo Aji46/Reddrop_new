@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reddrop/bottom_navigationbar/bottomnav.dart';
+import 'package:reddrop/constant/constant.dart';
 
 
 
@@ -36,13 +37,13 @@ class _SplashState extends State<Splash> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white, 
+        backgroundColor: MyColors.mycolor2, 
         title: Row(
           children: [
             Text(
               'Red',
               style: TextStyle(
-                color: Colors.red,
+                color: MyColors.mycolor4,
                 fontFamily: 'Italiana',
                 fontSize: screenWidth < 600 ? 20 : 24,
               ),
@@ -50,7 +51,7 @@ class _SplashState extends State<Splash> {
             Text(
               'drop',
               style: TextStyle(
-                color: Colors.black,
+                color: MyColors.mycolor7,
                 fontFamily: 'Italiana',
                 fontSize: screenWidth < 600 ? 20 : 24,
               ),
@@ -59,7 +60,7 @@ class _SplashState extends State<Splash> {
         ),
       ),
       body: Container(
-        color: Colors.white, 
+        color: MyColors.mycolor2, 
         child: SafeArea(
           child: ListView(
             children: [
@@ -88,7 +89,7 @@ class _SplashState extends State<Splash> {
                         TextSpan(
                           text: 'Red',
                           style: TextStyle(
-                            color: const Color.fromARGB(255, 255, 0, 0),
+                            color: MyColors.mycolor4,
                             fontFamily: 'Italiana',
                             fontSize: screenWidth < 600 ? 20 : 24,
                           ),
@@ -96,13 +97,13 @@ class _SplashState extends State<Splash> {
                         TextSpan(
                           text: 'Drop ',
                           style: TextStyle(
-                            color: const Color.fromARGB(255, 0, 0, 0),
+                            color: MyColors.mycolor7,
                             fontFamily: 'Italiana',
                             fontSize: screenWidth < 600 ? 20 : 24,
                           ),
                         ),
                         TextSpan(
-                          text: 'have 1000’s of donors all over India.',
+                          text: 'we have donors all over India.',
                           style: TextStyle(
                             color: const Color.fromARGB(255, 0, 0, 0),
                             fontSize: screenWidth < 600 ? 20 : 24,

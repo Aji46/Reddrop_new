@@ -60,11 +60,13 @@ class RegisterForm extends StatelessWidget {
                 controller: passwordController,
                 labelText: "Password",
                 validator: (value) => ValidationUtils.validate(value, 'Password'),
+                isPassword: true,
+
               ),
               CustomTextFormField(
                 controller: phoneController,
                 labelText: "Phone Number",
-                keyboardType: TextInputType.number,
+                keyboardType: TextInputType.phone,
                 validator: (value) => ValidationUtils.validatePhoneNumber(value),
               ),
               CustomTextFormField(

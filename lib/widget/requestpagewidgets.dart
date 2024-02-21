@@ -7,7 +7,7 @@ import 'package:share/share.dart';
 class RequestCard extends StatelessWidget {
   final DocumentSnapshot requestSnap;
 
-  RequestCard({required this.requestSnap});
+  const RequestCard({super.key, required this.requestSnap});
 
   void shareContact(String contactDetails) {
     Share.share(contactDetails, subject: 'Contact Information');
@@ -105,9 +105,23 @@ class RequestListView extends StatelessWidget {
   final List<DocumentSnapshot> requests;
 
   const RequestListView({super.key, required this.requests});
-
   @override
   Widget build(BuildContext context) {
+    List<DocumentSnapshot> filteredRequests = requests.where((requestSnap) {
+      var year = int.parse(requestSnap['date'].substring(0, 4));
+      var month = int.parse(requestSnap['date'].substring(5, 7));
+      var day = int.parse(requestSnap['date'].substring(8));
+      DateTime now = DateTime.now();
+      DateTime today = DateTime(now.year, now.month, now.day);
+      return DateTime(year, month, day).isAfter(today);
+    }).toList();
+
+        if (filteredRequests.isEmpty) {
+      return const Center(
+        child: Text('No requests found'),
+      );
+    }
+
     return Container(
       margin: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
@@ -122,10 +136,10 @@ class RequestListView extends StatelessWidget {
         ],
       ),
       child: ListView.separated(
-        itemCount: requests.length,
+        itemCount: filteredRequests.length,
         separatorBuilder: (context, index) => const SizedBox(height: 1),
         itemBuilder: (context, index) {
-          final DocumentSnapshot requestSnap = requests[index];
+          final DocumentSnapshot requestSnap = filteredRequests[index];
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: Padding(

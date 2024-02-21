@@ -37,13 +37,15 @@ class RequestList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+         DateTime now = DateTime.now();
+    DateTime today = DateTime(now.year, now.month, now.day);
     return Column(
       children: [
         const RequestCreateCard(),
         const SizedBox(height: 10),
         Expanded(
           child: FutureBuilder<QuerySnapshot>(
-            future: FirebaseFirestore.instance.collection('Request').get(),
+            future: FirebaseFirestore.instance.collection('Request').orderBy('date').get(),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(
@@ -58,6 +60,8 @@ class RequestList extends StatelessWidget {
               }
 
               if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                print("Today: $today");
+
                 return const Center(
                   child: Text('No requests found'),
                 );
@@ -99,7 +103,7 @@ class RequestCreateCard extends StatelessWidget {
           alignment: Alignment.center,
           child: InkWell(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
                 builder: (ctx) => const RequestSignup(),
               ));
             },

@@ -86,7 +86,7 @@ class RegisterPagestate extends State<RequestSignup> {
               const SizedBox(height: 10),
               const CustomText(text: "You need to manage your request you want to login using your email and Your password", fontSize: 16, textAlign: TextAlign.center),
               const SizedBox(height: 30),
-              CustomTextField(controller: _emailController, hintText: "email"),
+            CustomTextField(controller: _emailController, hintText: "email", keyboardType: TextInputType.emailAddress,obscureText: false),
               const SizedBox(height: 15),
               CustomTextField(controller: _passwordController, keyboardType: TextInputType.visiblePassword, obscureText: true, hintText: "Password"),
               const SizedBox(height: 20),

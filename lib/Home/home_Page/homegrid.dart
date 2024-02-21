@@ -43,11 +43,12 @@ class HomeGrid extends StatelessWidget {
                         decoration: MyDecorations.bottomContainerDecoration,
                         child: const Center(
                           child: Text(
-                            'Request for blood',
+                            'Request for Blood',
                             style: TextStyle(
                                 fontSize: 25,
                                 color: MyColors.mycolor3,
                                 fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
                           ),
                         ),
                       ),
@@ -67,9 +68,11 @@ class HomeGrid extends StatelessWidget {
                           child: Text(
                             'I want to be a Donor',
                             style: TextStyle(
-                                fontSize: 25,
-                                color: MyColors.mycolor3,
-                                fontWeight: FontWeight.bold),
+                              fontSize: 25,
+                              color: MyColors.mycolor3,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
                         ),
                       ),
