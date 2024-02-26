@@ -28,30 +28,49 @@ class RegisterPagestate extends State<RequestSignup> {
     _passwordController;
   }
 
-  Future<void> _signInWithEmailAndPassword() async {
-    try {
-      showDialog(context: context, barrierDismissible: false, builder: (BuildContext context) => const Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(MyColors.mycolor2),)));
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(email: _emailController.text.trim(), password: _passwordController.text);
-      // ignore: use_build_context_synchronously
-      Navigator.of(context).pop();
-     if (userCredential != null) {
-      // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Login Successful"),
-          duration: Duration(seconds: 2),
+ Future<void> _signInWithEmailAndPassword() async {
+  try {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) => const Center(
+        child: CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation<Color>(MyColors.mycolor2),
         ),
-      );
-      // ignore: use_build_context_synchronously
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) => const Requestmanage()));
-    }
-    } catch (e) {
-      // ignore: use_build_context_synchronously
-      Navigator.of(context).pop();
-      // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Invalid email or password. Please check your credentials."), duration: Duration(seconds: 3)));
-    }
+      ),
+    );
+     await _auth.signInWithEmailAndPassword(
+      email: _emailController.text.trim(),
+      password: _passwordController.text,
+    );
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).pop();
+    // Since userCredential cannot be null, there's no need for a null check
+    // before proceeding with the following actions.
+    // ignore: use_build_context_synchronously
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Login Successful"),
+        duration: Duration(seconds: 2),
+      ),
+    );
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (ctx) => const Requestmanage()),
+    );
+  } catch (e) {
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).pop();
+    // ignore: use_build_context_synchronously
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Invalid email or password. Please check your credentials."),
+        duration: Duration(seconds: 3),
+      ),
+    );
   }
+}
+
 
   Future<void> loginUser(String email, String password) async {
     try {

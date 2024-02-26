@@ -30,21 +30,19 @@ class RegisterPagestate extends State<Signup> {
   Future<void> _signInWithEmailAndPassword() async {
     try {
       showDialog(context: context, barrierDismissible: false, builder: (BuildContext context) => const Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>( Color.fromARGB(255, 255, 255, 255)),)));
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(email: _emailController.text.trim(), password: _passwordController.text);
+      await _auth.signInWithEmailAndPassword(email: _emailController.text.trim(), password: _passwordController.text);
       // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
-     if (userCredential != null) {
-      // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Login Successful"),
-          duration: Duration(seconds: 2),
-        ),
-      );
-      // ignore: use_build_context_synchronously
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) => const Update()));
-    }
-    } catch (e) {
+    // ignore: use_build_context_synchronously
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Login Successful"),
+        duration: Duration(seconds: 2),
+      ),
+    );
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) => const Update()));
+      } catch (e) {
       // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
       // ignore: use_build_context_synchronously

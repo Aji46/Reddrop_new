@@ -22,7 +22,6 @@ class RegisterPageState extends State<RegisterPage> {
   final TextEditingController _stateController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   String? bloodGroup;

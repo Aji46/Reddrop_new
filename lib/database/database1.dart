@@ -103,8 +103,6 @@ void updateUser(BuildContext context, String uid) async {
 
 
 class DatabaseManager {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
   Future<void> updateUserData(String uid, Map<String, dynamic> data) async {
     try {
       await FirebaseFirestore.instance.collection('Request').doc(uid).set(data);

@@ -10,8 +10,7 @@ static void makeCall(String phoneNumber) async {
 
   // Check if the result is not null before assigning it to a bool variable
   if (result != null) {
-    bool res = result;
-    // Now you can use 'res' as a non-nullable boolean
+  
     // ... rest of your code
   } else {
     // Handle the case when the result is null (optional)
