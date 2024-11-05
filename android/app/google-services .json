@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "175166379388",
-    "project_id": "reddrop1-93fb0",
-    "storage_bucket": "reddrop1-93fb0.appspot.com"
+    "project_number": "765692546365",
+    "project_id": "reddrop1-f1c8c",
+    "storage_bucket": "reddrop1-f1c8c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:175166379388:android:4a5f1d3ff602f47dabc0f9",
+        "mobilesdk_app_id": "1:765692546365:android:4e69d89b94859dd62a8954",
         "android_client_info": {
           "package_name": "com.example.reddrop"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAJ5kY8MUv2TAjqnZdH5vWW2TIQ2mvJu8E"
+          "current_key": "AIzaSyCgEyusQUYHrPo-bobqWZBM6XlVfXR1lo8"
         }
       ],
       "services": {

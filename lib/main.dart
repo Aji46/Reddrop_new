@@ -20,22 +20,22 @@ Future<void> main() async {
     if (kIsWeb) {
       await Firebase.initializeApp(
         options: const FirebaseOptions(
-            apiKey: "AIzaSyA44mKuX-mq2l_MiJbB8Ag6BDNY1P_Nl-o",
-            authDomain: "reddrop1-93fb0.firebaseapp.com",
-            databaseURL: "https://reddrop1-93fb0-default-rtdb.firebaseio.com",
-            projectId: "reddrop1-93fb0",
-            storageBucket: "reddrop1-93fb0.appspot.com",
-            messagingSenderId: "175166379388",
-            appId: "1:175166379388:web:20278cf7d5d17792abc0f9",
-            measurementId: "G-QBJXK2QNCG"),
+            apiKey: "AIzaSyC1h6rWYeSi-9oT7apAZoJWMvMpOGEpSi4",
+  authDomain: "reddrop1-f1c8c.firebaseapp.com",
+  projectId: "reddrop1-f1c8c",
+  storageBucket: "reddrop1-f1c8c.appspot.com",
+  messagingSenderId: "765692546365",
+  appId: "1:765692546365:web:8253f61fbbdaf02a2a8954",
+  measurementId: "G-ZKG1XFP8DP"
+            ),
       );
     } else if (Platform.isAndroid) {
       await Firebase.initializeApp(
         options: const FirebaseOptions(
-          apiKey: "AIzaSyAJ5kY8MUv2TAjqnZdH5vWW2TIQ2mvJu8E",
-          appId: "1:175166379388:android:4a5f1d3ff602f47dabc0f9",
-          messagingSenderId: "175166379388",
-          projectId: "reddrop1-93fb0",
+          apiKey: "AIzaSyC1h6rWYeSi-9oT7apAZoJWMvMpOGEpSi4",
+          appId: "1:765692546365:android:4e69d89b94859dd62a8954",
+          messagingSenderId: "765692546365",
+          projectId: "reddrop1-f1c8c",
         ),
       );
     }
